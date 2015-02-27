@@ -1,0 +1,22 @@
+{
+  "name": "react-star-rating",
+  "version": "0.1.0",
+  "description": "A simple star rating component.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Cameron J Roe <cameronjroe@gmail.com> (http://cameronjroe.com/)",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^0.12.2"
+  },
+  "devDependencies": {
+    "babelify": "^5.0.3",
+    "browserify": "^9.0.1",
+    "gulp": "^3.8.11",
+    "gulp-webserver": "^0.9.0",
+    "reactify": "^1.0.0",
+    "vinyl-source-stream": "^1.0.0"
+  }
+}
