@@ -16,11 +16,11 @@ module.exports = React.createClass({
 
   render: function () {
     return (
-	<div className="star-rating">
-	  <input ref="r" type="range" min="0" max="10" value={this.state.value} onChange={this.setValue} />
-	  {this.state.value}
-	</div>
-      );
+    	<div className="star-rating">
+    	  <input ref="r" type="range" min="0" max="10" value={this.state.value} onChange={this.setValue} />
+    	  {this.state.value}
+    	</div>
+    );
   }
 
 });
