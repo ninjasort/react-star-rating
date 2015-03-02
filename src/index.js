@@ -28,12 +28,12 @@ var App = React.createClass({
     var reviewWillOpen = this.state.reviewHidden ? {display: 'block'} : {display: 'none'};
     var reviewDidOpen = reviewWillOpen.display === 'none' ? {display: 'block'} : {display: 'none'};
     return (
-	<section className="review">
-	  <Review reviewHidden={this.state.reviewHidden} />
-	  <button style={reviewWillOpen} onClick={this.showReviewForm}>Leave a review!</button>
-	  <button style={reviewDidOpen} onClick={this.finishReview}>Send review!</button>
-	</section>
-      );
+    	<section className="review">
+    	  <Review reviewHidden={this.state.reviewHidden} />
+    	  <button style={reviewWillOpen} onClick={this.showReviewForm}>Leave a review!</button>
+    	  <button style={reviewDidOpen} onClick={this.finishReview}>Send review!</button>
+    	</section>
+    );
   }
 
 });
