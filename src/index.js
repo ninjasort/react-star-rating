@@ -1,7 +1,6 @@
 var React = require('react');
 var Review = require('./components/Review.jsx');
 var Star = require('./components/Star.jsx');
-var RatingStore = require('./stores/ratingStore');
 
 var inject = document.querySelector('.inject');
 
