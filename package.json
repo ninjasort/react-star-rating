@@ -3,9 +3,7 @@
   "version": "0.1.0",
   "description": "A simple star rating component.",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "author": "Cameron J Roe <cameronjroe@gmail.com> (http://cameronjroe.com/)",
   "license": "ISC",
   "dependencies": {
