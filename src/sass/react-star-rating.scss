@@ -1,0 +1,97 @@
+@import "bourbon";
+
+@import "review";
+
+.rating-loading {
+  width: 25px;
+  height: 25px;
+  font-size: 0px;
+  color: #fff;
+  background: transparent url('../img/loading.gif') top left no-repeat;
+  border: none;
+}
+.star-rating__root {
+  font-size: 2em;
+}
+
+/*
+ * Stars
+ */
+.rating-fa {
+  font-family: 'FontAwesome';
+  padding-left: 1px;
+  .rating-stars:before {
+    padding-left: 1px;
+  }
+}
+
+.rating-gly {
+  font-family: 'Glyphicons Halflings';
+}
+
+.rating-gly-star {
+  font-family: 'Glyphicons Halflings';
+  padding-left: 2px;
+  .rating-stars:before {
+    padding-left: 2px;
+  }
+}
+
+.rating-lg .rating-gly-star {
+  padding-left: 4px;
+  .rating-stars:before {
+    padding-left: 4px;
+  }
+}
+
+.rating-xl .rating-gly-star {
+  padding-left: 2px;
+  .rating-stars:before {
+    padding-left: 2px;
+  }
+}
+
+.rating-uni {
+  font-size: 1.2em;
+  margin-top: -5px;
+}
+
+.rating-container {
+  position: relative;
+  vertical-align: middle;
+  display: inline-block;
+  color: #e3e3e3;
+  overflow: hidden;
+  &:before {
+    content: attr(data-content);
+  }
+  &:hover {
+    cursor: pointer;
+  }
+  .rating-stars {
+    position: absolute;
+    left: 0;
+    top: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    color: #fde16d;
+    &:before {
+      content: attr(data-content);
+    }
+  }
+}
+
+.react-rating-caption {
+  font-size: 1.25em;
+  vertical-align: middle;
+  margin-right: 0.5em;
+}
+
+.rating-disabled {
+  .rating-stars {
+    display: none;
+  }
+  .rating-container:hover {
+    cursor: not-allowed;
+  }
+}

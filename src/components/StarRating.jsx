@@ -2,14 +2,13 @@ var React = require('react');
 
 var StarRating = React.createClass({
 
-  ratingCache: {
-    pos: 0,
-    rating: 0
-  },
-
   propTypes: {
     title: React.PropTypes.string,
-
+    ratingAmount: React.PropTypes.number.isRequired,
+    rating: React.PropTypes.number,
+    onRatingClick: React.PropTypes.func,
+    disabled: React.PropTypes.bool,
+    editing: React.PropTypes.bool
   },
 
   styles: {
@@ -20,7 +19,7 @@ var StarRating = React.createClass({
 
   getStars: function () {
     var stars = '';
-    var numRating = this.props.rating;
+    var numRating = this.props.ratingAmount;
     for(var i = 0; i < numRating; i++) {
       stars += '\u2605';
     }
@@ -30,20 +29,30 @@ var StarRating = React.createClass({
   getDefaultProps: function () {
     return {
       step: 0.5,
-      min: 0,
-      max: 5,
+      ratingAmount: 5,
       onRatingClick: function (e, cache) {
-      }
+      },
+      editing: true,
+      disabled: false
     }
   },
 
   getInitialState: function () {
     return {
+      ratingCache: {
+        pos: 0,
+        rating: 0
+      },
       stars: 5,
       rating: 0,
       pos: 0,
       glyph: this.getStars()
     }
+  },
+
+  componentWillMount: function () {
+    this.min = 0;
+    this.max = this.props.ratingAmount || 5;
   },
 
   componentDidMount: function () {
@@ -57,7 +66,7 @@ var StarRating = React.createClass({
   },
 
   getPosition: function (e) {
-    return e.pageX - this.root.offsetLeft;
+    return e.pageX - this.root.getBoundingClientRect().left;
   },
 
   applyPrecision: function (val, precision) {
@@ -70,8 +79,8 @@ var StarRating = React.createClass({
   },
 
   getWidthFromValue: function (val) {
-    var min = this.props.min,
-        max = this.props.max;
+    var min = this.min,
+        max = this.max;
     if (val <= min || min === max) {
       return 0;
     }
@@ -84,11 +93,11 @@ var StarRating = React.createClass({
   getValueFromPosition: function (pos) {
     var precision = this.getDecimalPlaces(this.props.step);
     var maxWidth = this.ratingContainer.offsetWidth;
-    var diff = this.props.max - this.props.min;
+    var diff = this.max - this.min;
     var factor = (diff * pos) / (maxWidth * this.props.step);
         factor = Math.ceil(factor);
-    var val = this.applyPrecision(parseFloat(this.props.min + factor * this.props.step), precision);
-        val = Math.max(Math.min(val, this.props.max), this.props.min);
+    var val = this.applyPrecision(parseFloat(this.min + factor * this.props.step), precision);
+        val = Math.max(Math.min(val, this.max), this.min);
     return val;
   },
 
@@ -100,25 +109,56 @@ var StarRating = React.createClass({
     return {width: width, val: val};
   },
 
+  getStarRatingPosition: function (val) {
+    var width = this.getWidthFromValue(val);
+    return width += '%';
+  },
+
   handleMouseLeave: function () {
     this.setState({
-      pos: this.ratingCache.pos,
-      rating: this.ratingCache.rating
+      pos: this.state.ratingCache.pos,
+      rating: this.state.ratingCache.rating
     });
+  },
+
+  getRatingEvent: function (e) {
+    var pos = this.getPosition(e);
+    return this.calculate(pos);
   },
 
   handleMouseOver: function (e) {
-    var pos = this.getPosition(e);
-    var rating = this.calculate(pos);
+    // get hover position
+    var ratingEvent = this.getRatingEvent(e);
     this.setState({
-      pos: rating.width,
-      rating: rating.val
+      pos: ratingEvent.width,
+      rating: ratingEvent.val
     });
   },
 
+  shouldComponentUpdate: function (nextProps, nextState) {
+    return nextState.rating !== this.state.rating;
+  },
+
   handleClick: function (e) {
-    this.ratingCache = this.state;
-    this.props.onRatingClick(e, this.ratingCache);
+
+    // is it disabled?
+    if (this.props.disabled) {
+      e.stopPropagation();
+      e.preventDefault();
+      return false;
+    }
+
+    var ratingCache = {
+      pos: this.state.pos,
+      rating: this.state.rating,
+      title: this.props.title
+    };
+
+    this.setState({
+      ratingCache: ratingCache
+    });
+
+    this.props.onRatingClick(e, ratingCache);
   },
 
   treatName: function (title) {
@@ -127,19 +167,54 @@ var StarRating = React.createClass({
     }
   },
 
+  getClasses: function () {
+    var classes = ['star-rating__root'];
+
+    // is it disabled?
+    if (this.props.disabled) {
+      classes.push('rating-disabled');
+    }
+
+    return classes.join(' ');
+  },
+
   render: function () {
     var inputName = this.treatName(this.props.title);
+    // is there a title?
     if (this.props.title) {
-      var title = (<span className="react-rating-title">{this.props.title}</span>);
+      var title = (<span className="react-rating-caption">{this.props.title}</span>);
     }
+    // is the rating set?
+    if (this.props.rating) {
+      this.state.pos = this.getStarRatingPosition(this.props.rating);
+    }
+
+    // get the classes on this render
+    var classes = this.getClasses();
+
+    // are we editing this rating?
+    var starRating;
+    if (this.props.editing) {
+      starRating = (
+        <div ref="ratingContainer" className="rating-container rating-editing rating-gly-star" data-content={this.state.glyph} onMouseMove={this.handleMouseOver} onMouseLeave={this.handleMouseLeave} onClick={this.handleClick}>
+          <div ref="ratingStars" className="rating-stars" data-content={this.state.glyph} style={{width: this.state.pos}}></div>
+          <input type="number" name={inputName} value={this.state.ratingCache.rating} style={{display: 'none !important'}} min={this.min} max={this.max} />
+        </div>
+      );
+    } else {
+      starRating = (
+        <div ref="ratingContainer" className="rating-container rating-gly-star" data-content={this.state.glyph}>
+          <div ref="ratingStars" className="rating-stars" data-content={this.state.glyph} style={{width: this.state.pos}}></div>
+          <input type="number" name={inputName} value={this.state.ratingCache.rating} style={{display: 'none !important'}} min={this.min} max={this.max} />
+        </div>
+      );
+    }
+
     return (
       <fieldset>
         {title}
-        <span ref="root" className="star-rating rating-xs rating-active">
-          <div ref="ratingContainer" className="rating-container rating-gly-star" data-content={this.state.glyph} onMouseMove={this.handleMouseOver} onMouseLeave={this.handleMouseLeave} onClick={this.handleClick}>
-            <div ref="ratingStars" className="rating-stars" data-content={this.state.glyph} style={{width: this.state.pos + '%'}}></div>
-            <input type="number" name={inputName} style={{display: 'none !important'}} min={this.props.min} max={this.props.max} defaultValue={this.state.rating} />
-          </div>
+        <span ref="root" className={classes}>
+          {starRating}
         </span>
       </fieldset>
     );

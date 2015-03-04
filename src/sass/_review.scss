@@ -1,0 +1,31 @@
+.review {
+  width: 300px;
+  margin: 100px auto;
+  text-align: right;
+  button {
+    background-color: #ccc;
+    border-radius: 4px;
+    border: 0;
+    color: #444;
+    padding: 0.5em 1em;
+    outline: 0;
+  }
+}
+
+.review__form {
+  line-height: 1.5;
+  input {
+    margin-bottom: 1em;
+  }
+  textarea {
+    border: 0px;
+    background-color: #eee;
+    padding: 1.5em;
+    border-radius: 4px;
+    color: #444;
+    outline: 0;
+    font-family: Helvetica;
+    font-size: 16px;
+    margin-bottom: 1em;
+  }
+}
