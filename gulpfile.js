@@ -33,7 +33,7 @@ gulp.task('styles', function () {
 });
 
 gulp.task('watch', ['default'], function () {
-  gulp.watch(['./src/*.js', './src/**/*.jsx', './src/sass/{**/,}*.scss'], ['default']);
+  gulp.watch(['./src/*.js', './src/**/*.jsx', './src/sass/{*/,}*.scss'], ['default']);
   return gulp.src('.').pipe(server());
 });
 

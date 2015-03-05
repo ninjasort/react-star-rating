@@ -1,5 +1,5 @@
 node_modules
 bootstrap-star-rating
 dist
-script.sh
 ./src/components/Review.jsx
+other

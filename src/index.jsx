@@ -1,5 +1,4 @@
 var React = require('react');
-var Review = require('./components/Review.jsx');
 var StarRating = require('./components/StarRating.jsx');
 
 var inject = document.querySelector('.inject');
@@ -12,10 +11,47 @@ var App = React.createClass({
 
   render: function () {
     return (
-    	<section className="review">
-    	  {/*<Review />*/}
-        <StarRating ratingAmount={5} title="Music" onRatingClick={this.handleRatingClick} />
-        <StarRating ratingAmount={5} title="Presence" onRatingClick={this.handleRatingClick} />
+    	<section>
+        <div className="intro">
+          <h1 className="main-title">
+            {'react-star-rating'} <small> easy star ratings.</small>
+          </h1>
+        </div>
+        <div className="ratings-wrap">
+          <h3>Create star ratings easily with react-star-rating.</h3>
+          <h2>Installation</h2>
+          <hr/>
+          <p>You can use react-star-rating with Browserify or by simply including it as a script tag in your page.</p>
+          <code>
+            <p>{'// Browserify'}</p>
+            <p>{'var StarRating = require(\'StarRating\');'}</p>
+            <p>{'// Script Tag'}</p>
+            {'<script src=".../react-star-rating.min.js">'}
+          </code>
+          <h2>Examples</h2>
+          <hr/>
+          <StarRating title="Hotels!" ratingAmount={5} step={0.5} onRatingClick={this.handleRatingClick} />
+          <code>
+            {'<StarRating title="Hotels!" ratingAmount={5} onRatingClick={this.handleRatingClick} />'}
+          </code>
+          <StarRating title="Restaurants!" ratingAmount={10} step={1} onRatingClick={this.handleRatingClick} />
+          <code>
+            {'<StarRating title="Restaurants!" ratingAmount={10} onRatingClick={this.handleRatingClick} />'}
+          </code>
+          <StarRating title="Movie Ratings" ratingAmount={10} onRatingClick={this.handleRatingClick} />
+          <code>
+            {'<StarRating title="Movie Ratings!" ratingAmount={10} onRatingClick={this.handleRatingClick} />'}
+          </code>
+          <StarRating title="Movie Ratings" ratingAmount={5} rating={3} disabled={true} />
+          <code>
+            {'<StarRating title="Movie Ratings!" ratingAmount={10} rating={3} disabled={true} />'}
+          </code>
+        </div>
+        <footer>
+          <p className="footer-creds">
+            Created by <a href="http://twitter.com/cameronjroe">@cameronjroe</a>
+          </p>
+        </footer>
     	</section>
     );
   }

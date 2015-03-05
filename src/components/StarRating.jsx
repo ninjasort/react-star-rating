@@ -1,5 +1,17 @@
 var React = require('react');
 
+/**
+ * @fileoverview react-star-rating
+ * @author @cameronjroe
+ * <StarRating 
+ *   title={string} - title of caption for rating (optional)
+ *   ratingAmount={number} - the rating amount (default: 5)
+ *   rating={number} - a set rating between the rating amount (optional)
+ *   disabled={boolean} - whether to disable the rating from being selected (optional)
+ *   editing={boolean} - whether the rating is explicitly in editing mode (optional)
+ *   onRatingClick={function} - a handler function that gets called onClick of the rating
+ *   />
+ */
 var StarRating = React.createClass({
 
   propTypes: {
@@ -61,8 +73,9 @@ var StarRating = React.createClass({
     this.ratingContainer = this.refs.ratingContainer.getDOMNode();
   },
 
-  componentDidUnmount: function () {
-
+  componentWillUnmount: function () {
+    delete this.ratingStars;
+    delete this.ratingContainer;
   },
 
   getPosition: function (e) {
@@ -187,6 +200,7 @@ var StarRating = React.createClass({
     // is the rating set?
     if (this.props.rating) {
       this.state.pos = this.getStarRatingPosition(this.props.rating);
+      this.props.editing = false;
     }
 
     // get the classes on this render

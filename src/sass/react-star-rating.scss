@@ -1,6 +1,6 @@
 @import "bourbon";
 
-@import "review";
+@import "demo";
 
 .rating-loading {
   width: 25px;
@@ -22,32 +22,6 @@
   padding-left: 1px;
   .rating-stars:before {
     padding-left: 1px;
-  }
-}
-
-.rating-gly {
-  font-family: 'Glyphicons Halflings';
-}
-
-.rating-gly-star {
-  font-family: 'Glyphicons Halflings';
-  padding-left: 2px;
-  .rating-stars:before {
-    padding-left: 2px;
-  }
-}
-
-.rating-lg .rating-gly-star {
-  padding-left: 4px;
-  .rating-stars:before {
-    padding-left: 4px;
-  }
-}
-
-.rating-xl .rating-gly-star {
-  padding-left: 2px;
-  .rating-stars:before {
-    padding-left: 2px;
   }
 }
 
@@ -88,9 +62,6 @@
 }
 
 .rating-disabled {
-  .rating-stars {
-    display: none;
-  }
   .rating-container:hover {
     cursor: not-allowed;
   }
