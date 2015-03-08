@@ -1,5 +1,5 @@
 var React = require('react');
-var StarRating = require('./components/StarRating.jsx');
+var StarRating = require('./StarRating.jsx');
 var pkg = require('../package.json');
 
 var inject = document.querySelector('.inject');

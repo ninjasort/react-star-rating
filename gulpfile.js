@@ -46,7 +46,7 @@ gulp.task('watch', ['default'], function () {
 });
 
 gulp.task('build:react', function () {
-  return gulp.src('./src/components/StarRating.jsx')
+  return gulp.src('./src/StarRating.jsx')
     .pipe(react())
     .pipe(uglify())
     .pipe(gulp.dest('dist/browser'));
