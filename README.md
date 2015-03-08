@@ -34,7 +34,7 @@ $ bower install react-star-rating --save
 var FormComponent = React.createClass({
     render: function () {
       return (
-        <form action="/" method="GET">
+        <form action="/api" method="POST">
           <StarRating name="airbnb-rating" caption="Rate your stay!" ratingAmount={5} />
           <button type="submit" className="btn btn-submit">Submit Rating</button>
         </form>
