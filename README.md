@@ -1,4 +1,6 @@
-# react-star-rating [![Build Status](https://travis-ci.org/)](https://travis-ci.org/)
+# react-star-rating
+
+<!-- [![Build Status](https://travis-ci.org/)](https://travis-ci.org/) -->
 
 > A simple star rating component.
 
