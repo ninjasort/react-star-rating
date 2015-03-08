@@ -2,6 +2,14 @@
 
 > A simple star rating component.
 
+## Install
+
+```sh
+$ npm install react-star-rating --save
+```
+
+## Todos
+
 - component
   - [x] be able to set star rating
   - [ ] emit events on rating select, change, remove
