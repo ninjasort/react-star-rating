@@ -18,6 +18,7 @@ $ bower install react-star-rating --save
 
 #### Browser
 ```html
+<link rel="stylesheet" href="path/to/react-star-rating.min.css">
 <script src="http://fb.me/react-0.12.2.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.12.2/JSXTransformer.js"></script>
 <script src="path/to/react-star-rating/react-star-rating.min.js"></script>
