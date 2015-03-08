@@ -57,3 +57,7 @@ React.render(<FormComponent />, document.getElementById('star-rating')'}</p>
   - [x] show usage instructions
   - [ ] AMD module support
   - [ ] Browser global support
+
+  ## License
+
+  [MIT](https://github.com/cameronjroe/react-star-rating/blob/master/LICENSE)
