@@ -48,7 +48,7 @@ var App = React.createClass({
           </code>
           <h2>Usage</h2>
           <hr/>
-          <form action="/" target="_self" method="GET" className="demo-form">
+          <form target="_self" method="GET" className="demo-form">
             <StarRating name="react-star-rating" caption="Rate this component!" ratingAmount={5} />
             <button type="submit" className="btn btn-submit">Submit Rating</button>
           </form>
@@ -56,7 +56,7 @@ var App = React.createClass({
             <p>{'var FormComponent = React.createClass({'}</p>
             <p>{'  render: function () { '}</p>
             <p>{'    return ('}</p>
-            <p>{'      <form action="/" method="GET">'}</p>
+            <p>{'      <form target="_self" method="GET">'}</p>
             <p>{'        <StarRating name="react-star-rating" caption="Rate this component!" ratingAmount={5} />'}</p>
             <p>{'        <button type="submit" className="btn btn-submit">Submit Rating</button>'}</p>
             <p>{'      </form>'}</p>
