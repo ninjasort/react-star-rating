@@ -5,7 +5,7 @@
   "main": "dist/react-star-rating.min.js",
   "scripts": {},
   "author": "Cameron J Roe <cameronjroe@gmail.com> (http://cameronjroe.com/)",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "react": "^0.12.2"
   },
