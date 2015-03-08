@@ -26,12 +26,6 @@ var StarRating = React.createClass({
     size: React.PropTypes.string
   },
 
-  styles: {
-    'display': 'inline-block',
-    'vertical-align': 'top',
-    'margin': '0 1em'
-  },
-
   getStars: function () {
     var stars = '';
     var numRating = this.props.ratingAmount;
