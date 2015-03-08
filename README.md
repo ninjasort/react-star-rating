@@ -41,7 +41,7 @@ React.render(<FormComponent />, document.getElementById('star-rating')'}</p>
   - **disabled**={boolean} - whether to disable the rating from being selected (optional)
   - **editing**={boolean} - whether the rating is explicitly in editing mode (optional)
   - **size**={string} - size of stars (optional)
-  - **onRatingClick**={function} - a handler function that gets called onClick of the rating (optional) - gets passed (event, {rating, caption})
+  - **onRatingClick**={function} - a handler function that gets called onClick of the rating (optional) - gets passed (event, {position, rating, caption, name})
 
 ## Todos
 

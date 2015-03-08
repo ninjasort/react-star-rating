@@ -7,7 +7,7 @@ var inject = document.querySelector('.inject');
 var App = React.createClass({
 
   handleRatingClick: function (e, data) {
-    alert('You left a ' + data.rating + ' star rating for ' + data.caption);
+    alert('You left a ' + data.rating + ' star rating for ' + data.name);
   },
 
   render: function () {
@@ -46,7 +46,7 @@ var App = React.createClass({
           <h2>Usage</h2>
           <hr/>
           <form action="/" method="GET" className="demo-form">
-            <StarRating name="airbnb-rating" caption="Rate your stay!" ratingAmount={5} />
+            <StarRating name="react-star-rating" caption="Rate this component!" ratingAmount={5} />
             <button type="submit" className="btn btn-submit">Submit Rating</button>
           </form>
           <code>
@@ -54,7 +54,7 @@ var App = React.createClass({
             <p>{'  render: function () { '}</p>
             <p>{'    return ('}</p>
             <p>{'      <form action="/" method="GET">'}</p>
-            <p>{'        <StarRating name="airbnb-rating" caption="Rate your stay!" ratingAmount={5} />'}</p>
+            <p>{'        <StarRating name="react-star-rating" caption="Rate this component!" ratingAmount={5} />'}</p>
             <p>{'        <button type="submit" className="btn btn-submit">Submit Rating</button>'}</p>
             <p>{'      </form>'}</p>
             <p>{'    );'}</p>
@@ -73,11 +73,11 @@ var App = React.createClass({
             <li>{'disabled={boolean} - whether to disable the rating from being selected (optional)'}</li>
             <li>{'editing={boolean} - whether the rating is explicitly in editing mode (optional)'}</li>
             <li>{'size={string} - size of stars (optional)'}</li>
-            <li>{'onRatingClick={function} - a handler function that gets called onClick of the rating (optional) - gets passed (event, {rating, caption})'}</li>
+            <li>{'onRatingClick={function} - a handler function that gets called onClick of the rating (optional) - gets passed (event, {position, rating, caption, name})'}</li>
           </ul>
           <h2>Examples</h2>
           <hr/>
-          <StarRating name="component" caption="Rate this component!" ratingAmount={5} step={0.5} onRatingClick={this.handleRatingClick} />
+          <StarRating name="handler" caption="Use onClick Handlers!" ratingAmount={5} step={0.5} onRatingClick={this.handleRatingClick} />
           <p></p>
           <code>
             <p>{'<script>'}</p>
@@ -85,31 +85,37 @@ var App = React.createClass({
             <p>{'      alert(\'You left a \' + data.rating + \' star rating for \' + data.caption);'}</p>
             <p>{'    },'}</p>
             <p>{'</script>'}</p>
-            <p>{'<StarRating name="hotels" caption="Rate this component!" ratingAmount={5} step={0.5} onRatingClick={handleRatingClick} />'}</p>
+            <p>{'<StarRating name="handler" caption="Use onClick Handlers!" ratingAmount={5} step={0.5} onRatingClick={handleRatingClick} />'}</p>
           </code>
-          <StarRating name="restaurants" caption="Restaurants!" ratingAmount={10} step={1} onRatingClick={this.handleRatingClick} />
+          <StarRating name="ten-stars" caption="Configure number of stars!" ratingAmount={10} step={1} onRatingClick={this.handleRatingClick} />
           <code>
-            {'<StarRating name="restaurants" caption="Restaurants!" ratingAmount={10} step={1} onRatingClick={this.handleRatingClick} />'}
+            {'<StarRating name="ten-stars" caption="Configure number of stars!" ratingAmount={10} step={1} onRatingClick={this.handleRatingClick} />'}
           </code>
-          <StarRating name="movie-ratings" caption="Movie Ratings!" ratingAmount={5} rating={3.5} />
+          <StarRating name="half-stars" caption="Use half-star steps!" ratingAmount={5} />
           <code>
-            {'<StarRating name="movie-ratings" caption="Movie Ratings!" ratingAmount={5} rating={3.5} />'}
+            {'<StarRating name="half-stars" caption="Use half-star steps!" ratingAmount={5} />'}
           </code>
-          <StarRating name="movie-ratings" caption="Movie Ratings!" ratingAmount={10} onRatingClick={this.handleRatingClick} />
+          <StarRating name="small-rating" caption="Small!" size="sm" ratingAmount={5} rating={3} />
           <code>
-            {'<StarRating name="movie-ratings" caption="Movie Ratings!" ratingAmount={10} onRatingClick={this.handleRatingClick} />'}
+            {'<StarRating name="small-rating" caption="Small!" size="sm" ratingAmount={5} rating={3} />'}
           </code>
-          <StarRating name="movie-ratings" caption="Movie Ratings!" ratingAmount={5} rating={3} disabled={true} />
+          <StarRating name="medium-rating" caption="Medium!" size="md" ratingAmount={5} rating={4} />
           <code>
-            {'<StarRating name="movie-ratings" caption="Movie Ratings!" ratingAmount={5} rating={3} disabled={true} />'}
+            {'<StarRating name="medium-rating" caption="Medium!" size="md" ratingAmount={5} rating={4} />'}
+          </code>
+          <StarRating name="large-rating" caption="Large!" size="lg" ratingAmount={5} rating={5} />
+          <code>
+            {'<StarRating name="large-rating" caption="Large!" size="lg" ratingAmount={5} rating={5} />'}
+          </code>
+          <StarRating name="disabled" caption="Disabled." ratingAmount={5} rating={3} disabled={true} />
+          <code>
+            {'<StarRating name="disabled" caption="Disabled." ratingAmount={5} rating={3} disabled={true} />'}
           </code>
         </div>
         <footer>
           <p className="footer-creds">
-            {/*<p><iframe src="https://ghbtns.com/github-btn.html?user=cameronjroe&repo=react-star-rating&type=star&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe></p>*/}
-            {/*<p><iframe src="https://ghbtns.com/github-btn.html?user=cameronjroe&repo=react-star-rating&type=fork&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe></p>*/}
-            <p>Code licensed under <a href="https://github.com/cameronjroe/react-star-rating/blob/master/LICENSE">MIT</a> - Currently v{currentVersion}</p>
-            <p>Created by <a href="http://twitter.com/cameronjroe">@cameronjroe</a> - <iframe src="https://ghbtns.com/github-btn.html?user=cameronjroe&type=follow&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe></p>
+            <p>Code licensed under <a href="https://github.com/cameronjroe/react-star-rating/blob/master/LICENSE">MIT</a> - Currently v{currentVersion} - <a href="https://github.com/cameronjroe/react-star-rating">Github Repo</a></p>
+            <p>Created by <a href="http://twitter.com/cameronjroe">@cameronjroe</a> - <iframe src="https://ghbtns.com/github-btn.html?user=cameronjroe&type=follow&count=true" frameBorder="0" scrolling="0" width="170px" height="20px"></iframe></p>
           </p>
         </footer>
     	</section>

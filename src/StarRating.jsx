@@ -172,7 +172,8 @@ var StarRating = React.createClass({
     var ratingCache = {
       pos: this.state.pos,
       rating: this.state.rating,
-      caption: this.props.caption
+      caption: this.props.caption,
+      name: this.props.name
     };
 
     this.setState({
@@ -221,7 +222,7 @@ var StarRating = React.createClass({
 
   render: function () {
 
-    var caption = '';
+    var caption = null;
     
     // is there a caption?
     if (this.props.caption) {
