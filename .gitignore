@@ -1,5 +1,4 @@
 node_modules
 bootstrap-star-rating
-dist
 ./src/components/Review.jsx
 other
