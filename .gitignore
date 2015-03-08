@@ -2,3 +2,4 @@ node_modules
 bootstrap-star-rating
 ./src/components/Review.jsx
 other
+.travis.yml
