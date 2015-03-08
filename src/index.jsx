@@ -14,13 +14,17 @@ var App = React.createClass({
     	<section>
         <div className="intro">
           <h1 className="main-title">
-            {'react-star-rating'} <br/> <small> easy star ratings.</small>
+            {'react-star-rating'} <br/> <small> easy star ratings with React</small>
           </h1>
           <StarRating name="hotels" size="md" rating={5} editing={true} ratingAmount={5} step={1} />
         </div>
         <div className="ratings-wrap">
-          <h3>Create star ratings easily with react-star-rating.</h3>
           <h2>Installation</h2>
+          <hr/>
+          <code>
+            {'$ npm install react-star-rating --save'}
+          </code>
+          <h2>Usage</h2>
           <hr/>
           <p>You can use react-star-rating with Browserify or by simply including it as a script tag in your page.</p>
           <code>
@@ -35,21 +39,21 @@ var App = React.createClass({
           <code>
             {'<StarRating name="hotels" caption="Hotels!" ratingAmount={5} step={0.5} onRatingClick={this.handleRatingClick} />'}
           </code>
-          <StarRating name="movie-ratings" caption="Movie Ratings!" ratingAmount={5} rating={3} disabled={true} />
+          <StarRating name="restaurants" caption="Restaurants!" ratingAmount={10} step={1} onRatingClick={this.handleRatingClick} />
           <code>
-            {'<StarRating name="movie-ratings" caption="Movie Ratings!" ratingAmount={5} rating={3} disabled={true} />'}
+            {'<StarRating name="restaurants" caption="Restaurants!" ratingAmount={10} step={1} onRatingClick={this.handleRatingClick} />'}
           </code>
           <StarRating name="movie-ratings" caption="Movie Ratings!" ratingAmount={5} rating={3.5} />
           <code>
             {'<StarRating name="movie-ratings" caption="Movie Ratings!" ratingAmount={5} rating={3.5} />'}
           </code>
-          <StarRating name="restaurants" caption="Restaurants!" ratingAmount={10} step={1} onRatingClick={this.handleRatingClick} />
-          <code>
-            {'<StarRating name="restaurants" caption="Restaurants!" ratingAmount={10} step={1} onRatingClick={this.handleRatingClick} />'}
-          </code>
           <StarRating name="movie-ratings" caption="Movie Ratings!" ratingAmount={10} onRatingClick={this.handleRatingClick} />
           <code>
             {'<StarRating name="movie-ratings" caption="Movie Ratings!" ratingAmount={10} onRatingClick={this.handleRatingClick} />'}
+          </code>
+          <StarRating name="movie-ratings" caption="Movie Ratings!" ratingAmount={5} rating={3} disabled={true} />
+          <code>
+            {'<StarRating name="movie-ratings" caption="Movie Ratings!" ratingAmount={5} rating={3} disabled={true} />'}
           </code>
         </div>
         <footer>
