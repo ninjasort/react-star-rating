@@ -256,7 +256,7 @@ var StarRating = React.createClass({
     }
 
     return (
-      <fieldset>
+      <fieldset className="react-star-rating">
         {caption}
         <span ref="root" className={classes}>
           {starRating}

@@ -14,8 +14,9 @@ var App = React.createClass({
     	<section>
         <div className="intro">
           <h1 className="main-title">
-            {'react-star-rating'} <small> easy star ratings.</small>
+            {'react-star-rating'} <br/> <small> easy star ratings.</small>
           </h1>
+          <StarRating name="hotels" size="md" rating={5} editing={true} ratingAmount={5} step={1} />
         </div>
         <div className="ratings-wrap">
           <h3>Create star ratings easily with react-star-rating.</h3>

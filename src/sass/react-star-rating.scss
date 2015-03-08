@@ -10,11 +10,6 @@
   background: transparent url('../img/loading.gif') top left no-repeat;
   border: none;
 }
-.react-star-rating__root {
-  font-size: 2em;
-  vertical-align: middle;
-  display: inline-block;
-}
 
 /*
  * Stars
@@ -32,6 +27,16 @@
   margin-top: -5px;
 }
 
+.react-star-rating__root {
+  font-size: 2em;
+  vertical-align: middle;
+  display: inline-block;
+  &.rating-editing {
+    &:hover {
+      cursor: pointer;
+    }
+  }  
+}
 .rating-container {
   position: relative;
   vertical-align: middle;
@@ -40,11 +45,6 @@
   overflow: hidden;
   &:before {
     content: attr(data-content);
-  }
-  &.rating-editing {
-    &:hover {
-      cursor: pointer;
-    }
   }
   .rating-stars {
     position: absolute;
