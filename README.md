@@ -42,7 +42,7 @@ var FormComponent = React.createClass({
     }
 });
 
-React.render(<FormComponent />, document.getElementById('star-rating')</p>
+React.render(<FormComponent />, document.getElementById('star-rating')
 ```
 
 ## Options
