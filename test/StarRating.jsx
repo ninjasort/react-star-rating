@@ -1,6 +1,0 @@
-
-describe("StarRating", function() {
-  
-  
-
-});

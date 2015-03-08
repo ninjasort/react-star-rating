@@ -16,6 +16,16 @@ $ npm install react-star-rating --save
 $ bower install react-star-rating --save
 ```
 
+#### Browser
+```html
+<script src="http://fb.me/react-0.12.2.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.12.2/JSXTransformer.js"></script>
+<script src="path/to/react-star-rating/react-star-rating.min.js"></script>
+<script>
+// window.StarRating
+</script>
+```
+
 ## Usage
 
 ```js
@@ -43,21 +53,7 @@ React.render(<FormComponent />, document.getElementById('star-rating')'}</p>
   - **size**={string} - size of stars (optional)
   - **onRatingClick**={function} - a handler function that gets called onClick of the rating (optional) - gets passed (event, {position, rating, caption, name})
 
-## Todos
 
-- component
-  - [x] be able to set star rating
-  - [x] have minimal styling in react-star-rating.min.css
-  - [x] have classes to override styling
-  - [x] unbind, clean up when removed
-  - [ ] include tests
-- demo
-  - [x] gh-pages
-  - [ ] CommonJS module support
-  - [x] show usage instructions
-  - [ ] AMD module support
-  - [ ] Browser global support
+## License
 
-  ## License
-
-  [MIT](https://github.com/cameronjroe/react-star-rating/blob/master/LICENSE)
+[MIT](https://github.com/cameronjroe/react-star-rating/blob/master/LICENSE)

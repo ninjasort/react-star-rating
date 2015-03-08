@@ -32,12 +32,15 @@ var App = React.createClass({
           </code>
           <h3>Bower/AMD</h3>
           <code>
-            {'$ bower install react-star-rating --save'}
+            <p>{'$ bower install react-star-rating --save'}</p>
+            <p>{'\n'}</p>
+            <p>{'var StarRating = require(\'react-star-rating/dist/amd/react-star-rating\');'}</p>
           </code>
           <h3>Browser Global</h3>
           <p>The bower repo contains react-star-rating.js and react-star-rating.min.js with a global object accessible from window.StarRating.</p>
           <code>
             <p>{'<script src="http://fb.me/react-0.12.2.js"></script>'}</p>
+            <p>{'<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.12.2/JSXTransformer.js"></script>'}</p>
             <p>{'<script src="path/to/react-star-rating/react-star-rating.min.js"></script>'}</p>
             <p>{'<script>'}</p>
             <p><i>{'// window.StarRating'}</i></p>
@@ -66,14 +69,14 @@ var App = React.createClass({
           <h2>Options</h2>
           <hr/>
           <ul>
-            <li>{'name={string} - name for form input (required)'}</li>
-            <li>{'caption={string} - caption for rating (optional)'}</li>
-            <li>{'ratingAmount={number} - rating amount (required, default: 5)'}</li>
-            <li>{'rating={number} - a set rating between the rating amount (optional)'}</li>
-            <li>{'disabled={boolean} - whether to disable the rating from being selected (optional)'}</li>
-            <li>{'editing={boolean} - whether the rating is explicitly in editing mode (optional)'}</li>
-            <li>{'size={string} - size of stars (optional)'}</li>
-            <li>{'onRatingClick={function} - a handler function that gets called onClick of the rating (optional) - gets passed (event, {position, rating, caption, name})'}</li>
+            <li><strong>name</strong>{'={string} - name for form input (required)'}</li>
+            <li><strong>caption</strong>{'={string} - caption for rating (optional)'}</li>
+            <li><strong>ratingAmount</strong>{'={number} - rating amount (required, default: 5)'}</li>
+            <li><strong>rating</strong>{'={number} - a set rating between the rating amount (optional)'}</li>
+            <li><strong>disabled</strong>{'={boolean} - whether to disable the rating from being selected (optional)'}</li>
+            <li><strong>editing</strong>{'={boolean} - whether the rating is explicitly in editing mode (optional)'}</li>
+            <li><strong>size</strong>{'={string} - size of stars (optional)'}</li>
+            <li><strong>onRatingClick</strong>{'={function} - a handler function that gets called onClick of the rating (optional) - gets passed (event, {position, rating, caption, name})'}</li>
           </ul>
           <h2>Examples</h2>
           <hr/>

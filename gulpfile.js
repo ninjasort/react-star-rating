@@ -1,16 +1,20 @@
-var gulp = require('gulp');
-var source = require('vinyl-source-stream');
+/**
+ * Gulp
+ */
+var gulp       = require('gulp');
+var source     = require('vinyl-source-stream');
 var browserify = require('browserify');
-var babelify = require('babelify');
-var reactify = require('reactify');
-var server = require('gulp-webserver');
-var sass = require('gulp-sass');
-var concat = require('gulp-concat');
-var rename = require('gulp-rename');
-var react = require('gulp-react');
-var uglify = require('gulp-uglify');
-var jshint = require('gulp-jshint');
-var wrapAmd = require('gulp-wrap-amd');
+var babelify   = require('babelify');
+var reactify   = require('reactify');
+var server     = require('gulp-webserver');
+var sass       = require('gulp-sass');
+var concat     = require('gulp-concat');
+var rename     = require('gulp-rename');
+var react      = require('gulp-react');
+var uglify     = require('gulp-uglify');
+var jshint     = require('gulp-jshint');
+var removeCode = require('gulp-remove-code');
+var wrapAmd    = require('gulp-wrap-amd');
 
 gulp.task('lint', function () {
   return gulp.src('./src/**/*.{jsx, js}')
@@ -68,7 +72,16 @@ gulp.task('build:npm', function () {
 });
 
 gulp.task('uglify', function () {
-  return gulp.src('./dist/browser/react-star-rating.js')
+  return gulp.src('./dist/amd/react-star-rating.js')
+    .pipe(rename('react-star-rating.min.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('dist/amd'));
+});
+
+gulp.task('build:browser', function () {
+  return gulp.src('./dist/amd/react-star-rating.js')
+    .pipe(removeCode({ browser: true }))
+    .pipe(gulp.dest('dist/browser'))
     .pipe(rename('react-star-rating.min.js'))
     .pipe(uglify())
     .pipe(gulp.dest('dist/browser'));
@@ -81,7 +94,7 @@ gulp.task('build:bower', function () {
     .pipe(jshint.reporter('jshint-stylish'))
     .pipe(rename('react-star-rating.js'))
     .pipe(wrapAmd())
-    .pipe(gulp.dest('dist/browser'))
+    .pipe(gulp.dest('dist/amd'))
     .pipe(rename('react-star-rating.min.js'))
     .pipe(uglify())
     .on('error', function (err) {
