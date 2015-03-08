@@ -49,7 +49,7 @@ var App = React.createClass({displayName: "App",
           ), 
           React.createElement("h2", null, "Usage"), 
           React.createElement("hr", null), 
-          React.createElement("form", {action: "/", method: "GET", className: "demo-form"}, 
+          React.createElement("form", {action: "/", target: "_self", method: "GET", className: "demo-form"}, 
             React.createElement(StarRating, {name: "react-star-rating", caption: "Rate this component!", ratingAmount: 5}), 
             React.createElement("button", {type: "submit", className: "btn btn-submit"}, "Submit Rating")
           ), 
