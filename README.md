@@ -1,5 +1,6 @@
-# react-star-rating
-A simple star rating component.
+# react-star-rating [![Build Status](https://travis-ci.org/)](https://travis-ci.org/)
+
+> A simple star rating component.
 
 - component
   - [x] be able to set star rating

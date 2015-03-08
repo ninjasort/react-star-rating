@@ -44,11 +44,10 @@ var StarRating = React.createClass({
     return {
       step: 0.5,
       ratingAmount: 5,
-      onRatingClick: function (e, cache) {
-      },
+      onRatingClick: function () {},
       editing: true,
       disabled: false
-    }
+    };
   },
 
   getInitialState: function () {
@@ -61,7 +60,7 @@ var StarRating = React.createClass({
       rating: 0,
       pos: 0,
       glyph: this.getStars()
-    }
+    };
   },
 
   componentWillMount: function () {
@@ -190,7 +189,7 @@ var StarRating = React.createClass({
 
   treatName: function (title) {
     if (typeof title === 'string') {
-      return title.toLowerCase().split(' ').join('_')
+      return title.toLowerCase().split(' ').join('_');
     }
   },
 
@@ -226,9 +225,12 @@ var StarRating = React.createClass({
   },
 
   render: function () {
+
+    var caption = '';
+    
     // is there a caption?
     if (this.props.caption) {
-      var caption = (<span className="react-rating-caption">{this.props.caption}</span>);
+      caption = (<span className="react-rating-caption">{this.props.caption}</span>);
     }
 
     // get the classes on this render

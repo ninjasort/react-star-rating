@@ -7,12 +7,18 @@ var server = require('gulp-webserver');
 var sass = require('gulp-sass');
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');
-var ps = require('child_process');
-var yargs = require('yargs').argv;
 var react = require('gulp-react');
 var uglify = require('gulp-uglify');
+var jshint = require('gulp-jshint');
 
-gulp.task('default', ['styles'], function () {
+gulp.task('lint', function () {
+  return gulp.src('./src/**/*.{jsx, js}')
+    .pipe(react())
+    .pipe(jshint())
+    .pipe(jshint.reporter('jshint-stylish'));
+});
+
+gulp.task('default', ['lint','styles'], function () {
   return browserify('./src/index.jsx')
     .transform(reactify)
     .bundle()
@@ -20,6 +26,8 @@ gulp.task('default', ['styles'], function () {
       console.log(err.fileName, err.lineNumber, err.description);
     })
     .pipe(source('bundle.js'))
+    .pipe(jshint())
+    .pipe(jshint.reporter('jshint-stylish'))
     .pipe(gulp.dest('dist'));
 });
 
@@ -43,9 +51,3 @@ gulp.task('build:react', function () {
     .pipe(uglify())
     .pipe(gulp.dest('dist/browser'));
 });
-
-// gulp.task('run', function () {
-//   ps.execFile('./script.sh', function (err, stdout, stderr) {
-//     console.log(stdout);
-//   });
-// });
