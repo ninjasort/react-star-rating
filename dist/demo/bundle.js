@@ -18434,7 +18434,6 @@ module.exports={
     "babelify": "^5.0.4",
     "browserify": "^9.0.3",
     "gulp": "^3.8.11",
-    "gulp-bump": "^0.2.2",
     "gulp-concat": "^2.5.2",
     "gulp-jshint": "^1.9.2",
     "gulp-react": "^3.0.0",
