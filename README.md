@@ -6,8 +6,31 @@
 
 ## Install
 
+### CommonJS/Browserify
 ```sh
 $ npm install react-star-rating --save
+```
+
+### Bower/AMD
+```sh
+$ bower install react-star-rating --save
+```
+
+## Usage
+
+```js
+var FormComponent = React.createClass({
+    render: function () {
+      return ('
+        <form action="/" method="GET">
+          <StarRating name="airbnb-rating" caption="Rate your stay!" ratingAmount={5} />
+          <button type="submit" className="btn btn-submit">Submit Rating</button>
+        </form>
+      );
+    }
+});
+
+React.render(<FormComponent />, document.getElementById(\'star-rating\')'}</p>
 ```
 
 ## Todos
