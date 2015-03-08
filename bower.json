@@ -1,0 +1,24 @@
+{
+  "name": "react-star-rating",
+  "version": "0.1.0",
+  "homepage": "https://github.com/cameronjroe/react-star-rating",
+  "authors": [
+    "Cameron J Roe <cameronjroe@gmail.com>"
+  ],
+  "description": "A simple star rating component built with React.",
+  "main": "dist/browser/react-star-rating.min.js",
+  "keywords": [
+    "React",
+    "Star",
+    "Rating"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components",
+    "test",
+    "tests"
+  ]
+}
