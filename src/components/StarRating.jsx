@@ -4,18 +4,19 @@ var React = require('react');
  * @fileoverview react-star-rating
  * @author @cameronjroe
  * <StarRating 
- *   title={string} - title of caption for rating (optional)
- *   ratingAmount={number} - the rating amount (default: 5)
+ *   name={string} - name for form input (required)
+ *   caption={string} - caption for rating (optional)
+ *   ratingAmount={number} - the rating amount (required, default: 5)
  *   rating={number} - a set rating between the rating amount (optional)
  *   disabled={boolean} - whether to disable the rating from being selected (optional)
  *   editing={boolean} - whether the rating is explicitly in editing mode (optional)
- *   onRatingClick={function} - a handler function that gets called onClick of the rating
+ *   onRatingClick={function} - a handler function that gets called onClick of the rating (optional)
  *   />
  */
 var StarRating = React.createClass({
 
   propTypes: {
-    name: React.PropTypes.string,
+    name: React.PropTypes.string.isRequired,
     caption: React.PropTypes.string,
     ratingAmount: React.PropTypes.number.isRequired,
     rating: React.PropTypes.number,
