@@ -34,8 +34,8 @@ React.render(<FormComponent />, document.getElementById('star-rating')'}</p>
 ```
 
 ## Options
-  - name={string} - name for form input (required)
-  - caption={string} - caption for rating (optional)
+  - *name*={string} - name for form input (required)
+  - **caption**={string} - caption for rating (optional)
   - ratingAmount={number} - rating amount (required, default: 5)
   - rating={number} - a set rating between the rating amount (optional)
   - disabled={boolean} - whether to disable the rating from being selected (optional)
