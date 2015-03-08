@@ -32,11 +32,10 @@ gulp.task('default', ['lint','styles'], function () {
 });
 
 gulp.task('styles', function () {
-  return gulp.src('./src/sass/**/*.scss')
+  return gulp.src('./src/sass/*.scss')
     .pipe(sass({
       includePaths: require('node-bourbon').includePaths
     }))
-    .pipe(concat('react-star-rating.min.css'))
     .pipe(gulp.dest('./dist/css'));
 });
 

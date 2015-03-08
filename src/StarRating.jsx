@@ -10,6 +10,7 @@ var React = require('react');
  *   rating={number} - a set rating between the rating amount (optional)
  *   disabled={boolean} - whether to disable the rating from being selected (optional)
  *   editing={boolean} - whether the rating is explicitly in editing mode (optional)
+ *   size={string} - size of stars (optional)
  *   onRatingClick={function} - a handler function that gets called onClick of the rating (optional)
  *   />
  */
@@ -82,6 +83,7 @@ var StarRating = React.createClass({
   },
 
   componentWillUnmount: function () {
+    delete this.root;
     delete this.ratingStars;
     delete this.ratingContainer;
   },
