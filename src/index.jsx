@@ -6,7 +6,7 @@ var inject = document.querySelector('.inject');
 var App = React.createClass({
 
   handleRatingClick: function (e, data) {
-    alert('You left a ' + data.rating + ' star rating for ' + data.title + '!');
+    alert('You left a ' + data.rating + ' star rating for ' + data.caption);
   },
 
   render: function () {
@@ -30,21 +30,25 @@ var App = React.createClass({
           </code>
           <h2>Examples</h2>
           <hr/>
-          <StarRating title="Hotels!" ratingAmount={5} step={0.5} onRatingClick={this.handleRatingClick} />
+          <StarRating name="hotels" caption="Hotel Rating!" ratingAmount={5} step={0.5} onRatingClick={this.handleRatingClick} />
           <code>
-            {'<StarRating title="Hotels!" ratingAmount={5} onRatingClick={this.handleRatingClick} />'}
+            {'<StarRating name="hotels" caption="Hotels!" ratingAmount={5} step={0.5} onRatingClick={this.handleRatingClick} />'}
           </code>
-          <StarRating title="Restaurants!" ratingAmount={10} step={1} onRatingClick={this.handleRatingClick} />
+          <StarRating name="movie-ratings" caption="Movie Ratings!" ratingAmount={5} rating={3} disabled={true} />
           <code>
-            {'<StarRating title="Restaurants!" ratingAmount={10} onRatingClick={this.handleRatingClick} />'}
+            {'<StarRating name="movie-ratings" caption="Movie Ratings!" ratingAmount={5} rating={3} disabled={true} />'}
           </code>
-          <StarRating title="Movie Ratings" ratingAmount={10} onRatingClick={this.handleRatingClick} />
+          <StarRating name="movie-ratings" caption="Movie Ratings!" ratingAmount={5} rating={3.5} />
           <code>
-            {'<StarRating title="Movie Ratings!" ratingAmount={10} onRatingClick={this.handleRatingClick} />'}
+            {'<StarRating name="movie-ratings" caption="Movie Ratings!" ratingAmount={5} rating={3.5} />'}
           </code>
-          <StarRating title="Movie Ratings" ratingAmount={5} rating={3} disabled={true} />
+          <StarRating name="restaurants" caption="Restaurants!" ratingAmount={10} step={1} onRatingClick={this.handleRatingClick} />
           <code>
-            {'<StarRating title="Movie Ratings!" ratingAmount={10} rating={3} disabled={true} />'}
+            {'<StarRating name="restaurants" caption="Restaurants!" ratingAmount={10} step={1} onRatingClick={this.handleRatingClick} />'}
+          </code>
+          <StarRating name="movie-ratings" caption="Movie Ratings!" ratingAmount={10} onRatingClick={this.handleRatingClick} />
+          <code>
+            {'<StarRating name="movie-ratings" caption="Movie Ratings!" ratingAmount={10} onRatingClick={this.handleRatingClick} />'}
           </code>
         </div>
         <footer>

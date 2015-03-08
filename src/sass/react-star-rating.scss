@@ -10,8 +10,10 @@
   background: transparent url('../img/loading.gif') top left no-repeat;
   border: none;
 }
-.star-rating__root {
+.react-star-rating__root {
   font-size: 2em;
+  vertical-align: middle;
+  display: inline-block;
 }
 
 /*
@@ -39,8 +41,10 @@
   &:before {
     content: attr(data-content);
   }
-  &:hover {
-    cursor: pointer;
+  &.rating-editing {
+    &:hover {
+      cursor: pointer;
+    }
   }
   .rating-stars {
     position: absolute;
@@ -48,7 +52,8 @@
     top: 0;
     white-space: nowrap;
     overflow: hidden;
-    color: #fde16d;
+    color: #F5A71B;
+    -webkit-mask-image: -webkit-gradient(linear,left top,left bottom,from(#FDBD47),to(#F5A71B));
     &:before {
       content: attr(data-content);
     }
@@ -65,4 +70,15 @@
   .rating-container:hover {
     cursor: not-allowed;
   }
+}
+
+// sizes
+.react-star-rating__size--sm {
+  font-size: 1em;
+}
+.react-star-rating__size--md {
+  font-size: 2em;
+}
+.react-star-rating__size--lg {
+  font-size: 2.5em;
 }
