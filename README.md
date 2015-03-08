@@ -6,12 +6,12 @@
 
 ## Install
 
-### CommonJS/Browserify
+#### CommonJS/Browserify
 ```sh
 $ npm install react-star-rating --save
 ```
 
-### Bower/AMD
+#### Bower/AMD
 ```sh
 $ bower install react-star-rating --save
 ```
@@ -21,7 +21,7 @@ $ bower install react-star-rating --save
 ```js
 var FormComponent = React.createClass({
     render: function () {
-      return ('
+      return (
         <form action="/" method="GET">
           <StarRating name="airbnb-rating" caption="Rate your stay!" ratingAmount={5} />
           <button type="submit" className="btn btn-submit">Submit Rating</button>
@@ -30,8 +30,18 @@ var FormComponent = React.createClass({
     }
 });
 
-React.render(<FormComponent />, document.getElementById(\'star-rating\')'}</p>
+React.render(<FormComponent />, document.getElementById('star-rating')'}</p>
 ```
+
+## Options
+  - name={string} - name for form input (required)
+  - caption={string} - caption for rating (optional)
+  - ratingAmount={number} - rating amount (required, default: 5)
+  - rating={number} - a set rating between the rating amount (optional)
+  - disabled={boolean} - whether to disable the rating from being selected (optional)
+  - editing={boolean} - whether the rating is explicitly in editing mode (optional)
+  - size={string} - size of stars (optional)
+  - onRatingClick={function} - a handler function that gets called onClick of the rating (optional) - gets passed (event, {rating, caption})
 
 ## Todos
 
