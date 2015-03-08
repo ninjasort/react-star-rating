@@ -2,31 +2,6 @@
 
 @import "demo";
 
-.rating-loading {
-  width: 25px;
-  height: 25px;
-  font-size: 0px;
-  color: #fff;
-  background: transparent url('../img/loading.gif') top left no-repeat;
-  border: none;
-}
-
-/*
- * Stars
- */
-.rating-fa {
-  font-family: 'FontAwesome';
-  padding-left: 1px;
-  .rating-stars:before {
-    padding-left: 1px;
-  }
-}
-
-.rating-uni {
-  font-size: 1.2em;
-  margin-top: -5px;
-}
-
 .react-star-rating__root {
   font-size: 2em;
   vertical-align: middle;
@@ -53,6 +28,7 @@
     white-space: nowrap;
     overflow: hidden;
     color: #F5A71B;
+    @include transition(all 0.01s);
     -webkit-mask-image: -webkit-gradient(linear,left top,left bottom,from(#FDBD47),to(#F5A71B));
     &:before {
       content: attr(data-content);

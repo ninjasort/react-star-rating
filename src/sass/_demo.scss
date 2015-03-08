@@ -12,16 +12,55 @@ h1, h2, h3, h4, h5, h6 {
 code {
   color: #444;
   padding: 2em;
+  line-height: 1.5;
   margin-top: 2em;
   margin-bottom: 2.5em;
   min-width: 100%;
   display: inline-block;
   box-shadow: inset 0px 0px 7px rgba(210, 210, 210, 0.54);
   background-color: rgba(210, 210, 210, 0.24);
+  white-space: pre-wrap;
+}
+
+iframe {
+  border: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+ul li {
+  margin: 0.5em 0;
+  font-size: 1.2em;
 }
 
 footer {
   text-align: center;
+}
+
+.btn {
+  border-radius: 2px;
+  box-shadow: 0px 1px 5px #E0E0E0;
+}
+
+.btn-submit {
+  background-color: #F5A71B;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 0 1.5em;
+  letter-spacing: 1px;
+  &:active, &:hover {
+    outline: 0;
+    color: #fff;
+    background-color: darken(#F5A71B, 10%);
+  }
+}
+
+.demo-form {
+  fieldset {
+    display: inline-block;
+  }
 }
 
 .footer-creds {
