@@ -2,7 +2,7 @@
 
 <!-- [![Build Status](https://travis-ci.org/)](https://travis-ci.org/) -->
 
-> A simple star rating component.
+> A simple star rating component built with React.
 
 ## Install
 
