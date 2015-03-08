@@ -1,6 +1,7 @@
 # react-star-rating
 
 <!-- [![Build Status](https://travis-ci.org/)](https://travis-ci.org/) -->
+[](/src/img/star-rating.png)
 
 > A simple star rating component built with React.
 
