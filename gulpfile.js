@@ -94,13 +94,7 @@ gulp.task('build:bower', function () {
     .pipe(jshint.reporter('jshint-stylish'))
     .pipe(rename('react-star-rating.js'))
     .pipe(wrapAmd())
-    .pipe(gulp.dest('dist/amd'))
-    .pipe(rename('react-star-rating.min.js'))
-    .pipe(uglify())
-    .on('error', function (err) {
-      console.log(err.lineNumber, err);
-    })
-    .pipe(gulp.dest('dist/browser'));
+    .pipe(gulp.dest('dist/amd'));
 });
 
 gulp.task('dist', ['default', 'build:styles', 'build:npm', 'build:bower']);

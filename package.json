@@ -6,7 +6,7 @@
   "scripts": {},
   "author": "Cameron J Roe <cameronjroe@gmail.com> (http://cameronjroe.com/)",
   "license": "MIT",
-  "dependencies": {
+  "peerDependencies": {
     "react": "^0.12.2"
   },
   "devDependencies": {

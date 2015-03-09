@@ -253,12 +253,12 @@ var StarRating = React.createClass({
     }
 
     return (
-      <fieldset className="react-star-rating">
+      <span className="react-star-rating">
         {caption}
         <span ref="root" className={classes}>
           {starRating}
         </span>
-      </fieldset>
+      </span>
     );
   }
 });

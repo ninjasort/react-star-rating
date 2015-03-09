@@ -1,7 +1,8 @@
+//removeIf(browser)
 define(function(require,exports,module){
 
-
-var React = require('react');
+return var React = require('react');
+//endRemoveIf(browser)
 
 /**
  * @fileoverview react-star-rating
@@ -256,7 +257,7 @@ var StarRating = React.createClass({displayName: "StarRating",
     }
 
     return (
-      React.createElement("fieldset", {className: "react-star-rating"}, 
+      React.createElement("span", {className: "react-star-rating"}, 
         caption, 
         React.createElement("span", {ref: "root", className: classes}, 
           starRating
@@ -266,6 +267,8 @@ var StarRating = React.createClass({displayName: "StarRating",
   }
 });
 
+// removeIf(browser)
 module.exports = StarRating;;
 
 });
+// endRemoveIf(browser)

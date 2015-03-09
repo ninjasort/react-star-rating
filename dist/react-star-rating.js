@@ -253,7 +253,7 @@ var StarRating = React.createClass({displayName: "StarRating",
     }
 
     return (
-      React.createElement("fieldset", {className: "react-star-rating"}, 
+      React.createElement("span", {className: "react-star-rating"}, 
         caption, 
         React.createElement("span", {ref: "root", className: classes}, 
           starRating
