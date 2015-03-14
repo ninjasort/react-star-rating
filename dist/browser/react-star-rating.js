@@ -1,7 +1,5 @@
 // {amd_start}
 
-var React = require('react');
-
 /**
  * @fileoverview react-star-rating
  * @author @cameronjroe
