@@ -1,6 +1,6 @@
 {
   "name": "react-star-rating",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A simple star rating component built with React.",
   "main": "dist/react-star-rating.min.js",
   "scripts": {},
