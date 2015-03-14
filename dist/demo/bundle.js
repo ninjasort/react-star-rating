@@ -41,7 +41,7 @@ var App = React.createClass({displayName: "App",
           React.createElement("h3", null, "Browser Global"), 
           React.createElement("p", null, "The bower repo contains react-star-rating.js and react-star-rating.min.js with a global object accessible from window.StarRating."), 
           React.createElement("code", null, 
-            React.createElement("p", null, '<script src="http://fb.me/react-0.12.2.js"></script>'), 
+            React.createElement("p", null, '<script src="http://fb.me/react-0.13.0.js"></script>'), 
             React.createElement("p", null, '<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.12.2/JSXTransformer.js"></script>'), 
             React.createElement("p", null, '<script src="path/to/react-star-rating/react-star-rating.min.js"></script>'), 
             React.createElement("p", null, '<script>'), 
@@ -19845,7 +19845,7 @@ module.exports = require('./lib/React');
 },{"./lib/React":30}],158:[function(require,module,exports){
 module.exports={
   "name": "react-star-rating",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A simple star rating component built with React.",
   "main": "dist/react-star-rating.min.js",
   "scripts": {},
