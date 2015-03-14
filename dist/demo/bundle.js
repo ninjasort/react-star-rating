@@ -19844,7 +19844,7 @@ module.exports = require('./lib/React');
 },{"./lib/React":30}],158:[function(require,module,exports){
 module.exports={
   "name": "react-star-rating",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A simple star rating component built with React.",
   "main": "dist/react-star-rating.min.js",
   "scripts": {},
@@ -19865,7 +19865,6 @@ module.exports={
     "gulp-sass": "^1.3.3",
     "gulp-uglify": "^1.1.0",
     "gulp-webserver": "^0.9.0",
-    "gulp-wrap-amd": "^0.4.1",
     "jshint-stylish": "^1.0.1",
     "node-bourbon": "^4.2.1-beta1",
     "reactify": "^1.0.0",
