@@ -265,5 +265,4 @@ module.exports = React.createClass({displayName: "exports",
   }
 });
 
-window.StarRating = StarRating;
 });

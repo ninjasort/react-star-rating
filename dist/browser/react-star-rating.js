@@ -16,7 +16,7 @@ var React = require('react');
  *   onRatingClick={function} - a handler function that gets called onClick of the rating (optional)
  *   />
  */
-module.exports = React.createClass({displayName: "exports",
+window.StarRating = React.createClass({displayName: "exports",
 
   propTypes: {
     name: React.PropTypes.string.isRequired,
@@ -265,5 +265,4 @@ module.exports = React.createClass({displayName: "exports",
   }
 });
 
-window.StarRating = StarRating;
 // {amd_end}

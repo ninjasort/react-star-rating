@@ -265,5 +265,4 @@ module.exports = React.createClass({
   }
 });
 
-// {window.StarRating}
 // {amd_end}

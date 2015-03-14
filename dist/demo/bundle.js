@@ -20142,7 +20142,6 @@ module.exports = React.createClass({displayName: "exports",
   }
 });
 
-// {window.StarRating}
 // {amd_end}
 
 },{"react":157}]},{},[1]);
