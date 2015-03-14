@@ -19844,7 +19844,7 @@ module.exports = require('./lib/React');
 },{"./lib/React":30}],158:[function(require,module,exports){
 module.exports={
   "name": "react-star-rating",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A simple star rating component built with React.",
   "main": "dist/react-star-rating.min.js",
   "scripts": {},
