@@ -39,7 +39,7 @@ var App = React.createClass({
           <h3>Browser Global</h3>
           <p>The bower repo contains react-star-rating.js and react-star-rating.min.js with a global object accessible from window.StarRating.</p>
           <code>
-            <p>{'<script src="http://fb.me/react-0.12.2.js"></script>'}</p>
+            <p>{'<script src="http://fb.me/react-0.13.0.js"></script>'}</p>
             <p>{'<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.12.2/JSXTransformer.js"></script>'}</p>
             <p>{'<script src="path/to/react-star-rating/react-star-rating.min.js"></script>'}</p>
             <p>{'<script>'}</p>
