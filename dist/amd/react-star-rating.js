@@ -1,6 +1,5 @@
 define(function(require,exports,module){
 
-
 var React = require('react');
 
 /**
@@ -17,7 +16,7 @@ var React = require('react');
  *   onRatingClick={function} - a handler function that gets called onClick of the rating (optional)
  *   />
  */
-var StarRating = React.createClass({displayName: "StarRating",
+module.exports = React.createClass({displayName: "exports",
 
   propTypes: {
     name: React.PropTypes.string.isRequired,
@@ -44,7 +43,6 @@ var StarRating = React.createClass({displayName: "StarRating",
       step: 0.5,
       ratingAmount: 5,
       onRatingClick: function () {},
-      editing: true,
       disabled: false
     };
   },
@@ -55,6 +53,7 @@ var StarRating = React.createClass({displayName: "StarRating",
         pos: 0,
         rating: 0
       },
+      editing: this.props.editing || true,
       stars: 5,
       rating: 0,
       pos: 0,
@@ -68,7 +67,7 @@ var StarRating = React.createClass({displayName: "StarRating",
     
     if (this.props.rating) {
       
-      this.props.editing = false;
+      this.state.editing = false;
 
       var ratingVal = this.props.rating;
       this.setState({
@@ -218,7 +217,7 @@ var StarRating = React.createClass({displayName: "StarRating",
       }
     }
 
-    if (this.props.editing) {
+    if (this.state.editing) {
       classes.push('rating-editing');
     }
 
@@ -239,7 +238,7 @@ var StarRating = React.createClass({displayName: "StarRating",
 
     // are we editing this rating?
     var starRating;
-    if (this.props.editing) {
+    if (this.state.editing) {
       starRating = (
         React.createElement("div", {ref: "ratingContainer", className: "rating-container rating-gly-star", "data-content": this.state.glyph, onMouseMove: this.handleMouseMove, onMouseLeave: this.handleMouseLeave, onClick: this.handleClick}, 
           React.createElement("div", {ref: "ratingStars", className: "rating-stars", "data-content": this.state.glyph, style: {width: this.state.pos}}), 
@@ -256,7 +255,7 @@ var StarRating = React.createClass({displayName: "StarRating",
     }
 
     return (
-      React.createElement("fieldset", {className: "react-star-rating"}, 
+      React.createElement("span", {className: "react-star-rating"}, 
         caption, 
         React.createElement("span", {ref: "root", className: classes}, 
           starRating
@@ -266,6 +265,5 @@ var StarRating = React.createClass({displayName: "StarRating",
   }
 });
 
-module.exports = StarRating;;
-
+window.StarRating = StarRating;
 });

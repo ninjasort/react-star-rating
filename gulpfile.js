@@ -13,32 +13,14 @@ var rename     = require('gulp-rename');
 var react      = require('gulp-react');
 var uglify     = require('gulp-uglify');
 var jshint     = require('gulp-jshint');
-var removeCode = require('gulp-remove-code');
-var wrapAmd    = require('gulp-wrap-amd');
+var replace    = require('gulp-replace');
+var source     = require('vinyl-source-stream');
 
 gulp.task('lint', function () {
   return gulp.src('./src/**/*.{jsx, js}')
     .pipe(react())
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'));
-});
-
-gulp.task('default', ['lint','styles'], function () {
-  return browserify('./src/index.jsx')
-    .transform(reactify)
-    .bundle()
-    .on('error', function (err) {
-      console.log(err.fileName, err.lineNumber, err.description);
-    })
-    .pipe(source('bundle.js'))
-    .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish'))
-    .pipe(gulp.dest('dist/demo'));
-});
-
-gulp.task('watch', ['default'], function () {
-  gulp.watch(['./src/*.js', './src/**/*.jsx', './src/sass/{*/,}*.scss'], ['default']);
-  return gulp.src('.').pipe(server());
 });
 
 gulp.task('styles', function () {
@@ -71,36 +53,40 @@ gulp.task('build:npm', function () {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('uglify', function () {
-  return gulp.src('./dist/amd/react-star-rating.js')
-    .pipe(rename('react-star-rating.min.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest('dist/amd'));
-});
-
-gulp.task('build:browser', function () {
-  return gulp.src('./dist/amd/react-star-rating.js')
-    .pipe(removeCode({ browser: true }))
-    .pipe(gulp.dest('dist/browser'))
-    .pipe(rename('react-star-rating.min.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest('dist/browser'));
-});
-
 gulp.task('build:bower', function () {
   return gulp.src('./src/StarRating.jsx')
     .pipe(react())
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'))
     .pipe(rename('react-star-rating.js'))
-    .pipe(wrapAmd())
+    .pipe(replace(/\/\/ \{window\.StarRating\}/g, 'window.StarRating = StarRating;'))
+    .pipe(replace(/\/\/ \{amd_start\}/, 'define(function(require,exports,module){'))
+    .pipe(replace(/\/\/ \{amd_end\}/, '});'))
     .pipe(gulp.dest('dist/amd'))
     .pipe(rename('react-star-rating.min.js'))
     .pipe(uglify())
     .on('error', function (err) {
-      console.log(err.lineNumber, err);
+      console.log(err);
     })
-    .pipe(gulp.dest('dist/browser'));
+    .pipe(gulp.dest('dist/amd'));
+});
+
+gulp.task('default', ['lint','styles'], function () {
+  return browserify('./src/index.jsx')
+    .transform(reactify)
+    .bundle()
+    .on('error', function (err) {
+      console.log(err.fileName, err.lineNumber, err.description);
+    })
+    .pipe(source('bundle.js'))
+    .pipe(jshint())
+    .pipe(jshint.reporter('jshint-stylish'))
+    .pipe(gulp.dest('dist/demo'));
+});
+
+gulp.task('watch', ['default'], function () {
+  gulp.watch(['./src/*.js', './src/**/*.jsx', './src/sass/{*/,}*.scss'], ['dist']);
+  return gulp.src('.').pipe(server());
 });
 
 gulp.task('dist', ['default', 'build:styles', 'build:npm', 'build:bower']);

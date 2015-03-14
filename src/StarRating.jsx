@@ -1,3 +1,5 @@
+// {amd_start}
+
 var React = require('react');
 
 /**
@@ -14,7 +16,7 @@ var React = require('react');
  *   onRatingClick={function} - a handler function that gets called onClick of the rating (optional)
  *   />
  */
-var StarRating = React.createClass({
+module.exports = React.createClass({
 
   propTypes: {
     name: React.PropTypes.string.isRequired,
@@ -41,7 +43,6 @@ var StarRating = React.createClass({
       step: 0.5,
       ratingAmount: 5,
       onRatingClick: function () {},
-      editing: true,
       disabled: false
     };
   },
@@ -52,6 +53,7 @@ var StarRating = React.createClass({
         pos: 0,
         rating: 0
       },
+      editing: this.props.editing || true,
       stars: 5,
       rating: 0,
       pos: 0,
@@ -65,7 +67,7 @@ var StarRating = React.createClass({
     
     if (this.props.rating) {
       
-      this.props.editing = false;
+      this.state.editing = false;
 
       var ratingVal = this.props.rating;
       this.setState({
@@ -215,7 +217,7 @@ var StarRating = React.createClass({
       }
     }
 
-    if (this.props.editing) {
+    if (this.state.editing) {
       classes.push('rating-editing');
     }
 
@@ -236,7 +238,7 @@ var StarRating = React.createClass({
 
     // are we editing this rating?
     var starRating;
-    if (this.props.editing) {
+    if (this.state.editing) {
       starRating = (
         <div ref="ratingContainer" className="rating-container rating-gly-star" data-content={this.state.glyph} onMouseMove={this.handleMouseMove} onMouseLeave={this.handleMouseLeave} onClick={this.handleClick}>
           <div ref="ratingStars" className="rating-stars" data-content={this.state.glyph} style={{width: this.state.pos}}></div>
@@ -253,14 +255,15 @@ var StarRating = React.createClass({
     }
 
     return (
-      <fieldset className="react-star-rating">
+      <span className="react-star-rating">
         {caption}
         <span ref="root" className={classes}>
           {starRating}
         </span>
-      </fieldset>
+      </span>
     );
   }
 });
 
-module.exports = StarRating;
+// {window.StarRating}
+// {amd_end}

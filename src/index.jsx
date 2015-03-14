@@ -21,6 +21,7 @@ var App = React.createClass({
             <small> easy star ratings with React</small>
           </h1>
           <StarRating name="hotels" size="md" rating={5} editing={true} ratingAmount={5} step={1} />
+          <p>v{currentVersion}</p>
         </div>
         <div className="ratings-wrap">
           <h2>Installation</h2>
