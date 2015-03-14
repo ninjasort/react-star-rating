@@ -61,7 +61,8 @@ footer {
   background: -webkit-linear-gradient(#444, #333) left repeat;
   background: linear-gradient(#444, #333) left repeat;
   padding: 8em 0;
-  box-shadow: inset 0px 0px 7px #000; }
+  box-shadow: inset 0px 0px 7px #000;
+  text-align: center; }
   .intro .react-star-rating {
     text-align: center; }
 
