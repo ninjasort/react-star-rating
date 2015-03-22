@@ -1,4 +1,4 @@
-# react-star-rating [![forthebadge]](http://forthebadge.com/images/badges/built-with-love.svg)(http://forthebadge.com)
+# react-star-rating [![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)
 
 <!-- [![Build Status](https://travis-ci.org/)](https://travis-ci.org/) -->
 ![](src/img/star-rating.png)
