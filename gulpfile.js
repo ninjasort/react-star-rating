@@ -14,7 +14,6 @@ var react      = require('gulp-react');
 var uglify     = require('gulp-uglify');
 var jshint     = require('gulp-jshint');
 var replace    = require('gulp-replace');
-var source     = require('vinyl-source-stream');
 
 gulp.task('lint', function () {
   return gulp.src('./src/**/*.{jsx, js}')
