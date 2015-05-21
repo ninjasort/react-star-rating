@@ -31,6 +31,9 @@ $ bower install react-star-rating --save
 ## Usage
 
 ```js
+var React = require('react');
+var StarRating = require('react-star-rating');
+
 var FormComponent = React.createClass({
     render: function () {
       return (
