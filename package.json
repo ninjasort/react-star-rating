@@ -3,7 +3,9 @@
   "version": "1.1.4",
   "description": "A simple star rating component built with React.",
   "main": "dist/react-star-rating.min.js",
-  "scripts": {},
+  "scripts": {
+    "watch": "gulp watch"
+  },
   "author": "Cameron J Roe <cameronjroe@gmail.com> (http://cameronjroe.com/)",
   "license": "MIT",
   "peerDependencies": {
@@ -13,8 +15,11 @@
     "babelify": "^5.0.4",
     "browserify": "^9.0.3",
     "gulp": "^3.8.11",
+    "gulp-babel": "^5.1.0",
     "gulp-concat": "^2.5.2",
+    "gulp-eslint": "^0.12.0",
     "gulp-jshint": "^1.9.2",
+    "gulp-minify-css": "^1.1.1",
     "gulp-react": "^3.0.0",
     "gulp-rename": "^1.2.0",
     "gulp-replace": "^0.5.3",
