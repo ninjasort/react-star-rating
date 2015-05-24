@@ -10,6 +10,8 @@ var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_ag
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+function _defineProperty(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
@@ -17,6 +19,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
 
 /**
  * @fileoverview react-star-rating
@@ -82,15 +88,13 @@ var StarRating = (function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.root = this.refs.root.getDOMNode();
-      this.ratingStars = this.refs.ratingStars.getDOMNode();
-      this.ratingContainer = this.refs.ratingContainer.getDOMNode();
+      this.root = _react2['default'].findDOMNode(this.refs.root);
+      this.ratingContainer = _react2['default'].findDOMNode(this.refs.ratingContainer);
     }
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
       delete this.root;
-      delete this.ratingStars;
       delete this.ratingContainer;
     }
   }, {
@@ -210,45 +214,14 @@ var StarRating = (function (_React$Component) {
       }
     }
   }, {
-    key: 'getClasses',
-
-    // TODO:
-    // Use classnames https://github.com/JedWatson/classnames
-    value: function getClasses() {
-      var classes = ['react-star-rating__root'];
-
-      // is it disabled?
-      if (this.props.disabled) {
-        classes.push('rating-disabled');
-      }
-
-      if (this.props.size) {
-        switch (this.props.size) {
-          case 'sm':
-            classes.push('react-star-rating__size--sm');
-            break;
-          case 'md':
-            classes.push('react-star-rating__size--md');
-            break;
-          case 'lg':
-            classes.push('react-star-rating__size--lg');
-            break;
-          default:
-            break;
-        }
-      }
-
-      if (this.state.editing) {
-        classes.push('rating-editing');
-      }
-
-      return classes.join(' ');
-    }
-  }, {
     key: 'render',
     value: function render() {
+      var _cx;
 
       var caption = null;
+      var classes = (0, _classnames2['default'])((_cx = {
+        'react-star-rating__root': true,
+        'rating-disabled': this.props.disabled }, _defineProperty(_cx, 'react-star-rating__size--' + this.props.size, this.props.size), _defineProperty(_cx, 'rating-editing', this.state.editing), _cx));
 
       // is there a caption?
       if (this.props.caption) {
@@ -259,23 +232,25 @@ var StarRating = (function (_React$Component) {
         );
       }
 
-      // get the classes on this render
-      var classes = this.getClasses();
-
       // are we editing this rating?
       var starRating;
       if (this.state.editing) {
         starRating = _react2['default'].createElement(
           'div',
-          { ref: 'ratingContainer', className: 'rating-container rating-gly-star', 'data-content': this.state.glyph, onMouseMove: this.handleMouseMove.bind(this), onMouseLeave: this.handleMouseLeave.bind(this), onClick: this.handleClick.bind(this) },
-          _react2['default'].createElement('div', { ref: 'ratingStars', className: 'rating-stars', 'data-content': this.state.glyph, style: { width: this.state.pos } }),
+          { ref: 'ratingContainer',
+            className: 'rating-container rating-gly-star',
+            'data-content': this.state.glyph,
+            onMouseMove: this.handleMouseMove.bind(this),
+            onMouseLeave: this.handleMouseLeave.bind(this),
+            onClick: this.handleClick.bind(this) },
+          _react2['default'].createElement('div', { className: 'rating-stars', 'data-content': this.state.glyph, style: { width: this.state.pos } }),
           _react2['default'].createElement('input', { type: 'number', name: this.props.name, value: this.state.ratingCache.rating, style: { display: 'none !important' }, min: this.min, max: this.max, readOnly: true })
         );
       } else {
         starRating = _react2['default'].createElement(
           'div',
           { ref: 'ratingContainer', className: 'rating-container rating-gly-star', 'data-content': this.state.glyph },
-          _react2['default'].createElement('div', { ref: 'ratingStars', className: 'rating-stars', 'data-content': this.state.glyph, style: { width: this.state.pos } }),
+          _react2['default'].createElement('div', { className: 'rating-stars', 'data-content': this.state.glyph, style: { width: this.state.pos } }),
           _react2['default'].createElement('input', { type: 'number', name: this.props.name, value: this.state.ratingCache.rating, style: { display: 'none !important' }, min: this.min, max: this.max, readOnly: true })
         );
       }

@@ -1,4 +1,5 @@
 import React from 'react';
+import cx from 'classnames';
 
 /**
  * @fileoverview react-star-rating
@@ -56,8 +57,8 @@ class StarRating extends React.Component {
   }
 
   componentDidMount() {
-    this.root = this.refs.root.getDOMNode();
-    this.ratingContainer = this.refs.ratingContainer.getDOMNode();
+    this.root = React.findDOMNode(this.refs.root);
+    this.ratingContainer = React.findDOMNode(this.refs.ratingContainer);
   }
 
   componentWillUnmount() {
@@ -168,50 +169,20 @@ class StarRating extends React.Component {
     }
   }
 
-  // TODO:
-  // Use classnames https://github.com/JedWatson/classnames
-  getClasses() {
-    var classes = ['react-star-rating__root'];
-
-    // is it disabled?
-    if (this.props.disabled) {
-      classes.push('rating-disabled');
-    }
-
-    if (this.props.size) {
-      switch(this.props.size) {
-        case 'sm':
-          classes.push('react-star-rating__size--sm');
-          break;
-        case 'md':
-          classes.push('react-star-rating__size--md');
-          break;
-        case 'lg':
-          classes.push('react-star-rating__size--lg');
-          break;
-        default:
-          break;
-      }
-    }
-
-    if (this.state.editing) {
-      classes.push('rating-editing');
-    }
-
-    return classes.join(' ');
-  }
-
   render() {
 
     var caption = null;
-    
+    var classes = cx({
+      'react-star-rating__root': true,
+      'rating-disabled': this.props.disabled,
+      ['react-star-rating__size--' + this.props.size]: this.props.size,
+      'rating-editing': this.state.editing
+    });
+
     // is there a caption?
     if (this.props.caption) {
       caption = (<span className="react-rating-caption">{this.props.caption}</span>);
     }
-
-    // get the classes on this render
-    var classes = this.getClasses();
 
     // are we editing this rating?
     var starRating;
