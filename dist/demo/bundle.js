@@ -179,7 +179,7 @@ var App = (function (_React$Component) {
             React.createElement(
               "h3",
               null,
-              "ES5/Browserify"
+              "ES5"
             ),
             React.createElement(
               "code",
@@ -20208,7 +20208,7 @@ module.exports={
   "name": "react-star-rating",
   "version": "1.1.4",
   "description": "A simple star rating component built with React.",
-  "main": "dist/react-star-rating.min.js",
+  "main": "./dist/react-star-rating.min.js",
   "scripts": {
     "watch": "gulp watch"
   },
@@ -20448,6 +20448,10 @@ var StarRating = (function (_React$Component) {
       }
     },
     getClasses: {
+
+      // TODO:
+      // Use classnames https://github.com/JedWatson/classnames
+
       value: function getClasses() {
         var classes = ["react-star-rating__root"];
 

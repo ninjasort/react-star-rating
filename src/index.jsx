@@ -53,7 +53,7 @@ class App extends React.Component {
             <p>{' '}</p>
             <p>{'React.render(<FormComponent />, document.getElementById(\'star-rating\'));'}</p>
           </code>
-          <h3>ES5/Browserify</h3>
+          <h3>ES5</h3>
           <code>
             <p>{'var React = require(\'react\');'}</p>
             <p>{'var StarRating = require(\'react-star-rating\');'}</p>

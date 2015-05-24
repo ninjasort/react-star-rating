@@ -108,7 +108,7 @@ class StarRating extends React.Component {
         width = this.getWidthFromValue(val);
     
     width += '%';
-    return {width: width, val: val};
+    return {width, val};
   }
 
   getStarRatingPosition(val) {
@@ -170,6 +170,8 @@ class StarRating extends React.Component {
     }
   }
 
+  // TODO:
+  // Use classnames https://github.com/JedWatson/classnames
   getClasses() {
     var classes = ['react-star-rating__root'];
 

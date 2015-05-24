@@ -211,6 +211,9 @@ var StarRating = (function (_React$Component) {
     }
   }, {
     key: 'getClasses',
+
+    // TODO:
+    // Use classnames https://github.com/JedWatson/classnames
     value: function getClasses() {
       var classes = ['react-star-rating__root'];
 
