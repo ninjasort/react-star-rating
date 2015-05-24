@@ -57,13 +57,11 @@ class StarRating extends React.Component {
 
   componentDidMount() {
     this.root = this.refs.root.getDOMNode();
-    this.ratingStars = this.refs.ratingStars.getDOMNode();
     this.ratingContainer = this.refs.ratingContainer.getDOMNode();
   }
 
   componentWillUnmount() {
     delete this.root;
-    delete this.ratingStars;
     delete this.ratingContainer;
   }
 
@@ -219,15 +217,20 @@ class StarRating extends React.Component {
     var starRating;
     if (this.state.editing) {
       starRating = (
-        <div ref="ratingContainer" className="rating-container rating-gly-star" data-content={this.state.glyph} onMouseMove={this.handleMouseMove.bind(this)} onMouseLeave={this.handleMouseLeave.bind(this)} onClick={this.handleClick.bind(this)}>
-          <div ref="ratingStars" className="rating-stars" data-content={this.state.glyph} style={{width: this.state.pos}}></div>
+        <div ref="ratingContainer" 
+          className="rating-container rating-gly-star"
+          data-content={this.state.glyph}
+          onMouseMove={this.handleMouseMove.bind(this)}
+          onMouseLeave={this.handleMouseLeave.bind(this)}
+          onClick={this.handleClick.bind(this)}>
+          <div className="rating-stars" data-content={this.state.glyph} style={{width: this.state.pos}}></div>
           <input type="number" name={this.props.name} value={this.state.ratingCache.rating} style={{display: 'none !important'}} min={this.min} max={this.max} readOnly />
         </div>
       );
     } else {
       starRating = (
         <div ref="ratingContainer" className="rating-container rating-gly-star" data-content={this.state.glyph}>
-          <div ref="ratingStars" className="rating-stars" data-content={this.state.glyph} style={{width: this.state.pos}}></div>
+          <div className="rating-stars" data-content={this.state.glyph} style={{width: this.state.pos}}></div>
           <input type="number" name={this.props.name} value={this.state.ratingCache.rating} style={{display: 'none !important'}} min={this.min} max={this.max} readOnly />
         </div>
       );

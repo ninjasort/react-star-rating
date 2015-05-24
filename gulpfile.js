@@ -17,7 +17,7 @@ var minifyCSS  = require('gulp-minify-css');
 
 var config = {
   componentFileName: 'react-star-rating',
-  componentSrc: './src/StarRating.jsx',
+  componentSrc: './src/export.js',
   componentStylesDir: './src/sass',
   stylesDest: './dist/css'
 };

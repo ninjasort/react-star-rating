@@ -20320,14 +20320,12 @@ var StarRating = (function (_React$Component) {
     componentDidMount: {
       value: function componentDidMount() {
         this.root = this.refs.root.getDOMNode();
-        this.ratingStars = this.refs.ratingStars.getDOMNode();
         this.ratingContainer = this.refs.ratingContainer.getDOMNode();
       }
     },
     componentWillUnmount: {
       value: function componentWillUnmount() {
         delete this.root;
-        delete this.ratingStars;
         delete this.ratingContainer;
       }
     },
@@ -20505,15 +20503,20 @@ var StarRating = (function (_React$Component) {
         if (this.state.editing) {
           starRating = React.createElement(
             "div",
-            { ref: "ratingContainer", className: "rating-container rating-gly-star", "data-content": this.state.glyph, onMouseMove: this.handleMouseMove.bind(this), onMouseLeave: this.handleMouseLeave.bind(this), onClick: this.handleClick.bind(this) },
-            React.createElement("div", { ref: "ratingStars", className: "rating-stars", "data-content": this.state.glyph, style: { width: this.state.pos } }),
+            { ref: "ratingContainer",
+              className: "rating-container rating-gly-star",
+              "data-content": this.state.glyph,
+              onMouseMove: this.handleMouseMove.bind(this),
+              onMouseLeave: this.handleMouseLeave.bind(this),
+              onClick: this.handleClick.bind(this) },
+            React.createElement("div", { className: "rating-stars", "data-content": this.state.glyph, style: { width: this.state.pos } }),
             React.createElement("input", { type: "number", name: this.props.name, value: this.state.ratingCache.rating, style: { display: "none !important" }, min: this.min, max: this.max, readOnly: true })
           );
         } else {
           starRating = React.createElement(
             "div",
             { ref: "ratingContainer", className: "rating-container rating-gly-star", "data-content": this.state.glyph },
-            React.createElement("div", { ref: "ratingStars", className: "rating-stars", "data-content": this.state.glyph, style: { width: this.state.pos } }),
+            React.createElement("div", { className: "rating-stars", "data-content": this.state.glyph, style: { width: this.state.pos } }),
             React.createElement("input", { type: "number", name: this.props.name, value: this.state.ratingCache.rating, style: { display: "none !important" }, min: this.min, max: this.max, readOnly: true })
           );
         }
