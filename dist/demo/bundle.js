@@ -5,8 +5,6 @@ var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["defau
 
 var _createClass = (function () { function defineProperties(target, props) { for (var key in props) { var prop = props[key]; prop.configurable = true; if (prop.value) prop.writable = true; } Object.defineProperties(target, props); } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _get = function get(object, property, receiver) { var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc && desc.writable) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
-
 var _inherits = function (subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
 
 var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
@@ -15,178 +13,486 @@ var React = _interopRequire(require("react"));
 
 var StarRating = _interopRequire(require("./StarRating"));
 
+var pkg = _interopRequire(require("../package.json"));
+
 var inject = document.querySelector(".inject");
 
-var FormComponent = (function (_React$Component) {
-  function FormComponent() {
-    _classCallCheck(this, FormComponent);
+var App = (function (_React$Component) {
+  function App() {
+    _classCallCheck(this, App);
 
-    _get(Object.getPrototypeOf(FormComponent.prototype), "constructor", this).call(this);
+    if (_React$Component != null) {
+      _React$Component.apply(this, arguments);
+    }
   }
 
-  _inherits(FormComponent, _React$Component);
+  _inherits(App, _React$Component);
 
-  _createClass(FormComponent, {
+  _createClass(App, {
+    handleRatingClick: {
+      value: function handleRatingClick(e, data) {
+        alert("You left a " + data.rating + " star rating for " + data.name);
+      }
+    },
     render: {
       value: function render() {
+        var currentVersion = pkg.version;
+
         return React.createElement(
-          "form",
-          { action: "/api", method: "POST" },
-          React.createElement(StarRating, { name: "airbnb-rating", caption: "Rate your stay!", ratingAmount: 5 }),
+          "section",
+          null,
           React.createElement(
-            "button",
-            { type: "submit", className: "btn btn-submit" },
-            "Submit Rating"
+            "div",
+            { className: "intro" },
+            React.createElement(
+              "h1",
+              { className: "main-title" },
+              "react-star-rating",
+              React.createElement(
+                "small",
+                null,
+                " easy star ratings with React"
+              )
+            ),
+            React.createElement(StarRating, { name: "hotels", size: "md", rating: 5, editing: true, ratingAmount: 5, step: 1 }),
+            React.createElement(
+              "p",
+              null,
+              "v",
+              currentVersion
+            )
+          ),
+          React.createElement(
+            "div",
+            { className: "ratings-wrap" },
+            React.createElement(
+              "h2",
+              null,
+              "Installation"
+            ),
+            React.createElement("hr", null),
+            React.createElement(
+              "code",
+              null,
+              "$ npm install react-star-rating --save"
+            ),
+            React.createElement(
+              "h2",
+              null,
+              "Usage"
+            ),
+            React.createElement("hr", null),
+            React.createElement(
+              "form",
+              { target: "_self", method: "GET", className: "demo-form" },
+              React.createElement(StarRating, { name: "react-star-rating", caption: "Rate this component!", ratingAmount: 5 }),
+              React.createElement(
+                "button",
+                { type: "submit", className: "btn btn-submit" },
+                "Submit Rating"
+              )
+            ),
+            React.createElement(
+              "h3",
+              null,
+              "ES6"
+            ),
+            React.createElement(
+              "code",
+              null,
+              React.createElement(
+                "p",
+                null,
+                "import React from 'react'"
+              ),
+              React.createElement(
+                "p",
+                null,
+                "import StarRating from 'react-star-rating'"
+              ),
+              React.createElement(
+                "p",
+                null,
+                " "
+              ),
+              React.createElement(
+                "p",
+                null,
+                "class FormComponent extends React.Component {"
+              ),
+              React.createElement(
+                "p",
+                null,
+                "  render() { "
+              ),
+              React.createElement(
+                "p",
+                null,
+                "    return ("
+              ),
+              React.createElement(
+                "p",
+                null,
+                "      <form target=\"_self\" method=\"GET\">"
+              ),
+              React.createElement(
+                "p",
+                null,
+                "        <StarRating name=\"react-star-rating\" caption=\"Rate this component!\" ratingAmount={5} />"
+              ),
+              React.createElement(
+                "p",
+                null,
+                "        <button type=\"submit\" className=\"btn btn-submit\">Submit Rating</button>"
+              ),
+              React.createElement(
+                "p",
+                null,
+                "      </form>"
+              ),
+              React.createElement(
+                "p",
+                null,
+                "    );"
+              ),
+              React.createElement(
+                "p",
+                null,
+                "  }"
+              ),
+              React.createElement(
+                "p",
+                null,
+                "}"
+              ),
+              React.createElement(
+                "p",
+                null,
+                " "
+              ),
+              React.createElement(
+                "p",
+                null,
+                "React.render(<FormComponent />, document.getElementById('star-rating'));"
+              )
+            ),
+            React.createElement(
+              "h3",
+              null,
+              "ES5"
+            ),
+            React.createElement(
+              "code",
+              null,
+              React.createElement(
+                "p",
+                null,
+                "var React = require('react');"
+              ),
+              React.createElement(
+                "p",
+                null,
+                "var StarRating = require('react-star-rating');"
+              ),
+              React.createElement(
+                "p",
+                null,
+                " "
+              ),
+              React.createElement(
+                "p",
+                null,
+                "var FormComponent = React.createClass({"
+              ),
+              React.createElement(
+                "p",
+                null,
+                "  render: function () { "
+              ),
+              React.createElement(
+                "p",
+                null,
+                "    return ("
+              ),
+              React.createElement(
+                "p",
+                null,
+                "      <form target=\"_self\" method=\"GET\">"
+              ),
+              React.createElement(
+                "p",
+                null,
+                "        <StarRating name=\"react-star-rating\" caption=\"Rate this component!\" ratingAmount={5} />"
+              ),
+              React.createElement(
+                "p",
+                null,
+                "        <button type=\"submit\" className=\"btn btn-submit\">Submit Rating</button>"
+              ),
+              React.createElement(
+                "p",
+                null,
+                "      </form>"
+              ),
+              React.createElement(
+                "p",
+                null,
+                "    );"
+              ),
+              React.createElement(
+                "p",
+                null,
+                "  }"
+              ),
+              React.createElement(
+                "p",
+                null,
+                "});"
+              ),
+              React.createElement(
+                "p",
+                null,
+                " "
+              ),
+              React.createElement(
+                "p",
+                null,
+                "React.render(<FormComponent />, document.getElementById('star-rating'));"
+              )
+            ),
+            React.createElement(
+              "h2",
+              null,
+              "Options"
+            ),
+            React.createElement("hr", null),
+            React.createElement(
+              "ul",
+              null,
+              React.createElement(
+                "li",
+                null,
+                React.createElement(
+                  "strong",
+                  null,
+                  "name"
+                ),
+                "={string} - name for form input (required)"
+              ),
+              React.createElement(
+                "li",
+                null,
+                React.createElement(
+                  "strong",
+                  null,
+                  "caption"
+                ),
+                "={string} - caption for rating (optional)"
+              ),
+              React.createElement(
+                "li",
+                null,
+                React.createElement(
+                  "strong",
+                  null,
+                  "ratingAmount"
+                ),
+                "={number} - rating amount (required, default: 5)"
+              ),
+              React.createElement(
+                "li",
+                null,
+                React.createElement(
+                  "strong",
+                  null,
+                  "rating"
+                ),
+                "={number} - a set rating between the rating amount (optional)"
+              ),
+              React.createElement(
+                "li",
+                null,
+                React.createElement(
+                  "strong",
+                  null,
+                  "disabled"
+                ),
+                "={boolean} - whether to disable the rating from being selected (optional)"
+              ),
+              React.createElement(
+                "li",
+                null,
+                React.createElement(
+                  "strong",
+                  null,
+                  "editing"
+                ),
+                "={boolean} - whether the rating is explicitly in editing mode (optional)"
+              ),
+              React.createElement(
+                "li",
+                null,
+                React.createElement(
+                  "strong",
+                  null,
+                  "size"
+                ),
+                "={string} - size of stars (optional)"
+              ),
+              React.createElement(
+                "li",
+                null,
+                React.createElement(
+                  "strong",
+                  null,
+                  "onRatingClick"
+                ),
+                "={function} - a handler function that gets called onClick of the rating (optional) - gets passed (event, {position, rating, caption, name})"
+              )
+            ),
+            React.createElement(
+              "h2",
+              null,
+              "Examples"
+            ),
+            React.createElement("hr", null),
+            React.createElement(StarRating, { name: "handler", caption: "Use onClick Handlers!", ratingAmount: 5, step: 0.5, onRatingClick: this.handleRatingClick.bind(this) }),
+            React.createElement("p", null),
+            React.createElement(
+              "code",
+              null,
+              React.createElement(
+                "p",
+                null,
+                "// handler in react class"
+              ),
+              React.createElement(
+                "p",
+                null,
+                "handleRatingClick: function (e, data) {"
+              ),
+              React.createElement(
+                "p",
+                null,
+                "    alert('You left a ' + data.rating + ' star rating for ' + data.caption);"
+              ),
+              React.createElement(
+                "p",
+                null,
+                "}"
+              ),
+              React.createElement(
+                "p",
+                null,
+                " "
+              ),
+              React.createElement(
+                "p",
+                null,
+                "<StarRating name=\"handler\" caption=\"Use onClick Handlers!\" ratingAmount={5} step={0.5} onRatingClick={handleRatingClick} />"
+              )
+            ),
+            React.createElement("p", null),
+            React.createElement(
+              "blockquote",
+              null,
+              React.createElement(
+                "strong",
+                null,
+                "If you're using ES6, make sure to bind the handler: "
+              ),
+              React.createElement(
+                "code",
+                null,
+                "this.handleRatingClick.bind(this, pass, args, here)"
+              )
+            ),
+            React.createElement(StarRating, { name: "ten-stars", caption: "Configure number of stars!", ratingAmount: 10, step: 1, onRatingClick: this.handleRatingClick.bind(this) }),
+            React.createElement(
+              "code",
+              null,
+              "<StarRating name=\"ten-stars\" caption=\"Configure number of stars!\" ratingAmount={10} step={1} onRatingClick={this.handleRatingClick} />"
+            ),
+            React.createElement(StarRating, { name: "half-stars", caption: "Use half-star steps!", ratingAmount: 5 }),
+            React.createElement(
+              "code",
+              null,
+              "<StarRating name=\"half-stars\" caption=\"Use half-star steps!\" ratingAmount={5} />"
+            ),
+            React.createElement(StarRating, { name: "small-rating", caption: "Small!", size: "sm", ratingAmount: 5, rating: 3 }),
+            React.createElement(
+              "code",
+              null,
+              "<StarRating name=\"small-rating\" caption=\"Small!\" size=\"sm\" ratingAmount={5} rating={3} />"
+            ),
+            React.createElement(StarRating, { name: "medium-rating", caption: "Medium!", size: "md", ratingAmount: 5, rating: 4 }),
+            React.createElement(
+              "code",
+              null,
+              "<StarRating name=\"medium-rating\" caption=\"Medium!\" size=\"md\" ratingAmount={5} rating={4} />"
+            ),
+            React.createElement(StarRating, { name: "large-rating", caption: "Large!", size: "lg", ratingAmount: 5, rating: 5 }),
+            React.createElement(
+              "code",
+              null,
+              "<StarRating name=\"large-rating\" caption=\"Large!\" size=\"lg\" ratingAmount={5} rating={5} />"
+            ),
+            React.createElement(StarRating, { name: "disabled", caption: "Disabled.", ratingAmount: 5, rating: 3, disabled: true }),
+            React.createElement(
+              "code",
+              null,
+              "<StarRating name=\"disabled\" caption=\"Disabled.\" ratingAmount={5} rating={3} disabled={true} />"
+            )
+          ),
+          React.createElement(
+            "footer",
+            null,
+            React.createElement(
+              "p",
+              { className: "footer-creds" },
+              React.createElement(
+                "p",
+                null,
+                "Code licensed under ",
+                React.createElement(
+                  "a",
+                  { href: "https://github.com/cameronjroe/react-star-rating/blob/master/LICENSE" },
+                  "MIT"
+                ),
+                " - Currently v",
+                currentVersion,
+                " - ",
+                React.createElement(
+                  "a",
+                  { href: "https://github.com/cameronjroe/react-star-rating" },
+                  "Github Repo"
+                )
+              ),
+              React.createElement(
+                "p",
+                null,
+                "Created by ",
+                React.createElement(
+                  "a",
+                  { href: "http://twitter.com/cameronjroe" },
+                  "@cameronjroe"
+                ),
+                " - ",
+                React.createElement("iframe", { src: "https://ghbtns.com/github-btn.html?user=cameronjroe&type=follow&count=true", frameBorder: "0", scrolling: "0", width: "170px", height: "20px" })
+              )
+            )
           )
         );
       }
     }
   });
 
-  return FormComponent;
+  return App;
 })(React.Component);
 
-React.render(React.createElement(FormComponent, null), inject);
+React.render(React.createElement(App, null), inject);
 
-// import React from 'react';
-// import StarRating from './StarRating';
-// import pkg from '../package.json';
-
-// var inject = document.querySelector('.inject');
-
-// class App extends React.Component {
-
-//   handleRatingClick(e, data) {
-//     alert('You left a ' + data.rating + ' star rating for ' + data.name);
-//   }
-
-//   render() {
-//     var currentVersion = pkg.version;
-
-//     return (
-//       <section>
-//         <div className="intro">
-//           <h1 className="main-title">
-//             {'react-star-rating'}
-//             <small> easy star ratings with React</small>
-//           </h1>
-//           <StarRating name="hotels" size="md" rating={5} editing={true} ratingAmount={5} step={1} />
-//           <p>v{currentVersion}</p>
-//         </div>
-//         <div className="ratings-wrap">
-//           <h2>Installation</h2>
-//           <hr/>
-//           <code>
-//             {'$ npm install react-star-rating --save'}
-//           </code>
-//           <h2>Usage</h2>
-//           <hr/>
-//           <form target="_self" method="GET" className="demo-form">
-//             <StarRating name="react-star-rating" caption="Rate this component!" ratingAmount={5} />
-//             <button type="submit" className="btn btn-submit">Submit Rating</button>
-//           </form>
-//           <h3>ES6</h3>
-//           <code>
-//             <p>{'import React from \'react\''}</p>
-//             <p>{'import StarRating from \'react-star-rating\''}</p>
-//             <p>{' '}</p>
-//             <p>{'class FormComponent extends React.Component {'}</p>
-//             <p>{'  render() { '}</p>
-//             <p>{'    return ('}</p>
-//             <p>{'      <form target="_self" method="GET">'}</p>
-//             <p>{'        <StarRating name="react-star-rating" caption="Rate this component!" ratingAmount={5} />'}</p>
-//             <p>{'        <button type="submit" className="btn btn-submit">Submit Rating</button>'}</p>
-//             <p>{'      </form>'}</p>
-//             <p>{'    );'}</p>
-//             <p>{'  }'}</p>
-//             <p>{'}'}</p>
-//             <p>{' '}</p>
-//             <p>{'React.render(<FormComponent />, document.getElementById(\'star-rating\'));'}</p>
-//           </code>
-//           <h3>ES5</h3>
-//           <code>
-//             <p>{'var React = require(\'react\');'}</p>
-//             <p>{'var StarRating = require(\'react-star-rating\');'}</p>
-//             <p>{' '}</p>
-//             <p>{'var FormComponent = React.createClass({'}</p>
-//             <p>{'  render: function () { '}</p>
-//             <p>{'    return ('}</p>
-//             <p>{'      <form target="_self" method="GET">'}</p>
-//             <p>{'        <StarRating name="react-star-rating" caption="Rate this component!" ratingAmount={5} />'}</p>
-//             <p>{'        <button type="submit" className="btn btn-submit">Submit Rating</button>'}</p>
-//             <p>{'      </form>'}</p>
-//             <p>{'    );'}</p>
-//             <p>{'  }'}</p>
-//             <p>{'});'}</p>
-//             <p>{' '}</p>
-//             <p>{'React.render(<FormComponent />, document.getElementById(\'star-rating\'));'}</p>
-//           </code>
-//           <h2>Options</h2>
-//           <hr/>
-//           <ul>
-//             <li><strong>name</strong>{'={string} - name for form input (required)'}</li>
-//             <li><strong>caption</strong>{'={string} - caption for rating (optional)'}</li>
-//             <li><strong>ratingAmount</strong>{'={number} - rating amount (required, default: 5)'}</li>
-//             <li><strong>rating</strong>{'={number} - a set rating between the rating amount (optional)'}</li>
-//             <li><strong>disabled</strong>{'={boolean} - whether to disable the rating from being selected (optional)'}</li>
-//             <li><strong>editing</strong>{'={boolean} - whether the rating is explicitly in editing mode (optional)'}</li>
-//             <li><strong>size</strong>{'={string} - size of stars (optional)'}</li>
-//             <li><strong>onRatingClick</strong>{'={function} - a handler function that gets called onClick of the rating (optional) - gets passed (event, {position, rating, caption, name})'}</li>
-//           </ul>
-//           <h2>Examples</h2>
-//           <hr/>
-//           <StarRating name="handler" caption="Use onClick Handlers!" ratingAmount={5} step={0.5} onRatingClick={this.handleRatingClick.bind(this)} />
-//           <p></p>
-//           <code>
-//             <p>{'// handler in react class'}</p>
-//             <p>{'handleRatingClick: function (e, data) {'}</p>
-//             <p>{'    alert(\'You left a \' + data.rating + \' star rating for \' + data.caption);'}</p>
-//             <p>{'}'}</p>
-//             <p>{' '}</p>
-//             <p>{'<StarRating name="handler" caption="Use onClick Handlers!" ratingAmount={5} step={0.5} onRatingClick={handleRatingClick} />'}</p>
-//           </code>
-//           <p></p>
-//           <blockquote><strong>{'If you\'re using ES6, make sure to bind the handler: '}</strong><code>{'this.handleRatingClick.bind(this, pass, args, here)'}</code></blockquote>
-//           <StarRating name="ten-stars" caption="Configure number of stars!" ratingAmount={10} step={1} onRatingClick={this.handleRatingClick.bind(this)} />
-//           <code>
-//             {'<StarRating name="ten-stars" caption="Configure number of stars!" ratingAmount={10} step={1} onRatingClick={this.handleRatingClick} />'}
-//           </code>
-//           <StarRating name="half-stars" caption="Use half-star steps!" ratingAmount={5} />
-//           <code>
-//             {'<StarRating name="half-stars" caption="Use half-star steps!" ratingAmount={5} />'}
-//           </code>
-//           <StarRating name="small-rating" caption="Small!" size="sm" ratingAmount={5} rating={3} />
-//           <code>
-//             {'<StarRating name="small-rating" caption="Small!" size="sm" ratingAmount={5} rating={3} />'}
-//           </code>
-//           <StarRating name="medium-rating" caption="Medium!" size="md" ratingAmount={5} rating={4} />
-//           <code>
-//             {'<StarRating name="medium-rating" caption="Medium!" size="md" ratingAmount={5} rating={4} />'}
-//           </code>
-//           <StarRating name="large-rating" caption="Large!" size="lg" ratingAmount={5} rating={5} />
-//           <code>
-//             {'<StarRating name="large-rating" caption="Large!" size="lg" ratingAmount={5} rating={5} />'}
-//           </code>
-//           <StarRating name="disabled" caption="Disabled." ratingAmount={5} rating={3} disabled={true} />
-//           <code>
-//             {'<StarRating name="disabled" caption="Disabled." ratingAmount={5} rating={3} disabled={true} />'}
-//           </code>
-//         </div>
-//         <footer>
-//           <p className="footer-creds">
-//             <p>Code licensed under <a href="https://github.com/cameronjroe/react-star-rating/blob/master/LICENSE">MIT</a> - Currently v{currentVersion} - <a href="https://github.com/cameronjroe/react-star-rating">Github Repo</a></p>
-//             <p>Created by <a href="http://twitter.com/cameronjroe">@cameronjroe</a> - <iframe src="https://ghbtns.com/github-btn.html?user=cameronjroe&type=follow&count=true" frameBorder="0" scrolling="0" width="170px" height="20px"></iframe></p>
-//           </p>
-//         </footer>
-//       </section>
-//     );
-//   }
-
-// }
-
-// React.render(<App />, inject);
-
-},{"./StarRating":159,"react":158}],2:[function(require,module,exports){
+},{"../package.json":159,"./StarRating":160,"react":158}],2:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -19947,6 +20253,47 @@ module.exports = warning;
 module.exports = require('./lib/React');
 
 },{"./lib/React":31}],159:[function(require,module,exports){
+module.exports={
+  "name": "react-star-rating",
+  "version": "1.1.4",
+  "description": "A simple star rating component built with React.",
+  "main": "./dist/react-star-rating.min.js",
+  "scripts": {
+    "watch": "gulp watch"
+  },
+  "author": "Cameron J Roe <cameronjroe@gmail.com> (http://cameronjroe.com/)",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^0.13.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^3.1.8",
+    "babelify": "^5.0.4",
+    "browserify": "^9.0.3",
+    "gulp": "^3.8.11",
+    "gulp-babel": "^5.1.0",
+    "gulp-concat": "^2.5.2",
+    "gulp-eslint": "^0.12.0",
+    "gulp-jshint": "^1.9.2",
+    "gulp-minify-css": "^1.1.1",
+    "gulp-react": "^3.0.0",
+    "gulp-rename": "^1.2.0",
+    "gulp-replace": "^0.5.3",
+    "gulp-sass": "^1.3.3",
+    "gulp-uglify": "^1.1.0",
+    "gulp-webserver": "^0.9.0",
+    "jshint-stylish": "^1.0.1",
+    "node-bourbon": "^4.2.1-beta1",
+    "reactify": "^1.0.0",
+    "through2": "^0.6.3",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "dependencies": {
+    "classnames": "^2.1.1"
+  }
+}
+
+},{}],160:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
