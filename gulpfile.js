@@ -62,46 +62,7 @@ gulp.task('build', ['lint'], function () {
 });
 
 /**
- * hacky, don't use !!!![Deprecated]!!!!!
- */
-// gulp.task('replace-scripts', function () {
-//   return gulp.src('./src/StarRating.jsx')
-//     .pipe(babel())
-//     .pipe(jshint())
-//     .pipe(jshint.reporter('jshint-stylish'))
-//     .pipe(rename('react-star-rating.js'))
-//     .pipe(replace(/module.exports/g, 'window.StarRating'))
-//     .pipe(gulp.dest('dist/browser'))
-//     .pipe(replace(/window.StarRating/g, 'module.exports'))
-//     .pipe(replace(/\/\/ \{amd_start\}/, 'define(function(require,exports,module){'))
-//     .pipe(replace(/\/\/ \{amd_end\}/, '});'))
-//     .pipe(gulp.dest('dist/amd'));
-// });
-
-/**
- * Browser !!!![Deprecated]!!!!!
- */
-// gulp.task('build:browser', ['replace-scripts'], function () {
-//   // amd
-//   gulp.src('./dist/amd/react-star-rating.js')
-//     .pipe(rename('react-star-rating.min.js'))
-//     .pipe(uglify())
-//     .on('error', function (err) {
-//       console.log(err);
-//     })
-//     .pipe(gulp.dest('dist/amd'));
-//   // browser
-//   gulp.src('./dist/browser/react-star-rating.js')
-//     .pipe(rename('react-star-rating.min.js'))
-//     .pipe(uglify())
-//     .on('error', function (err) {
-//       console.log(err);
-//     })
-//     .pipe(gulp.dest('dist/browser'));
-// });
-
-/**
- * Bundle
+ * Demo Bundle
  */
 gulp.task('default', ['lint','styles'], function () {
   return browserify('./src/index.jsx', {extensions: '.jsx'})
