@@ -69,7 +69,7 @@ gulp.task('default', ['lint','styles'], function () {
     .transform(babelify)
     .bundle()
     .on('error', function (err) {
-      console.log(err.fileName, err.lineNumber, err.description);
+      console.log(err);
     })
     .pipe(source('bundle.js'))
     .pipe(gulp.dest('dist/demo'));

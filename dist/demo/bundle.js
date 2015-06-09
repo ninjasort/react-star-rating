@@ -20446,6 +20446,19 @@ var StarRating = (function (_React$Component) {
         return this.calculate(pos);
       }
     },
+    getSvg: {
+      value: function getSvg() {
+        return React.createElement(
+          "svg",
+          { className: "react-star-rating__star", viewBox: "0 0 286 272", version: "1.1", xmlns: "http://www.w3.org/2000/svg" },
+          React.createElement(
+            "g",
+            { stroke: "none", "stroke-width": "1", fill: "none", "fill-rule": "evenodd" },
+            React.createElement("polygon", { id: "star-flat", points: "143 225 54.8322122 271.352549 71.6707613 173.176275 0.341522556 103.647451 98.9161061 89.3237254 143 0 187.083894 89.3237254 285.658477 103.647451 214.329239 173.176275 231.167788 271.352549 " })
+          )
+        );
+      }
+    },
     handleMouseLeave: {
       value: function handleMouseLeave() {
         this.setState({

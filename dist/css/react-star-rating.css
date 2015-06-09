@@ -1,3 +1,10 @@
+.react-star-rating__star {
+  width: 25px; }
+  .react-star-rating__star #star-flat {
+    fill: #C6C6C6; }
+    .react-star-rating__star #star-flat:hover {
+      fill: #FFA91B; }
+
 .react-star-rating__root {
   font-size: 2em;
   vertical-align: middle;
