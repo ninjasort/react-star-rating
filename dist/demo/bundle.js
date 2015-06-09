@@ -20267,7 +20267,6 @@ module.exports={
     "react": "^0.13.0"
   },
   "devDependencies": {
-    "babel": "^5.5.4",
     "babel-eslint": "^3.1.8",
     "babelify": "^5.0.4",
     "browserify": "^9.0.3",
@@ -20277,7 +20276,6 @@ module.exports={
     "gulp-eslint": "^0.12.0",
     "gulp-jshint": "^1.9.2",
     "gulp-minify-css": "^1.1.1",
-    "gulp-react": "^3.0.0",
     "gulp-rename": "^1.2.0",
     "gulp-replace": "^0.5.3",
     "gulp-sass": "^1.3.3",
