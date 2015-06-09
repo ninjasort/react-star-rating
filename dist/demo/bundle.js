@@ -20267,6 +20267,7 @@ module.exports={
     "react": "^0.13.0"
   },
   "devDependencies": {
+    "babel": "^5.5.4",
     "babel-eslint": "^3.1.8",
     "babelify": "^5.0.4",
     "browserify": "^9.0.3",
@@ -20284,7 +20285,6 @@ module.exports={
     "gulp-webserver": "^0.9.0",
     "jshint-stylish": "^1.0.1",
     "node-bourbon": "^4.2.1-beta1",
-    "reactify": "^1.0.0",
     "through2": "^0.6.3",
     "vinyl-source-stream": "^1.1.0"
   },
