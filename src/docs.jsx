@@ -1,6 +1,6 @@
 import React from 'react';
 import StarRating from './StarRating';
-import pkg from '../package.json';
+import pkg from '../package';
 
 var inject = document.querySelector('.inject');
 
@@ -21,7 +21,8 @@ class App extends React.Component {
             <small> easy star ratings with React</small>
           </h1>
           <StarRating name="hotels" size="md" rating={5} editing={true} ratingAmount={5} step={1} />
-          <p>v{currentVersion}</p>
+          <p style={{marginBottom: '10px'}}>v{currentVersion}</p>
+          <a href="https://github.com/cameronjroe/react-star-rating" className="btn btn-primary">View on Github</a>
         </div>
         <div className="ratings-wrap">
           <h2>Installation</h2>
@@ -33,7 +34,7 @@ class App extends React.Component {
           <hr/>
           <form target="_self" method="GET" className="demo-form">
             <StarRating name="react-star-rating" caption="Rate this component!" ratingAmount={5} />
-            <button type="submit" className="btn btn-submit">Submit Rating</button>
+            <button type="submit" className="btn btn-primary">Submit Rating</button>
           </form>
           <h3>ES6</h3>
           <code>
@@ -45,7 +46,7 @@ class App extends React.Component {
             <p>{'    return ('}</p>
             <p>{'      <form target="_self" method="GET">'}</p>
             <p>{'        <StarRating name="react-star-rating" caption="Rate this component!" ratingAmount={5} />'}</p>
-            <p>{'        <button type="submit" className="btn btn-submit">Submit Rating</button>'}</p>
+            <p>{'        <button type="submit" className="btn btn-primary">Submit Rating</button>'}</p>
             <p>{'      </form>'}</p>
             <p>{'    );'}</p>
             <p>{'  }'}</p>
@@ -63,7 +64,7 @@ class App extends React.Component {
             <p>{'    return ('}</p>
             <p>{'      <form target="_self" method="GET">'}</p>
             <p>{'        <StarRating name="react-star-rating" caption="Rate this component!" ratingAmount={5} />'}</p>
-            <p>{'        <button type="submit" className="btn btn-submit">Submit Rating</button>'}</p>
+            <p>{'        <button type="submit" className="btn btn-primary">Submit Rating</button>'}</p>
             <p>{'      </form>'}</p>
             <p>{'    );'}</p>
             <p>{'  }'}</p>

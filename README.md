@@ -1,7 +1,7 @@
 # react-star-rating [![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)
 
 <!-- [![Build Status](https://travis-ci.org/)](https://travis-ci.org/) -->
-![](src/img/star-rating.png)
+![](src/assets/star-rating.png)
 
 > A simple star rating component built with React.
 
@@ -59,6 +59,13 @@ React.render(<FormComponent />, document.getElementById('star-rating'));
   - **editing**={boolean} - whether the rating is explicitly in editing mode (optional)
   - **size**={string} - size of stars (optional)
   - **onRatingClick**={function} - a handler function that gets called onClick of the rating (optional) - gets passed (event, {position, rating, caption, name})
+
+## Todo
+
+- [ ] Fix ES6 bug with bundling
+- [ ] Add svg stars
+- [ ] Re-implement star hovering (kinda janky right now)
+- [ ] Double-check touch support works
 
 
 ## License

@@ -37,7 +37,7 @@ gulp.task('lint', function () {
 /**
  * Styles
  */
-gulp.task('styles', function () {
+gulp.task('styles', ['demo-styles'], function () {
   return gulp.src(config.componentStylesDir + '/' + config.componentFileName + '.scss')
     .pipe(sass({
       includePaths: require('node-bourbon').includePaths
@@ -45,6 +45,14 @@ gulp.task('styles', function () {
     .pipe(gulp.dest(config.stylesDest))
     .pipe(minifyCSS())
     .pipe(rename(config.componentFileName + '.min.css'))
+    .pipe(gulp.dest(config.stylesDest));
+});
+
+gulp.task('demo-styles', function () {
+  return gulp.src(config.componentStylesDir + '/demo.scss')
+    .pipe(sass({
+      includePaths: require('node-bourbon').includePaths
+    }))
     .pipe(gulp.dest(config.stylesDest));
 });
 
@@ -65,14 +73,14 @@ gulp.task('build', ['lint'], function () {
  * Demo Bundle
  */
 gulp.task('default', ['lint','styles'], function () {
-  return browserify('./src/index.jsx', {extensions: '.jsx'})
+  return browserify('./src/docs.jsx', {extensions: '.jsx'})
     .transform(babelify)
     .bundle()
     .on('error', function (err) {
       console.log(err);
     })
-    .pipe(source('bundle.js'))
-    .pipe(gulp.dest('dist/demo'));
+    .pipe(source('docs.js'))
+    .pipe(gulp.dest('dist'));
 });
 
 /**

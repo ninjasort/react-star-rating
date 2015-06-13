@@ -234,7 +234,8 @@ var StarRating = (function (_React$Component) {
       var caption = null;
       var classes = (0, _classnames2['default'])((_cx = {
         'react-star-rating__root': true,
-        'rating-disabled': this.props.disabled }, _defineProperty(_cx, 'react-star-rating__size--' + this.props.size, this.props.size), _defineProperty(_cx, 'rating-editing', this.state.editing), _cx));
+        'rating-disabled': this.props.disabled
+      }, _defineProperty(_cx, 'react-star-rating__size--' + this.props.size, this.props.size), _defineProperty(_cx, 'rating-editing', this.state.editing), _cx));
 
       // is there a caption?
       if (this.props.caption) {

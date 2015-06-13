@@ -13,7 +13,7 @@ var React = _interopRequire(require("react"));
 
 var StarRating = _interopRequire(require("./StarRating"));
 
-var pkg = _interopRequire(require("../package.json"));
+var pkg = _interopRequire(require("../package"));
 
 var inject = document.querySelector(".inject");
 
@@ -57,9 +57,14 @@ var App = (function (_React$Component) {
             React.createElement(StarRating, { name: "hotels", size: "md", rating: 5, editing: true, ratingAmount: 5, step: 1 }),
             React.createElement(
               "p",
-              null,
+              { style: { marginBottom: "10px" } },
               "v",
               currentVersion
+            ),
+            React.createElement(
+              "a",
+              { href: "https://github.com/cameronjroe/react-star-rating", className: "btn btn-primary" },
+              "View on Github"
             )
           ),
           React.createElement(
@@ -88,7 +93,7 @@ var App = (function (_React$Component) {
               React.createElement(StarRating, { name: "react-star-rating", caption: "Rate this component!", ratingAmount: 5 }),
               React.createElement(
                 "button",
-                { type: "submit", className: "btn btn-submit" },
+                { type: "submit", className: "btn btn-primary" },
                 "Submit Rating"
               )
             ),
@@ -143,7 +148,7 @@ var App = (function (_React$Component) {
               React.createElement(
                 "p",
                 null,
-                "        <button type=\"submit\" className=\"btn btn-submit\">Submit Rating</button>"
+                "        <button type=\"submit\" className=\"btn btn-primary\">Submit Rating</button>"
               ),
               React.createElement(
                 "p",
@@ -227,7 +232,7 @@ var App = (function (_React$Component) {
               React.createElement(
                 "p",
                 null,
-                "        <button type=\"submit\" className=\"btn btn-submit\">Submit Rating</button>"
+                "        <button type=\"submit\" className=\"btn btn-primary\">Submit Rating</button>"
               ),
               React.createElement(
                 "p",
@@ -492,7 +497,7 @@ var App = (function (_React$Component) {
 
 React.render(React.createElement(App, null), inject);
 
-},{"../package.json":159,"./StarRating":160,"react":158}],2:[function(require,module,exports){
+},{"../package":159,"./StarRating":160,"react":158}],2:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
