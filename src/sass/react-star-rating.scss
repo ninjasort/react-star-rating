@@ -1,5 +1,15 @@
 @import "bourbon";
 
+.react-star-rating__star {
+  width: 25px;
+  #star-flat {
+    fill: #C6C6C6;
+    &:hover {
+      fill: #FFA91B;
+    }
+  }
+}
+
 .react-star-rating__root {
   font-size: 2em;
   vertical-align: middle;

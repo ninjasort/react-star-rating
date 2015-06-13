@@ -1,6 +1,5 @@
-// {amd_start}
-
-var React = require('react');
+import React from 'react';
+import cx from 'classnames';
 
 /**
  * @fileoverview react-star-rating
@@ -16,55 +15,35 @@ var React = require('react');
  *   onRatingClick={function} - a handler function that gets called onClick of the rating (optional)
  *   />
  */
-module.exports = React.createClass({
+class StarRating extends React.Component {
 
-  propTypes: {
-    name: React.PropTypes.string.isRequired,
-    caption: React.PropTypes.string,
-    ratingAmount: React.PropTypes.number.isRequired,
-    rating: React.PropTypes.number,
-    onRatingClick: React.PropTypes.func,
-    disabled: React.PropTypes.bool,
-    editing: React.PropTypes.bool,
-    size: React.PropTypes.string
-  },
+  constructor(props) {
+    super(props);
+    this.state = {
+      ratingCache: {
+        pos: 0,
+        rating: 0
+      },
+      editing: props.editing || true,
+      stars: 5,
+      rating: 0,
+      pos: 0,
+      glyph: this.getStars()
+    };
+  }
 
-  getStars: function () {
+  getStars() {
     var stars = '';
     var numRating = this.props.ratingAmount;
     for(var i = 0; i < numRating; i++) {
       stars += '\u2605';
     }
     return stars;
-  },
+  }
 
-  getDefaultProps: function () {
-    return {
-      step: 0.5,
-      ratingAmount: 5,
-      onRatingClick: function () {},
-      disabled: false
-    };
-  },
-
-  getInitialState: function () {
-    return {
-      ratingCache: {
-        pos: 0,
-        rating: 0
-      },
-      editing: this.props.editing || true,
-      stars: 5,
-      rating: 0,
-      pos: 0,
-      glyph: this.getStars()
-    };
-  },
-
-  componentWillMount: function () {
+  componentWillMount() {
     this.min = 0;
     this.max = this.props.ratingAmount || 5;
-    
     if (this.props.rating) {
       
       this.state.editing = false;
@@ -75,35 +54,32 @@ module.exports = React.createClass({
         pos: this.getStarRatingPosition(ratingVal)
       });
     }
+  }
 
-  },
+  componentDidMount() {
+    this.root = React.findDOMNode(this.refs.root);
+    this.ratingContainer = React.findDOMNode(this.refs.ratingContainer);
+  }
 
-  componentDidMount: function () {
-    this.root = this.refs.root.getDOMNode();
-    this.ratingStars = this.refs.ratingStars.getDOMNode();
-    this.ratingContainer = this.refs.ratingContainer.getDOMNode();
-  },
-
-  componentWillUnmount: function () {
+  componentWillUnmount() {
     delete this.root;
-    delete this.ratingStars;
     delete this.ratingContainer;
-  },
+  }
 
-  getPosition: function (e) {
+  getPosition(e) {
     return e.pageX - this.root.getBoundingClientRect().left;
-  },
+  }
 
-  applyPrecision: function (val, precision) {
+  applyPrecision(val, precision) {
     return parseFloat(val.toFixed(precision));
-  },
+  }
 
-  getDecimalPlaces: function (num) {
+  getDecimalPlaces(num) {
     var match = ('' + num).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
     return !match ? 0 : Math.max(0, (match[1] ? match[1].length : 0) - (match[2] ? +match[2] : 0));
-  },
+  }
 
-  getWidthFromValue: function (val) {
+  getWidthFromValue(val) {
     var min = this.min,
         max = this.max;
     if (val <= min || min === max) {
@@ -113,9 +89,9 @@ module.exports = React.createClass({
       return 100;
     }
     return (val - min) * 100 / (max - min);
-  },
+  }
   
-  getValueFromPosition: function (pos) {
+  getValueFromPosition(pos) {
     var precision = this.getDecimalPlaces(this.props.step);
     var maxWidth = this.ratingContainer.offsetWidth;
     var diff = this.max - this.min;
@@ -124,47 +100,57 @@ module.exports = React.createClass({
     var val = this.applyPrecision(parseFloat(this.min + factor * this.props.step), precision);
         val = Math.max(Math.min(val, this.max), this.min);
     return val;
-  },
+  }
 
-  calculate: function (pos) {
+  calculate(pos) {
     var val = this.getValueFromPosition(pos),
         width = this.getWidthFromValue(val);
     
     width += '%';
-    return {width: width, val: val};
-  },
+    return {width, val};
+  }
 
-  getStarRatingPosition: function (val) {
-    var width = this.getWidthFromValue(val);
-    return width += '%';
-  },
+  getStarRatingPosition(val) {
+    var width = this.getWidthFromValue(val) + '%';
+    return width;
+  }
 
-  getRatingEvent: function (e) {
+  getRatingEvent(e) {
     var pos = this.getPosition(e);
     return this.calculate(pos);
-  },
+  }
 
-  handleMouseLeave: function () {
+  getSvg() {
+    return (
+      <svg className="react-star-rating__star" viewBox="0 0 286 272" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <polygon id="star-flat" points="143 225 54.8322122 271.352549 71.6707613 173.176275 0.341522556 103.647451 98.9161061 89.3237254 143 0 187.083894 89.3237254 285.658477 103.647451 214.329239 173.176275 231.167788 271.352549 "></polygon>
+        </g>
+      </svg>
+    );
+  }
+
+  handleMouseLeave() {
     this.setState({
       pos: this.state.ratingCache.pos,
       rating: this.state.ratingCache.rating
     });
-  },
+  }
 
-  handleMouseMove: function (e) {
+  handleMouseMove(e) {
     // get hover position
     var ratingEvent = this.getRatingEvent(e);
     this.setState({
       pos: ratingEvent.width,
       rating: ratingEvent.val
     });
-  },
+  }
 
-  shouldComponentUpdate: function (nextProps, nextState) {
+  shouldComponentUpdate(nextProps, nextState) {
     return nextState.ratingCache.rating !== this.state.ratingCache.rating || nextState.rating !== this.state.rating;
-  },
+  }
 
-  handleClick: function (e) {
+  handleClick(e) {
 
     // is it disabled?
     if (this.props.disabled) {
@@ -185,70 +171,47 @@ module.exports = React.createClass({
     });
 
     this.props.onRatingClick(e, ratingCache);
-  },
+  }
 
-  treatName: function (title) {
+  treatName(title) {
     if (typeof title === 'string') {
       return title.toLowerCase().split(' ').join('_');
     }
-  },
+  }
 
-  getClasses: function () {
-    var classes = ['react-star-rating__root'];
-
-    // is it disabled?
-    if (this.props.disabled) {
-      classes.push('rating-disabled');
-    }
-
-    if (this.props.size) {
-      switch(this.props.size) {
-        case 'sm':
-          classes.push('react-star-rating__size--sm');
-          break;
-        case 'md':
-          classes.push('react-star-rating__size--md');
-          break;
-        case 'lg':
-          classes.push('react-star-rating__size--lg');
-          break;
-        default:
-          break;
-      }
-    }
-
-    if (this.state.editing) {
-      classes.push('rating-editing');
-    }
-
-    return classes.join(' ');
-  },
-
-  render: function () {
+  render() {
 
     var caption = null;
-    
+    var classes = cx({
+      'react-star-rating__root': true,
+      'rating-disabled': this.props.disabled,
+      ['react-star-rating__size--' + this.props.size]: this.props.size,
+      'rating-editing': this.state.editing
+    });
+
     // is there a caption?
     if (this.props.caption) {
       caption = (<span className="react-rating-caption">{this.props.caption}</span>);
     }
 
-    // get the classes on this render
-    var classes = this.getClasses();
-
     // are we editing this rating?
     var starRating;
     if (this.state.editing) {
       starRating = (
-        <div ref="ratingContainer" className="rating-container rating-gly-star" data-content={this.state.glyph} onMouseMove={this.handleMouseMove} onMouseLeave={this.handleMouseLeave} onClick={this.handleClick}>
-          <div ref="ratingStars" className="rating-stars" data-content={this.state.glyph} style={{width: this.state.pos}}></div>
+        <div ref="ratingContainer" 
+          className="rating-container rating-gly-star"
+          data-content={this.state.glyph}
+          onMouseMove={this.handleMouseMove.bind(this)}
+          onMouseLeave={this.handleMouseLeave.bind(this)}
+          onClick={this.handleClick.bind(this)}>
+          <div className="rating-stars" data-content={this.state.glyph} style={{width: this.state.pos}}></div>
           <input type="number" name={this.props.name} value={this.state.ratingCache.rating} style={{display: 'none !important'}} min={this.min} max={this.max} readOnly />
         </div>
       );
     } else {
       starRating = (
         <div ref="ratingContainer" className="rating-container rating-gly-star" data-content={this.state.glyph}>
-          <div ref="ratingStars" className="rating-stars" data-content={this.state.glyph} style={{width: this.state.pos}}></div>
+          <div className="rating-stars" data-content={this.state.glyph} style={{width: this.state.pos}}></div>
           <input type="number" name={this.props.name} value={this.state.ratingCache.rating} style={{display: 'none !important'}} min={this.min} max={this.max} readOnly />
         </div>
       );
@@ -263,6 +226,24 @@ module.exports = React.createClass({
       </span>
     );
   }
-});
+}
 
-// {amd_end}
+StarRating.propTypes = {
+  name: React.PropTypes.string.isRequired,
+  caption: React.PropTypes.string,
+  ratingAmount: React.PropTypes.number.isRequired,
+  rating: React.PropTypes.number,
+  onRatingClick: React.PropTypes.func,
+  disabled: React.PropTypes.bool,
+  editing: React.PropTypes.bool,
+  size: React.PropTypes.string
+};
+
+StarRating.defaultProps = {
+  step: 0.5,
+  ratingAmount: 5,
+  onRatingClick() {},
+  disabled: false
+};
+
+export default StarRating;

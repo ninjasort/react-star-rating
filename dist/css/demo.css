@@ -32,18 +32,18 @@ footer {
   text-align: center; }
 
 .btn {
-  border-radius: 2px;
-  box-shadow: 0px 1px 5px #E0E0E0; }
+  border-radius: 2px; }
 
-.btn-submit {
+.btn-primary {
   background-color: #F5A71B;
   color: #fff;
+  border: 0;
   text-transform: uppercase;
   font-size: 12px;
   font-weight: bold;
   margin: 0 1.5em;
   letter-spacing: 1px; }
-  .btn-submit:active, .btn-submit:hover {
+  .btn-primary:active, .btn-primary:hover, .btn-primary:focus {
     outline: 0;
     color: #fff;
     background-color: #d48b09; }
