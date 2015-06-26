@@ -140,13 +140,13 @@ class StarRating extends React.Component {
   handleMouseMove(e) {
     // get hover position
     var ratingEvent = this.getRatingEvent(e);
-    this.updateRatingAmount(
+    this.updateRating(
       ratingEvent.width,
       ratingEvent.val
     );
   }
 
-  updateRatingAmount(width, val) {
+  updateRating(width, val) {
     this.setState({
       pos: width,
       rating: val
@@ -155,9 +155,9 @@ class StarRating extends React.Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     if (nextProps !== this.props) {
-      this.updateRatingAmount(
-        this.getStarRatingPosition(nextProps.ratingAmount),
-        nextProps.ratingAmount
+      this.updateRating(
+        this.getStarRatingPosition(nextProps.rating),
+        nextProps.rating
       );
       return true;
     } else {
