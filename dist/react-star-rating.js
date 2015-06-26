@@ -185,15 +185,25 @@ var StarRating = (function (_React$Component) {
     value: function handleMouseMove(e) {
       // get hover position
       var ratingEvent = this.getRatingEvent(e);
+      this.updateRatingAmount(ratingEvent.width, ratingEvent.val);
+    }
+  }, {
+    key: 'updateRatingAmount',
+    value: function updateRatingAmount(width, val) {
       this.setState({
-        pos: ratingEvent.width,
-        rating: ratingEvent.val
+        pos: width,
+        rating: val
       });
     }
   }, {
     key: 'shouldComponentUpdate',
     value: function shouldComponentUpdate(nextProps, nextState) {
-      return nextState.ratingCache.rating !== this.state.ratingCache.rating || nextState.rating !== this.state.rating;
+      if (nextProps !== this.props) {
+        this.updateRatingAmount(this.getStarRatingPosition(nextProps.ratingAmount), nextProps.ratingAmount);
+        return true;
+      } else {
+        return nextState.ratingCache.rating !== this.state.ratingCache.rating || nextState.rating !== this.state.rating;
+      }
     }
   }, {
     key: 'handleClick',
