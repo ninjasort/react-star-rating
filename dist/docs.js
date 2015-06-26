@@ -20260,7 +20260,7 @@ module.exports = require('./lib/React');
 },{"./lib/React":31}],159:[function(require,module,exports){
 module.exports={
   "name": "react-star-rating",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "A simple star rating component built with React.",
   "main": "./dist/react-star-rating.min.js",
   "scripts": {
@@ -20476,15 +20476,25 @@ var StarRating = (function (_React$Component) {
       value: function handleMouseMove(e) {
         // get hover position
         var ratingEvent = this.getRatingEvent(e);
+        this.updateRatingAmount(ratingEvent.width, ratingEvent.val);
+      }
+    },
+    updateRatingAmount: {
+      value: function updateRatingAmount(width, val) {
         this.setState({
-          pos: ratingEvent.width,
-          rating: ratingEvent.val
+          pos: width,
+          rating: val
         });
       }
     },
     shouldComponentUpdate: {
       value: function shouldComponentUpdate(nextProps, nextState) {
-        return nextState.ratingCache.rating !== this.state.ratingCache.rating || nextState.rating !== this.state.rating;
+        if (nextProps !== this.props) {
+          this.updateRatingAmount(this.getStarRatingPosition(nextProps.ratingAmount), nextProps.ratingAmount);
+          return true;
+        } else {
+          return nextState.ratingCache.rating !== this.state.ratingCache.rating || nextState.rating !== this.state.rating;
+        }
       }
     },
     handleClick: {
