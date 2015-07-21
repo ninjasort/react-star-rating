@@ -44,6 +44,10 @@ var StarRating = (function (_React$Component) {
     _classCallCheck(this, StarRating);
 
     _get(Object.getPrototypeOf(StarRating.prototype), 'constructor', this).call(this, props);
+
+    // initialize touch events
+    _react2['default'].initializeTouchEvents();
+
     this.state = {
       ratingCache: {
         pos: 0,
@@ -61,6 +65,11 @@ var StarRating = (function (_React$Component) {
 
   _createClass(StarRating, [{
     key: 'getStars',
+
+    /**
+     * Gets the stars based on ratingAmount
+     * @return {string} stars
+     */
     value: function getStars() {
       var stars = '';
       var numRating = this.props.ratingAmount;

@@ -19,6 +19,10 @@ class StarRating extends React.Component {
 
   constructor(props) {
     super(props);
+    
+    // initialize touch events
+    React.initializeTouchEvents();
+
     this.state = {
       ratingCache: {
         pos: 0,
@@ -32,6 +36,10 @@ class StarRating extends React.Component {
     };
   }
 
+  /**
+   * Gets the stars based on ratingAmount
+   * @return {string} stars
+   */
   getStars() {
     var stars = '';
     var numRating = this.props.ratingAmount;
