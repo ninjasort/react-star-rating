@@ -20260,7 +20260,7 @@ module.exports = require('./lib/React');
 },{"./lib/React":31}],159:[function(require,module,exports){
 module.exports={
   "name": "react-star-rating",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "A simple star rating component built with React.",
   "main": "./dist/react-star-rating.min.js",
   "scripts": {
@@ -20272,27 +20272,27 @@ module.exports={
     "react": "^0.13.0"
   },
   "devDependencies": {
-    "babel-eslint": "^3.1.8",
-    "babelify": "^5.0.4",
-    "browserify": "^9.0.3",
-    "gulp": "^3.8.11",
+    "babel-eslint": "^3.1.23",
+    "babelify": "^6.1.3",
+    "browserify": "^11.0.0",
+    "gulp": "^3.9.0",
     "gulp-babel": "^5.1.0",
-    "gulp-concat": "^2.5.2",
-    "gulp-eslint": "^0.12.0",
-    "gulp-jshint": "^1.9.2",
-    "gulp-minify-css": "^1.1.1",
-    "gulp-rename": "^1.2.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-eslint": "^0.15.0",
+    "gulp-jshint": "^1.11.2",
+    "gulp-minify-css": "^1.2.0",
+    "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.5.3",
-    "gulp-sass": "^1.3.3",
-    "gulp-uglify": "^1.1.0",
-    "gulp-webserver": "^0.9.0",
-    "jshint-stylish": "^1.0.1",
-    "node-bourbon": "^4.2.1-beta1",
-    "through2": "^0.6.3",
+    "gulp-sass": "^2.0.4",
+    "gulp-uglify": "^1.2.0",
+    "gulp-webserver": "^0.9.1",
+    "jshint-stylish": "^2.0.1",
+    "node-bourbon": "^4.2.3",
+    "through2": "^2.0.0",
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
-    "classnames": "^2.1.1"
+    "classnames": "^2.1.3"
   }
 }
 
@@ -20335,6 +20335,10 @@ var StarRating = (function (_React$Component) {
     _classCallCheck(this, StarRating);
 
     _get(Object.getPrototypeOf(StarRating.prototype), "constructor", this).call(this, props);
+
+    // initialize touch events
+    React.initializeTouchEvents();
+
     this.state = {
       ratingCache: {
         pos: 0,
@@ -20352,6 +20356,12 @@ var StarRating = (function (_React$Component) {
 
   _createClass(StarRating, {
     getStars: {
+
+      /**
+       * Gets the stars based on ratingAmount
+       * @return {string} stars
+       */
+
       value: function getStars() {
         var stars = "";
         var numRating = this.props.ratingAmount;
