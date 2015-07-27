@@ -50,3 +50,9 @@
 
 .react-star-rating__size--lg {
   font-size: 2.5em; }
+
+.react-star-rating__size--jumbo {
+  font-size: 6em; }
+  @media screen and (max-width: 768px) {
+    .react-star-rating__size--jumbo {
+      font-size: 3em; } }

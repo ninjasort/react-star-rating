@@ -1,19 +1,20 @@
 /**
  * Gulp
  */
-var gulp       = require('gulp');
-var source     = require('vinyl-source-stream');
+'use strict';
+var gulp = require('gulp');
+var source = require('vinyl-source-stream');
 var browserify = require('browserify');
-var babelify   = require('babelify');
-var babel      = require('gulp-babel');
-var server     = require('gulp-webserver');
-var sass       = require('gulp-sass');
-var concat     = require('gulp-concat');
-var rename     = require('gulp-rename');
-var uglify     = require('gulp-uglify');
-var eslint     = require('gulp-eslint');
-var replace    = require('gulp-replace');
-var minifyCSS  = require('gulp-minify-css');
+var babelify = require('babelify');
+var babel = require('gulp-babel');
+var server = require('gulp-webserver');
+var sass = require('gulp-sass');
+var concat = require('gulp-concat');
+var rename = require('gulp-rename');
+var uglify = require('gulp-uglify');
+var eslint = require('gulp-eslint');
+var replace = require('gulp-replace');
+var minifyCSS = require('gulp-minify-css');
 
 var config = {
   componentFileName: 'react-star-rating',
@@ -72,7 +73,7 @@ gulp.task('build', ['lint'], function () {
 /**
  * Demo Bundle
  */
-gulp.task('default', ['lint','styles'], function () {
+gulp.task('default', ['lint', 'styles'], function () {
   return browserify('./src/docs.jsx', {extensions: '.jsx'})
     .transform(babelify)
     .bundle()
