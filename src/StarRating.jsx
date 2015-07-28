@@ -22,7 +22,7 @@ class StarRating extends React.Component {
     super(props);
     
     // initialize touch events
-    React.initializeTouchEvents();
+    React.initializeTouchEvents(true);
 
     this.state = {
       ratingCache: {
@@ -244,7 +244,7 @@ class StarRating extends React.Component {
     return (
       <span className="react-star-rating">
         {caption}
-        <span ref="root" className={classes}>
+        <span ref="root" style={{cursor: 'pointer'}} className={classes}>
           {starRating}
         </span>
       </span>

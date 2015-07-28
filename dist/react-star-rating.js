@@ -45,7 +45,7 @@ var StarRating = (function (_React$Component) {
     _get(Object.getPrototypeOf(StarRating.prototype), 'constructor', this).call(this, props);
 
     // initialize touch events
-    _react2['default'].initializeTouchEvents();
+    _react2['default'].initializeTouchEvents(true);
 
     this.state = {
       ratingCache: {
@@ -293,7 +293,7 @@ var StarRating = (function (_React$Component) {
         caption,
         _react2['default'].createElement(
           'span',
-          { ref: 'root', className: classes },
+          { ref: 'root', style: { cursor: 'pointer' }, className: classes },
           starRating
         )
       );

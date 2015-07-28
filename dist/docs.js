@@ -19862,7 +19862,7 @@ module.exports = require('./lib/React');
 },{"./lib/React":30}],158:[function(require,module,exports){
 module.exports={
   "name": "react-star-rating",
-  "version": "1.3.1",
+  "version": "1.3.1b",
   "description": "A simple star rating component built with React.",
   "main": "./dist/react-star-rating.min.js",
   "scripts": {
@@ -19948,7 +19948,7 @@ var StarRating = (function (_React$Component) {
     _get(Object.getPrototypeOf(StarRating.prototype), 'constructor', this).call(this, props);
 
     // initialize touch events
-    _react2['default'].initializeTouchEvents();
+    _react2['default'].initializeTouchEvents(true);
 
     this.state = {
       ratingCache: {
@@ -20194,7 +20194,7 @@ var StarRating = (function (_React$Component) {
         caption,
         _react2['default'].createElement(
           'span',
-          { ref: "root", className: classes },
+          { ref: "root", style: { cursor: 'pointer' }, className: classes },
           starRating
         )
       );
