@@ -1,28 +1,25 @@
 'use strict';
-
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-function _defineProperty(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
 var _classnames = require('classnames');
-
-var _classnames2 = _interopRequireDefault(_classnames);
 
 /**
  * @fileoverview react-star-rating
@@ -39,14 +36,18 @@ var _classnames2 = _interopRequireDefault(_classnames);
  *   />
  */
 
+var _classnames2 = _interopRequireDefault(_classnames);
+
 var StarRating = (function (_React$Component) {
+  _inherits(StarRating, _React$Component);
+
   function StarRating(props) {
     _classCallCheck(this, StarRating);
 
     _get(Object.getPrototypeOf(StarRating.prototype), 'constructor', this).call(this, props);
 
     // initialize touch events
-    _react2['default'].initializeTouchEvents();
+    _react2['default'].initializeTouchEvents(true);
 
     this.state = {
       ratingCache: {
@@ -61,15 +62,13 @@ var StarRating = (function (_React$Component) {
     };
   }
 
-  _inherits(StarRating, _React$Component);
+  /**
+   * Gets the stars based on ratingAmount
+   * @return {string} stars
+   */
 
   _createClass(StarRating, [{
     key: 'getStars',
-
-    /**
-     * Gets the stars based on ratingAmount
-     * @return {string} stars
-     */
     value: function getStars() {
       var stars = '';
       var numRating = this.props.ratingAmount;
@@ -173,11 +172,11 @@ var StarRating = (function (_React$Component) {
     value: function getSvg() {
       return _react2['default'].createElement(
         'svg',
-        { className: 'react-star-rating__star', viewBox: '0 0 286 272', version: '1.1', xmlns: 'http://www.w3.org/2000/svg' },
+        { className: "react-star-rating__star", viewBox: "0 0 286 272", version: "1.1", xmlns: "http://www.w3.org/2000/svg" },
         _react2['default'].createElement(
           'g',
-          { stroke: 'none', 'stroke-width': '1', fill: 'none', 'fill-rule': 'evenodd' },
-          _react2['default'].createElement('polygon', { id: 'star-flat', points: '143 225 54.8322122 271.352549 71.6707613 173.176275 0.341522556 103.647451 98.9161061 89.3237254 143 0 187.083894 89.3237254 285.658477 103.647451 214.329239 173.176275 231.167788 271.352549 ' })
+          { stroke: "none", 'stroke-width': "1", fill: "none", 'fill-rule': "evenodd" },
+          _react2['default'].createElement('polygon', { id: "star-flat", points: "143 225 54.8322122 271.352549 71.6707613 173.176275 0.341522556 103.647451 98.9161061 89.3237254 143 0 187.083894 89.3237254 285.658477 103.647451 214.329239 173.176275 231.167788 271.352549 " })
         )
       );
     }
@@ -260,7 +259,7 @@ var StarRating = (function (_React$Component) {
       if (this.props.caption) {
         caption = _react2['default'].createElement(
           'span',
-          { className: 'react-rating-caption' },
+          { className: "react-rating-caption" },
           this.props.caption
         );
       }
@@ -270,31 +269,31 @@ var StarRating = (function (_React$Component) {
       if (this.state.editing) {
         starRating = _react2['default'].createElement(
           'div',
-          { ref: 'ratingContainer',
-            className: 'rating-container rating-gly-star',
+          { ref: "ratingContainer",
+            className: "rating-container rating-gly-star",
             'data-content': this.state.glyph,
             onMouseMove: this.handleMouseMove.bind(this),
             onMouseLeave: this.handleMouseLeave.bind(this),
             onClick: this.handleClick.bind(this) },
-          _react2['default'].createElement('div', { className: 'rating-stars', 'data-content': this.state.glyph, style: { width: this.state.pos } }),
-          _react2['default'].createElement('input', { type: 'number', name: this.props.name, value: this.state.ratingCache.rating, style: { display: 'none !important' }, min: this.min, max: this.max, readOnly: true })
+          _react2['default'].createElement('div', { className: "rating-stars", 'data-content': this.state.glyph, style: { width: this.state.pos } }),
+          _react2['default'].createElement('input', { type: "number", name: this.props.name, value: this.state.ratingCache.rating, style: { display: 'none !important' }, min: this.min, max: this.max, readOnly: true })
         );
       } else {
         starRating = _react2['default'].createElement(
           'div',
-          { ref: 'ratingContainer', className: 'rating-container rating-gly-star', 'data-content': this.state.glyph },
-          _react2['default'].createElement('div', { className: 'rating-stars', 'data-content': this.state.glyph, style: { width: this.state.pos } }),
-          _react2['default'].createElement('input', { type: 'number', name: this.props.name, value: this.state.ratingCache.rating, style: { display: 'none !important' }, min: this.min, max: this.max, readOnly: true })
+          { ref: "ratingContainer", className: "rating-container rating-gly-star", 'data-content': this.state.glyph },
+          _react2['default'].createElement('div', { className: "rating-stars", 'data-content': this.state.glyph, style: { width: this.state.pos } }),
+          _react2['default'].createElement('input', { type: "number", name: this.props.name, value: this.state.ratingCache.rating, style: { display: 'none !important' }, min: this.min, max: this.max, readOnly: true })
         );
       }
 
       return _react2['default'].createElement(
         'span',
-        { className: 'react-star-rating' },
+        { className: "react-star-rating" },
         caption,
         _react2['default'].createElement(
           'span',
-          { ref: 'root', className: classes },
+          { ref: "root", style: { cursor: 'pointer' }, className: classes },
           starRating
         )
       );
