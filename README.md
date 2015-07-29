@@ -65,7 +65,7 @@ React.render(<FormComponent />, document.getElementById('star-rating'));
 - [x] Fix ES6 bug with bundling
 - [ ] Add svg stars
 - [ ] Re-implement star hovering (kinda janky right now)
-- [ ] Double-check touch support works
+- [x] Double-check touch support works
 
 
 ## License
