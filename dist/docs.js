@@ -20675,6 +20675,12 @@ var App = (function (_React$Component) {
             null,
             '<StarRating name="large-rating" caption="Large!" size="lg" ratingAmount={5} rating={5} />'
           ),
+          _react2['default'].createElement(_StarRating2['default'], { name: "jumbo-rating", caption: "Jumbo!", size: "jumbo", ratingAmount: 5, rating: 5 }),
+          _react2['default'].createElement(
+            'code',
+            null,
+            '<StarRating name="jumbo-rating" caption="Jumbo!" size="jumbo" ratingAmount={5} rating={5} />'
+          ),
           _react2['default'].createElement(_StarRating2['default'], { name: "disabled", caption: "Disabled.", ratingAmount: 5, rating: 3, disabled: true }),
           _react2['default'].createElement(
             'code',

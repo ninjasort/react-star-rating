@@ -119,6 +119,10 @@ class App extends React.Component {
           <code>
             {'<StarRating name="large-rating" caption="Large!" size="lg" ratingAmount={5} rating={5} />'}
           </code>
+          <StarRating name="jumbo-rating" caption="Jumbo!" size="jumbo" ratingAmount={5} rating={5} />
+          <code>
+            {'<StarRating name="jumbo-rating" caption="Jumbo!" size="jumbo" ratingAmount={5} rating={5} />'}
+          </code>
           <StarRating name="disabled" caption="Disabled." ratingAmount={5} rating={3} disabled={true} />
           <code>
             {'<StarRating name="disabled" caption="Disabled." ratingAmount={5} rating={3} disabled={true} />'}
