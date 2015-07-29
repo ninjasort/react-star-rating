@@ -1,3 +1,4 @@
+'use strict';
 import React from 'react';
 import cx from 'classnames';
 
@@ -21,7 +22,7 @@ class StarRating extends React.Component {
     super(props);
     
     // initialize touch events
-    React.initializeTouchEvents();
+    React.initializeTouchEvents(true);
 
     this.state = {
       ratingCache: {
@@ -104,9 +105,9 @@ class StarRating extends React.Component {
     var maxWidth = this.ratingContainer.offsetWidth;
     var diff = this.max - this.min;
     var factor = (diff * pos) / (maxWidth * this.props.step);
-        factor = Math.ceil(factor);
+    factor = Math.ceil(factor);
     var val = this.applyPrecision(parseFloat(this.min + factor * this.props.step), precision);
-        val = Math.max(Math.min(val, this.max), this.min);
+    val = Math.max(Math.min(val, this.max), this.min);
     return val;
   }
 
@@ -243,7 +244,7 @@ class StarRating extends React.Component {
     return (
       <span className="react-star-rating">
         {caption}
-        <span ref="root" className={classes}>
+        <span ref="root" style={{cursor: 'pointer'}} className={classes}>
           {starRating}
         </span>
       </span>

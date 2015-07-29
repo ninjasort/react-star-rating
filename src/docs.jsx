@@ -1,3 +1,4 @@
+'use strict';
 import React from 'react';
 import StarRating from './StarRating';
 import pkg from '../package';
