@@ -24,7 +24,7 @@ var _classnames = require('classnames');
 /**
  * @fileoverview react-star-rating
  * @author @cameronjroe
- * <StarRating 
+ * <StarRating
  *   name={string} - name for form input (required)
  *   caption={string} - caption for rating (optional)
  *   ratingAmount={number} - the rating amount (required, default: 5)
@@ -84,10 +84,12 @@ var StarRating = (function (_React$Component) {
       this.max = this.props.ratingAmount || 5;
       if (this.props.rating) {
 
-        this.state.editing = false;
-
+        this.state.editing = this.props.editing || false;
         var ratingVal = this.props.rating;
+        this.state.ratingCache.pos = this.getStarRatingPosition(ratingVal);
+
         this.setState({
+          ratingCache: this.state.ratingCache,
           rating: ratingVal,
           pos: this.getStarRatingPosition(ratingVal)
         });
