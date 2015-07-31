@@ -5,7 +5,7 @@ import cx from 'classnames';
 /**
  * @fileoverview react-star-rating
  * @author @cameronjroe
- * <StarRating 
+ * <StarRating
  *   name={string} - name for form input (required)
  *   caption={string} - caption for rating (optional)
  *   ratingAmount={number} - the rating amount (required, default: 5)
@@ -20,7 +20,7 @@ class StarRating extends React.Component {
 
   constructor(props) {
     super(props);
-    
+
     // initialize touch events
     React.initializeTouchEvents(true);
 
@@ -54,11 +54,13 @@ class StarRating extends React.Component {
     this.min = 0;
     this.max = this.props.ratingAmount || 5;
     if (this.props.rating) {
-      
-      this.state.editing = false;
 
+      this.state.editing = this.props.editing || false;
       var ratingVal = this.props.rating;
+      this.state.ratingCache.pos = this.getStarRatingPosition(ratingVal);
+
       this.setState({
+        ratingCache: this.state.ratingCache,
         rating: ratingVal,
         pos: this.getStarRatingPosition(ratingVal)
       });
@@ -99,7 +101,7 @@ class StarRating extends React.Component {
     }
     return (val - min) * 100 / (max - min);
   }
-  
+
   getValueFromPosition(pos) {
     var precision = this.getDecimalPlaces(this.props.step);
     var maxWidth = this.ratingContainer.offsetWidth;
@@ -114,7 +116,7 @@ class StarRating extends React.Component {
   calculate(pos) {
     var val = this.getValueFromPosition(pos),
         width = this.getWidthFromValue(val);
-    
+
     width += '%';
     return {width, val};
   }
@@ -222,7 +224,7 @@ class StarRating extends React.Component {
     var starRating;
     if (this.state.editing) {
       starRating = (
-        <div ref="ratingContainer" 
+        <div ref="ratingContainer"
           className="rating-container rating-gly-star"
           data-content={this.state.glyph}
           onMouseMove={this.handleMouseMove.bind(this)}
