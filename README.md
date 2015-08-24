@@ -1,4 +1,4 @@
-# react-star-rating [![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com) ![](https://david-dm.org/cameronjroe/react-star-rating.svg)
+# react-star-rating ![](https://david-dm.org/cameronjroe/react-star-rating.svg)
 
 [![NPM](https://nodei.co/npm/react-star-rating.png?compact=true)](https://nodei.co/npm/react-star-rating/)
 
