@@ -1,5 +1,7 @@
 # react-star-rating [![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)
 
+[![NPM](https://nodei.co/npm/react-star-rating.png?compact=true)](https://nodei.co/npm/react-star-rating/)
+
 <!-- [![Build Status](https://travis-ci.org/)](https://travis-ci.org/) -->
 ![](src/assets/star-rating.png)
 
