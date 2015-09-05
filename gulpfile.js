@@ -90,7 +90,9 @@ gulp.task('default', ['lint', 'styles'], function () {
  */
 gulp.task('watch', ['default'], function () {
   gulp.watch(['./src/*.js', './src/**/*.jsx', './src/sass/{*/,}*.scss'], ['dist']);
-  return gulp.src('.').pipe(server());
+  return gulp.src('.').pipe(server({
+    port: 3000
+  }));
 });
 
 /**
