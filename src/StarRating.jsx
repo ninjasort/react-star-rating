@@ -18,6 +18,24 @@ import cx from 'classnames';
  */
 class StarRating extends React.Component {
 
+  static propTypes = {
+    name: React.PropTypes.string.isRequired,
+    caption: React.PropTypes.string,
+    ratingAmount: React.PropTypes.number.isRequired,
+    rating: React.PropTypes.number,
+    onRatingClick: React.PropTypes.func,
+    disabled: React.PropTypes.bool,
+    editing: React.PropTypes.bool,
+    size: React.PropTypes.string
+  }
+
+  static defaultProps = {
+    step: 0.5,
+    ratingAmount: 5,
+    onRatingClick() {},
+    disabled: false
+  }
+
   constructor(props) {
     super(props);
 
@@ -253,23 +271,5 @@ class StarRating extends React.Component {
     );
   }
 }
-
-StarRating.propTypes = {
-  name: React.PropTypes.string.isRequired,
-  caption: React.PropTypes.string,
-  ratingAmount: React.PropTypes.number.isRequired,
-  rating: React.PropTypes.number,
-  onRatingClick: React.PropTypes.func,
-  disabled: React.PropTypes.bool,
-  editing: React.PropTypes.bool,
-  size: React.PropTypes.string
-};
-
-StarRating.defaultProps = {
-  step: 0.5,
-  ratingAmount: 5,
-  onRatingClick() {},
-  disabled: false
-};
 
 export default StarRating;
