@@ -1,3 +1,5 @@
 {
-  "optional": ["es7.classProperties"]
+  "stage": 0,
+  "optional": ["runtime"],
+  "comments": false
 }
