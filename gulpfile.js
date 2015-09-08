@@ -13,6 +13,7 @@ var uglify     = require('gulp-uglify');
 var eslint     = require('gulp-eslint');
 var replace    = require('gulp-replace');
 var minifyCSS  = require('gulp-minify-css');
+var karma      = require('gulp-karma');
 
 var config = {
   componentFileName: 'react-star-rating',

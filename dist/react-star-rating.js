@@ -1,19 +1,20 @@
 'use strict';
+
+var _get = require('babel-runtime/helpers/get')['default'];
+
+var _inherits = require('babel-runtime/helpers/inherits')['default'];
+
+var _createClass = require('babel-runtime/helpers/create-class')['default'];
+
+var _classCallCheck = require('babel-runtime/helpers/class-call-check')['default'];
+
+var _defineProperty = require('babel-runtime/helpers/define-property')['default'];
+
+var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
+
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var _react = require('react');
 
@@ -21,32 +22,40 @@ var _react2 = _interopRequireDefault(_react);
 
 var _classnames = require('classnames');
 
-/**
- * @fileoverview react-star-rating
- * @author @cameronjroe
- * <StarRating
- *   name={string} - name for form input (required)
- *   caption={string} - caption for rating (optional)
- *   ratingAmount={number} - the rating amount (required, default: 5)
- *   rating={number} - a set rating between the rating amount (optional)
- *   disabled={boolean} - whether to disable the rating from being selected (optional)
- *   editing={boolean} - whether the rating is explicitly in editing mode (optional)
- *   size={string} - size of stars (optional)
- *   onRatingClick={function} - a handler function that gets called onClick of the rating (optional)
- *   />
- */
-
 var _classnames2 = _interopRequireDefault(_classnames);
 
 var StarRating = (function (_React$Component) {
   _inherits(StarRating, _React$Component);
+
+  _createClass(StarRating, null, [{
+    key: 'propTypes',
+    value: {
+      name: _react2['default'].PropTypes.string.isRequired,
+      caption: _react2['default'].PropTypes.string,
+      ratingAmount: _react2['default'].PropTypes.number.isRequired,
+      rating: _react2['default'].PropTypes.number,
+      onRatingClick: _react2['default'].PropTypes.func,
+      disabled: _react2['default'].PropTypes.bool,
+      editing: _react2['default'].PropTypes.bool,
+      size: _react2['default'].PropTypes.string
+    },
+    enumerable: true
+  }, {
+    key: 'defaultProps',
+    value: {
+      step: 0.5,
+      ratingAmount: 5,
+      onRatingClick: function onRatingClick() {},
+      disabled: false
+    },
+    enumerable: true
+  }]);
 
   function StarRating(props) {
     _classCallCheck(this, StarRating);
 
     _get(Object.getPrototypeOf(StarRating.prototype), 'constructor', this).call(this, props);
 
-    // initialize touch events
     _react2['default'].initializeTouchEvents(true);
 
     this.state = {
@@ -61,11 +70,6 @@ var StarRating = (function (_React$Component) {
       glyph: this.getStars()
     };
   }
-
-  /**
-   * Gets the stars based on ratingAmount
-   * @return {string} stars
-   */
 
   _createClass(StarRating, [{
     key: 'getStars',
@@ -193,7 +197,6 @@ var StarRating = (function (_React$Component) {
   }, {
     key: 'handleMouseMove',
     value: function handleMouseMove(e) {
-      // get hover position
       var ratingEvent = this.getRatingEvent(e);
       this.updateRating(ratingEvent.width, ratingEvent.val);
     }
@@ -218,8 +221,6 @@ var StarRating = (function (_React$Component) {
   }, {
     key: 'handleClick',
     value: function handleClick(e) {
-
-      // is it disabled?
       if (this.props.disabled) {
         e.stopPropagation();
         e.preventDefault();
@@ -257,7 +258,6 @@ var StarRating = (function (_React$Component) {
         'rating-disabled': this.props.disabled
       }, _defineProperty(_cx, 'react-star-rating__size--' + this.props.size, this.props.size), _defineProperty(_cx, 'rating-editing', this.state.editing), _cx));
 
-      // is there a caption?
       if (this.props.caption) {
         caption = _react2['default'].createElement(
           'span',
@@ -266,7 +266,6 @@ var StarRating = (function (_React$Component) {
         );
       }
 
-      // are we editing this rating?
       var starRating;
       if (this.state.editing) {
         starRating = _react2['default'].createElement(
@@ -304,24 +303,6 @@ var StarRating = (function (_React$Component) {
 
   return StarRating;
 })(_react2['default'].Component);
-
-StarRating.propTypes = {
-  name: _react2['default'].PropTypes.string.isRequired,
-  caption: _react2['default'].PropTypes.string,
-  ratingAmount: _react2['default'].PropTypes.number.isRequired,
-  rating: _react2['default'].PropTypes.number,
-  onRatingClick: _react2['default'].PropTypes.func,
-  disabled: _react2['default'].PropTypes.bool,
-  editing: _react2['default'].PropTypes.bool,
-  size: _react2['default'].PropTypes.string
-};
-
-StarRating.defaultProps = {
-  step: 0.5,
-  ratingAmount: 5,
-  onRatingClick: function onRatingClick() {},
-  disabled: false
-};
 
 exports['default'] = StarRating;
 module.exports = exports['default'];
