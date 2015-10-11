@@ -19522,16 +19522,6 @@ var StarRating = (function (_React$Component) {
   }
 
   _createClass(StarRating, [{
-    key: 'getStars',
-    value: function getStars() {
-      var stars = '';
-      var numRating = this.props.totalStars;
-      for (var i = 0; i < numRating; i++) {
-        stars += '★';
-      }
-      return stars;
-    }
-  }, {
     key: 'componentWillMount',
     value: function componentWillMount() {
       this.min = 0;
@@ -19560,6 +19550,16 @@ var StarRating = (function (_React$Component) {
     value: function componentWillUnmount() {
       delete this.root;
       delete this.ratingContainer;
+    }
+  }, {
+    key: 'getStars',
+    value: function getStars() {
+      var stars = '';
+      var numRating = this.props.totalStars;
+      for (var i = 0; i < numRating; i++) {
+        stars += '★';
+      }
+      return stars;
     }
   }, {
     key: 'getPosition',

@@ -53,19 +53,6 @@ class StarRating extends React.Component {
     };
   }
 
-  /**
-   * Gets the stars based on totalStars
-   * @return {string} stars
-   */
-  getStars() {
-    var stars = '';
-    var numRating = this.props.totalStars;
-    for(var i = 0; i < numRating; i++) {
-      stars += '\u2605';
-    }
-    return stars;
-  }
-
   componentWillMount() {
     this.min = 0;
     this.max = this.props.totalStars || 5;
@@ -93,6 +80,24 @@ class StarRating extends React.Component {
     delete this.ratingContainer;
   }
 
+  /**
+   * Gets the stars based on totalStars
+   * @return {string} stars
+   */
+  getStars() {
+    var stars = '';
+    var numRating = this.props.totalStars;
+    for(var i = 0; i < numRating; i++) {
+      stars += '\u2605';
+    }
+    return stars;
+  }
+
+  /**
+   * Gets the mouse position
+   * @param  {event} e
+   * @return {number} delta
+   */
   getPosition(e) {
     return e.pageX - this.root.getBoundingClientRect().left;
   }
