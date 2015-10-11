@@ -1,5 +1,5 @@
 import React from 'react/addons';
-import StarRating from 'components/StarRating';
+import StarRating from '../StarRating';
 
 // http://reactkungfu.com/2015/07/approaches-to-testing-react-components-an-overview/
 describe("Star rating", () => {

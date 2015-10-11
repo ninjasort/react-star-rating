@@ -1,5 +1,6 @@
 'use strict';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import cx from 'classnames';
 
 /**
@@ -38,9 +39,6 @@ class StarRating extends React.Component {
 
   constructor(props) {
     super(props);
-
-    // initialize touch events
-    React.initializeTouchEvents(true);
 
     this.state = {
       ratingCache: {
@@ -86,8 +84,8 @@ class StarRating extends React.Component {
   }
 
   componentDidMount() {
-    this.root = React.findDOMNode(this.refs.root);
-    this.ratingContainer = React.findDOMNode(this.refs.ratingContainer);
+    this.root = ReactDOM.findDOMNode(this.refs.root);
+    this.ratingContainer = ReactDOM.findDOMNode(this.refs.ratingContainer);
   }
 
   componentWillUnmount() {
@@ -159,22 +157,6 @@ class StarRating extends React.Component {
     );
   }
 
-  handleMouseLeave() {
-    this.setState({
-      pos: this.state.ratingCache.pos,
-      rating: this.state.ratingCache.rating
-    });
-  }
-
-  handleMouseMove(e) {
-    // get hover position
-    var ratingEvent = this.getRatingEvent(e);
-    this.updateRating(
-      ratingEvent.width,
-      ratingEvent.val
-    );
-  }
-
   updateRating(width, val) {
     this.setState({
       pos: width,
@@ -194,9 +176,23 @@ class StarRating extends React.Component {
     }
   }
 
-  handleClick(e) {
+  handleMouseLeave() {
+    this.setState({
+      pos: this.state.ratingCache.pos,
+      rating: this.state.ratingCache.rating
+    });
+  }
 
-    // is it disabled?
+  handleMouseMove(e) {
+    // get hover position
+    var ratingEvent = this.getRatingEvent(e);
+    this.updateRating(
+      ratingEvent.width,
+      ratingEvent.val
+    );
+  }
+
+  handleClick(e) {
     if (this.props.disabled) {
       e.stopPropagation();
       e.preventDefault();
@@ -224,7 +220,6 @@ class StarRating extends React.Component {
   }
 
   render() {
-
     var caption = null;
     var classes = cx({
       'react-star-rating__root': true,

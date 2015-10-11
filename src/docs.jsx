@@ -1,5 +1,6 @@
 'use strict';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import StarRating from './StarRating';
 import pkg from '../package';
 
@@ -129,10 +130,10 @@ class App extends React.Component {
           </code>
         </div>
         <footer>
-          <p className="footer-creds">
+          <div className="footer-creds">
             <p>Code licensed under <a href="https://github.com/cameronjroe/react-star-rating/blob/master/LICENSE">MIT</a> - Currently v{currentVersion} - <a href="https://github.com/cameronjroe/react-star-rating">Github Repo</a></p>
             <p>Created by <a href="http://twitter.com/cameronjroe">@cameronjroe</a> - <iframe src="https://ghbtns.com/github-btn.html?user=cameronjroe&type=follow&count=true" frameBorder="0" scrolling="0" width="170px" height="20px"></iframe></p>
-          </p>
+          </div>
         </footer>
       </section>
     );
@@ -140,4 +141,4 @@ class App extends React.Component {
 
 }
 
-React.render(<App />, inject);
+ReactDOM.render(<App />, inject);
