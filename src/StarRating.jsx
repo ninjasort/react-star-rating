@@ -9,7 +9,7 @@ import cx from 'classnames';
  * <StarRating
  *   name={string} - name for form input (required)
  *   caption={string} - caption for rating (optional)
- *   ratingAmount={number} - the rating amount (required, default: 5)
+ *   totalStars={number} - the total amount of stars (required, default: 5)
  *   rating={number} - a set rating between the rating amount (optional)
  *   disabled={boolean} - whether to disable the rating from being selected (optional)
  *   editing={boolean} - whether the rating is explicitly in editing mode (optional)
@@ -22,7 +22,7 @@ class StarRating extends React.Component {
   static propTypes = {
     name: React.PropTypes.string.isRequired,
     caption: React.PropTypes.string,
-    ratingAmount: React.PropTypes.number.isRequired,
+    totalStars: React.PropTypes.number.isRequired,
     rating: React.PropTypes.number,
     onRatingClick: React.PropTypes.func,
     disabled: React.PropTypes.bool,
@@ -32,7 +32,7 @@ class StarRating extends React.Component {
 
   static defaultProps = {
     step: 0.5,
-    ratingAmount: 5,
+    totalStars: 5,
     onRatingClick() {},
     disabled: false
   }
@@ -54,12 +54,12 @@ class StarRating extends React.Component {
   }
 
   /**
-   * Gets the stars based on ratingAmount
+   * Gets the stars based on totalStars
    * @return {string} stars
    */
   getStars() {
     var stars = '';
-    var numRating = this.props.ratingAmount;
+    var numRating = this.props.totalStars;
     for(var i = 0; i < numRating; i++) {
       stars += '\u2605';
     }
@@ -68,7 +68,7 @@ class StarRating extends React.Component {
 
   componentWillMount() {
     this.min = 0;
-    this.max = this.props.ratingAmount || 5;
+    this.max = this.props.totalStars || 5;
     if (this.props.rating) {
 
       this.state.editing = this.props.editing || false;
@@ -259,9 +259,9 @@ class StarRating extends React.Component {
     return (
       <span className="react-star-rating">
         {caption}
-        <span ref="root" style={{cursor: 'pointer'}} className={classes}>
+        <div ref="root" style={{cursor: 'pointer'}} className={classes}>
           {starRating}
-        </span>
+        </div>
       </span>
     );
   }

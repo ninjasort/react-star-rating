@@ -36,7 +36,7 @@ var StarRating = (function (_React$Component) {
     value: {
       name: _react2['default'].PropTypes.string.isRequired,
       caption: _react2['default'].PropTypes.string,
-      ratingAmount: _react2['default'].PropTypes.number.isRequired,
+      totalStars: _react2['default'].PropTypes.number.isRequired,
       rating: _react2['default'].PropTypes.number,
       onRatingClick: _react2['default'].PropTypes.func,
       disabled: _react2['default'].PropTypes.bool,
@@ -48,7 +48,7 @@ var StarRating = (function (_React$Component) {
     key: 'defaultProps',
     value: {
       step: 0.5,
-      ratingAmount: 5,
+      totalStars: 5,
       onRatingClick: function onRatingClick() {},
       disabled: false
     },
@@ -77,7 +77,7 @@ var StarRating = (function (_React$Component) {
     key: 'getStars',
     value: function getStars() {
       var stars = '';
-      var numRating = this.props.ratingAmount;
+      var numRating = this.props.totalStars;
       for (var i = 0; i < numRating; i++) {
         stars += '★';
       }
@@ -87,7 +87,7 @@ var StarRating = (function (_React$Component) {
     key: 'componentWillMount',
     value: function componentWillMount() {
       this.min = 0;
-      this.max = this.props.ratingAmount || 5;
+      this.max = this.props.totalStars || 5;
       if (this.props.rating) {
 
         this.state.editing = this.props.editing || false;
@@ -295,7 +295,7 @@ var StarRating = (function (_React$Component) {
         { className: 'react-star-rating' },
         caption,
         _react2['default'].createElement(
-          'span',
+          'div',
           { ref: 'root', style: { cursor: 'pointer' }, className: classes },
           starRating
         )
