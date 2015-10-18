@@ -1,20 +1,21 @@
 'use strict';
-
-var _get = require('babel-runtime/helpers/get')['default'];
-
-var _inherits = require('babel-runtime/helpers/inherits')['default'];
-
-var _createClass = require('babel-runtime/helpers/create-class')['default'];
-
-var _classCallCheck = require('babel-runtime/helpers/class-call-check')['default'];
-
-var _defineProperty = require('babel-runtime/helpers/define-property')['default'];
-
-var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
-
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var _react = require('react');
 
@@ -116,6 +117,7 @@ var StarRating = (function (_React$Component) {
   }, {
     key: 'getPosition',
     value: function getPosition(e) {
+      console.log(this.root.getBoundingClientRect());
       return e.pageX - this.root.getBoundingClientRect().left;
     }
   }, {
@@ -180,7 +182,7 @@ var StarRating = (function (_React$Component) {
     value: function getSvg() {
       return _react2['default'].createElement(
         'svg',
-        { className: 'react-star-rating__star', viewBox: '0 0 286 272', version: '1.1', xmlns: 'http://www.w3.org/2000/svg' },
+        { className: 'rsr__star', viewBox: '0 0 286 272', version: '1.1', xmlns: 'http://www.w3.org/2000/svg' },
         _react2['default'].createElement(
           'g',
           { stroke: 'none', 'stroke-width': '1', fill: 'none', 'fill-rule': 'evenodd' },
@@ -256,48 +258,48 @@ var StarRating = (function (_React$Component) {
 
       var caption = null;
       var classes = (0, _classnames2['default'])((_cx = {
-        'react-star-rating__root': true,
-        'rating-disabled': this.props.disabled
-      }, _defineProperty(_cx, 'react-star-rating__size--' + this.props.size, this.props.size), _defineProperty(_cx, 'rating-editing', this.state.editing), _cx));
+        'rsr-root': true,
+        'rsr--disabled': this.props.disabled
+      }, _defineProperty(_cx, 'rsr--' + this.props.size, this.props.size), _defineProperty(_cx, 'rsr--editing', this.state.editing), _cx));
 
       if (this.props.caption) {
         caption = _react2['default'].createElement(
           'span',
-          { className: 'react-rating-caption' },
+          { className: 'rsr__caption' },
           this.props.caption
         );
       }
 
-      var starRating;
+      var attrs = {};
       if (this.state.editing) {
-        starRating = _react2['default'].createElement(
-          'div',
-          { ref: 'ratingContainer',
-            className: 'rating-container rating-gly-star',
-            'data-content': this.state.glyph,
-            onMouseMove: this.handleMouseMove.bind(this),
-            onMouseLeave: this.handleMouseLeave.bind(this),
-            onClick: this.handleClick.bind(this) },
-          _react2['default'].createElement('div', { className: 'rating-stars', 'data-content': this.state.glyph, style: { width: this.state.pos } }),
-          _react2['default'].createElement('input', { type: 'number', name: this.props.name, value: this.state.ratingCache.rating, style: { display: 'none !important' }, min: this.min, max: this.max, readOnly: true })
-        );
-      } else {
-        starRating = _react2['default'].createElement(
-          'div',
-          { ref: 'ratingContainer', className: 'rating-container rating-gly-star', 'data-content': this.state.glyph },
-          _react2['default'].createElement('div', { className: 'rating-stars', 'data-content': this.state.glyph, style: { width: this.state.pos } }),
-          _react2['default'].createElement('input', { type: 'number', name: this.props.name, value: this.state.ratingCache.rating, style: { display: 'none !important' }, min: this.min, max: this.max, readOnly: true })
-        );
+        attrs['onMouseMove'] = this.handleMouseMove.bind(this);
+        attrs['onMouseLeave'] = this.handleMouseLeave.bind(this);
+        attrs['onClick'] = this.handleClick.bind(this);
       }
 
       return _react2['default'].createElement(
         'span',
-        { className: 'react-star-rating' },
+        { className: 'rsr-container' },
         caption,
         _react2['default'].createElement(
           'div',
-          { ref: 'root', style: { cursor: 'pointer' }, className: classes },
-          starRating
+          { ref: 'root', className: classes },
+          _react2['default'].createElement(
+            'div',
+            _extends({ ref: 'ratingContainer',
+              className: 'rsr rating-gly-star',
+              'data-content': this.state.glyph }, attrs),
+            _react2['default'].createElement('div', { className: 'rsr__stars',
+              'data-content': this.state.glyph,
+              style: { width: this.state.pos } }),
+            _react2['default'].createElement('input', { type: 'number',
+              name: this.props.name,
+              value: this.state.ratingCache.rating,
+              style: { display: 'none !important' },
+              min: this.min,
+              max: this.max,
+              readOnly: true })
+          )
         )
       );
     }

@@ -1,25 +1,22 @@
-var webpack = require('wepback');
+var webpack = require('webpack');
 
 module.exports = {
 
+  entry: [
+    './src/StarRating.jsx'
+  ],
   output: {
-    filename: 'main.js',
+    path: 'dist',
+    filename: 'react-star-rating.js',
     publicPath: '/assets/'
   },
-
   cache: true,
   debug: true,
   devtool: false,
-  entry: [
-    'webpack/hot/only-dev-server',
-    './src/App.js'
-  ],
-
   stats: {
     colors: true,
     reasons: true
   },
-
   resolve: {
     extensions: ['', '.js', '.jsx'],
     alias: {
@@ -29,15 +26,15 @@ module.exports = {
     }
   },
   module: {
-    preLoaders: [{
-      test: /\.(js|jsx)$/,
-      exclude: /node_modules/,
-      loader: 'jsxhint'
-    }],
+    // preLoaders: [{
+    //   test: /\.(js|jsx)$/,
+    //   exclude: /node_modules/,
+    //   loader: 'jsxhint'
+    // }],
     loaders: [{
       test: /\.(js|jsx)$/,
       exclude: /node_modules/,
-      loader: 'react-hot!babel',
+      loader: 'babel',
     }, {
       test: /\.less/,
       loader: 'style-loader!css-loader!less-loader'

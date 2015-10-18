@@ -99,6 +99,7 @@ class StarRating extends React.Component {
    * @return {number} delta
    */
   getPosition(e) {
+    console.log(this.root.getBoundingClientRect());
     return e.pageX - this.root.getBoundingClientRect().left;
   }
 
@@ -152,9 +153,12 @@ class StarRating extends React.Component {
     return this.calculate(pos);
   }
 
+  /**
+   * Get Star SVG
+   */
   getSvg() {
     return (
-      <svg className="react-star-rating__star" viewBox="0 0 286 272" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <svg className="rsr__star" viewBox="0 0 286 272" version="1.1" xmlns="http://www.w3.org/2000/svg">
         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
           <polygon id="star-flat" points="143 225 54.8322122 271.352549 71.6707613 173.176275 0.341522556 103.647451 98.9161061 89.3237254 143 0 187.083894 89.3237254 285.658477 103.647451 214.329239 173.176275 231.167788 271.352549 "></polygon>
         </g>
@@ -227,45 +231,43 @@ class StarRating extends React.Component {
   render() {
     var caption = null;
     var classes = cx({
-      'react-star-rating__root': true,
-      'rating-disabled': this.props.disabled,
-      ['react-star-rating__size--' + this.props.size]: this.props.size,
-      'rating-editing': this.state.editing
+      'rsr-root': true,
+      'rsr--disabled': this.props.disabled,
+      ['rsr--' + this.props.size]: this.props.size,
+      'rsr--editing': this.state.editing
     });
 
     // is there a caption?
     if (this.props.caption) {
-      caption = (<span className="react-rating-caption">{this.props.caption}</span>);
+      caption = (<span className="rsr__caption">{this.props.caption}</span>);
     }
 
-    // are we editing this rating?
-    var starRating;
+    var attrs = {};
     if (this.state.editing) {
-      starRating = (
-        <div ref="ratingContainer"
-          className="rating-container rating-gly-star"
-          data-content={this.state.glyph}
-          onMouseMove={this.handleMouseMove.bind(this)}
-          onMouseLeave={this.handleMouseLeave.bind(this)}
-          onClick={this.handleClick.bind(this)}>
-          <div className="rating-stars" data-content={this.state.glyph} style={{width: this.state.pos}}></div>
-          <input type="number" name={this.props.name} value={this.state.ratingCache.rating} style={{display: 'none !important'}} min={this.min} max={this.max} readOnly />
-        </div>
-      );
-    } else {
-      starRating = (
-        <div ref="ratingContainer" className="rating-container rating-gly-star" data-content={this.state.glyph}>
-          <div className="rating-stars" data-content={this.state.glyph} style={{width: this.state.pos}}></div>
-          <input type="number" name={this.props.name} value={this.state.ratingCache.rating} style={{display: 'none !important'}} min={this.min} max={this.max} readOnly />
-        </div>
-      );
+      attrs['onMouseMove'] = this.handleMouseMove.bind(this);
+      attrs['onMouseLeave'] = this.handleMouseLeave.bind(this);
+      attrs['onClick'] = this.handleClick.bind(this);
     }
 
     return (
-      <span className="react-star-rating">
+      <span className="rsr-container">
         {caption}
-        <div ref="root" style={{cursor: 'pointer'}} className={classes}>
-          {starRating}
+        <div ref="root" className={classes}>
+          <div ref="ratingContainer"
+            className="rsr rating-gly-star"
+            data-content={this.state.glyph} {...attrs}>
+            <div className="rsr__stars"
+                data-content={this.state.glyph} 
+                style={{width: this.state.pos}}>
+            </div>
+            <input type="number" 
+              name={this.props.name} 
+              value={this.state.ratingCache.rating} 
+              style={{display: 'none !important'}} 
+              min={this.min} 
+              max={this.max} 
+              readOnly />
+          </div>
         </div>
       </span>
     );
