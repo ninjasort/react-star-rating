@@ -1,5 +1,4 @@
 .rsr-root {
-  font-size: 2em;
   vertical-align: middle;
   display: inline-block; }
 
@@ -12,8 +11,6 @@
   display: inline-block;
   color: #e3e3e3;
   overflow: hidden; }
-  .rsr:before {
-    content: attr(data-content); }
 
 .rsr__stars {
   position: absolute;
@@ -24,22 +21,17 @@
   color: #F5A71B;
   -webkit-transition: all 0.01s;
   -moz-transition: all 0.01s;
-  transition: all 0.01s;
-  -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(#FDBD47), to(#F5A71B)); }
-  .rsr__stars:before {
-    content: attr(data-content); }
+  transition: all 0.01s; }
 
 .rsr__caption {
   font-size: 1.25em;
   vertical-align: middle;
   margin-right: 0.5em; }
 
-.rsr__star {
-  width: 25px; }
-  .rsr__star #star-flat {
-    fill: #C6C6C6; }
-    .rsr__star #star-flat:hover {
-      fill: #FFA91B; }
+.rsr__star path {
+  fill: #C6C6C6; }
+  .rsr__star path:hover {
+    fill: #FFA91B; }
 
 .rsr--disabled .rating-container:hover {
   cursor: not-allowed; }

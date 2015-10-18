@@ -117,19 +117,7 @@ var StarRating = (function (_React$Component) {
   }, {
     key: 'getPosition',
     value: function getPosition(e) {
-      console.log(this.root.getBoundingClientRect());
-      return e.pageX - this.root.getBoundingClientRect().left;
-    }
-  }, {
-    key: 'applyPrecision',
-    value: function applyPrecision(val, precision) {
-      return parseFloat(val.toFixed(precision));
-    }
-  }, {
-    key: 'getDecimalPlaces',
-    value: function getDecimalPlaces(num) {
-      var match = ('' + num).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
-      return !match ? 0 : Math.max(0, (match[1] ? match[1].length : 0) - (match[2] ? +match[2] : 0));
+      return e.clientX - this.root.getBoundingClientRect().left;
     }
   }, {
     key: 'getWidthFromValue',
@@ -143,6 +131,17 @@ var StarRating = (function (_React$Component) {
         return 100;
       }
       return (val - min) * 100 / (max - min);
+    }
+  }, {
+    key: 'applyPrecision',
+    value: function applyPrecision(val, precision) {
+      return parseFloat(val.toFixed(precision));
+    }
+  }, {
+    key: 'getDecimalPlaces',
+    value: function getDecimalPlaces(num) {
+      var match = ('' + num).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
+      return !match ? 0 : Math.max(0, (match[1] ? match[1].length : 0) - (match[2] ? +match[2] : 0));
     }
   }, {
     key: 'getValueFromPosition',
@@ -179,14 +178,33 @@ var StarRating = (function (_React$Component) {
     }
   }, {
     key: 'getSvg',
-    value: function getSvg() {
+    value: function getSvg(rating) {
+      var stars = [];
+      for (var i = 0; i < this.props.totalStars; i++) {
+        var attrs = {};
+        attrs['transform'] = 'translate(' + i * 50 + ', 0)';
+        stars.push(_react2['default'].createElement('path', _extends({ key: 'star-' + i }, attrs, { d: 'm0,18.1l19.1,0l5.9,-18.1l5.9,18.1l19.1,0l-15.4,11.2l5.9,18.1l-15.4,-11.2l-15.4,11.2l5.9,-18.1l-15.4,-11.2l0,0z' })));
+      }
+
+      var styles = {
+        width: stars.length * 50 + 'px',
+        height: '50px'
+      };
+
       return _react2['default'].createElement(
         'svg',
-        { className: 'rsr__star', viewBox: '0 0 286 272', version: '1.1', xmlns: 'http://www.w3.org/2000/svg' },
+        { className: 'rsr__star',
+          style: styles,
+          viewBox: '0 0 ' + stars.length + ' 50',
+          preserveAspectRatio: 'xMinYMin meet',
+          version: '1.1',
+          xmlns: 'http://www.w3.org/2000/svg' },
         _react2['default'].createElement(
           'g',
-          { stroke: 'none', 'stroke-width': '1', fill: 'none', 'fill-rule': 'evenodd' },
-          _react2['default'].createElement('polygon', { id: 'star-flat', points: '143 225 54.8322122 271.352549 71.6707613 173.176275 0.341522556 103.647451 98.9161061 89.3237254 143 0 187.083894 89.3237254 285.658477 103.647451 214.329239 173.176275 231.167788 271.352549 ' })
+          null,
+          stars.map(function (item) {
+            return item;
+          })
         )
       );
     }
@@ -289,16 +307,7 @@ var StarRating = (function (_React$Component) {
             _extends({ ref: 'ratingContainer',
               className: 'rsr rating-gly-star',
               'data-content': this.state.glyph }, attrs),
-            _react2['default'].createElement('div', { className: 'rsr__stars',
-              'data-content': this.state.glyph,
-              style: { width: this.state.pos } }),
-            _react2['default'].createElement('input', { type: 'number',
-              name: this.props.name,
-              value: this.state.ratingCache.rating,
-              style: { display: 'none !important' },
-              min: this.min,
-              max: this.max,
-              readOnly: true })
+            this.getSvg(this.state.rating)
           )
         )
       );
