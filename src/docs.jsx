@@ -9,6 +9,7 @@ var inject = document.querySelector('.inject');
 class App extends React.Component {
 
   handleRatingClick(e, data) {
+    console.log(data);
     alert('You left a ' + data.rating + ' star rating for ' + data.name);
   }
 

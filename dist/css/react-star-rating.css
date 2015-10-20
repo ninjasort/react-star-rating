@@ -28,11 +28,6 @@
   vertical-align: middle;
   margin-right: 0.5em; }
 
-.rsr__star path {
-  fill: #C6C6C6; }
-  .rsr__star path:hover {
-    fill: #FFA91B; }
-
 .rsr--disabled .rating-container:hover {
   cursor: not-allowed; }
 

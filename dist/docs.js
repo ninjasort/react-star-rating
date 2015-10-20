@@ -19128,6 +19128,10 @@ var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
+function isFloat(n) {
+  return n === Number(n) && n % 1 !== 0;
+}
+
 var StarRating = (function (_React$Component) {
   _inherits(StarRating, _React$Component);
 
@@ -19161,14 +19165,11 @@ var StarRating = (function (_React$Component) {
     _get(Object.getPrototypeOf(StarRating.prototype), 'constructor', this).call(this, props);
 
     this.state = {
-      ratingCache: {
-        pos: 0,
-        rating: 0
-      },
+      currentRatingVal: props.rating,
+      currentRatingPos: this.getStarRatingPosition(props.rating),
       editing: props.editing || true,
-      stars: 5,
-      rating: 0,
-      pos: 0,
+      rating: props.rating,
+      pos: this.getStarRatingPosition(props.rating),
       glyph: this.getStars()
     };
   }
@@ -19178,17 +19179,9 @@ var StarRating = (function (_React$Component) {
     value: function componentWillMount() {
       this.min = 0;
       this.max = this.props.totalStars || 5;
+
       if (this.props.rating) {
-
         this.state.editing = this.props.editing || false;
-        var ratingVal = this.props.rating;
-        this.state.ratingCache.pos = this.getStarRatingPosition(ratingVal);
-
-        this.setState({
-          ratingCache: this.state.ratingCache,
-          rating: ratingVal,
-          pos: this.getStarRatingPosition(ratingVal)
-        });
       }
     }
   }, {
@@ -19266,8 +19259,7 @@ var StarRating = (function (_React$Component) {
   }, {
     key: 'getStarRatingPosition',
     value: function getStarRatingPosition(val) {
-      var width = this.getWidthFromValue(val) + '%';
-      return width;
+      return this.getWidthFromValue(val) + '%';
     }
   }, {
     key: 'getRatingEvent',
@@ -19278,11 +19270,11 @@ var StarRating = (function (_React$Component) {
   }, {
     key: 'getSvg',
     value: function getSvg(rating) {
-      console.log(rating);
       var stars = [];
       for (var i = 0; i < this.props.totalStars; i++) {
         var attrs = {};
         attrs['transform'] = 'translate(' + i * 50 + ', 0)';
+        attrs['fill'] = i + 0.5 <= rating ? '#FFA91B' : '#C6C6C6';
         stars.push(_react2['default'].createElement('path', _extends({ key: 'star-' + i }, attrs, { d: 'm0,18.1l19.1,0l5.9,-18.1l5.9,18.1l19.1,0l-15.4,11.2l5.9,18.1l-15.4,-11.2l-15.4,11.2l5.9,-18.1l-15.4,-11.2l0,0z' })));
       }
 
@@ -19323,15 +19315,15 @@ var StarRating = (function (_React$Component) {
         this.updateRating(this.getStarRatingPosition(nextProps.rating), nextProps.rating);
         return true;
       } else {
-        return nextState.ratingCache.rating !== this.state.ratingCache.rating || nextState.rating !== this.state.rating;
+        return nextState.currentRatingVal !== this.state.currentRatingVal || nextState.rating !== this.state.rating;
       }
     }
   }, {
     key: 'handleMouseLeave',
     value: function handleMouseLeave() {
       this.setState({
-        pos: this.state.ratingCache.pos,
-        rating: this.state.ratingCache.rating
+        pos: this.state.currentRatingPos,
+        rating: this.state.currentRatingVal
       });
     }
   }, {
@@ -19349,18 +19341,21 @@ var StarRating = (function (_React$Component) {
         return false;
       }
 
-      var ratingCache = {
-        pos: this.state.pos,
-        rating: this.state.rating,
+      var payload = {
+        currentRatingPos: this.state.pos,
+        currentRatingVal: this.state.rating,
         caption: this.props.caption,
         name: this.props.name
       };
 
-      this.setState({
-        ratingCache: ratingCache
-      });
+      this.setState(payload);
 
-      this.props.onRatingClick(e, ratingCache);
+      this.props.onRatingClick(e, {
+        rating: this.state.rating,
+        position: this.state.pos,
+        caption: this.props.caption,
+        name: this.props.name
+      });
     }
   }, {
     key: 'treatName',
@@ -19407,7 +19402,14 @@ var StarRating = (function (_React$Component) {
             _extends({ ref: 'ratingContainer',
               className: 'rsr rating-gly-star',
               'data-content': this.state.glyph }, attrs),
-            this.getSvg(this.state.rating)
+            this.getSvg(this.state.rating),
+            _react2['default'].createElement('input', { type: 'number',
+              name: this.props.name,
+              value: this.state.currentRatingVal,
+              style: { display: 'none !important' },
+              min: this.min,
+              max: this.max,
+              readOnly: true })
           )
         )
       );
@@ -19463,6 +19465,7 @@ var App = (function (_React$Component) {
   _createClass(App, [{
     key: 'handleRatingClick',
     value: function handleRatingClick(e, data) {
+      console.log(data);
       alert('You left a ' + data.rating + ' star rating for ' + data.name);
     }
   }, {

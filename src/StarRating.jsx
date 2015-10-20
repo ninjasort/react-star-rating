@@ -3,6 +3,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import cx from 'classnames';
 
+function isFloat(n) {
+  return n === Number(n) && n % 1 !== 0;
+}
+
 // TODO:
 // - abstract mixin for mouse tracking
 // - finish updating svgs on hover, state changes
@@ -46,14 +50,11 @@ class StarRating extends React.Component {
     super(props);
 
     this.state = {
-      ratingCache: {
-        pos: 0,
-        rating: 0
-      },
+      currentRatingVal: props.rating,
+      currentRatingPos: this.getStarRatingPosition(props.rating),
       editing: props.editing || true,
-      stars: 5,
-      rating: 0,
-      pos: 0,
+      rating: props.rating,
+      pos: this.getStarRatingPosition(props.rating),
       glyph: this.getStars()
     };
   }
@@ -61,17 +62,9 @@ class StarRating extends React.Component {
   componentWillMount() {
     this.min = 0;
     this.max = this.props.totalStars || 5;
+    
     if (this.props.rating) {
-
       this.state.editing = this.props.editing || false;
-      var ratingVal = this.props.rating;
-      this.state.ratingCache.pos = this.getStarRatingPosition(ratingVal);
-
-      this.setState({
-        ratingCache: this.state.ratingCache,
-        rating: ratingVal,
-        pos: this.getStarRatingPosition(ratingVal)
-      });
     }
   }
 
@@ -148,8 +141,7 @@ class StarRating extends React.Component {
   }
 
   getStarRatingPosition(val) {
-    var width = this.getWidthFromValue(val) + '%';
-    return width;
+    return this.getWidthFromValue(val) + '%';
   }
 
   getRatingEvent(e) {
@@ -159,16 +151,14 @@ class StarRating extends React.Component {
 
   /**
    * Get Star SVG
-   * TODO:
-   * // - implement hover colors
-   * // - implement
    */
   getSvg(rating) {
     var stars = [];
     for(var i = 0; i < this.props.totalStars; i++) {
       var attrs = {};
       attrs['transform'] = `translate(${i*50}, 0)`;
-      stars.push(<path key={`star-${i}`} {...attrs} d="m0,18.1l19.1,0l5.9,-18.1l5.9,18.1l19.1,0l-15.4,11.2l5.9,18.1l-15.4,-11.2l-15.4,11.2l5.9,-18.1l-15.4,-11.2l0,0z"/>);
+      attrs['fill'] = i+0.5 <= rating ? '#FFA91B' : '#C6C6C6';
+      stars.push(<path key={`star-${i}`} {...attrs} d="m0,18.1l19.1,0l5.9,-18.1l5.9,18.1l19.1,0l-15.4,11.2l5.9,18.1l-15.4,-11.2l-15.4,11.2l5.9,-18.1l-15.4,-11.2l0,0z" />);
     }
 
     var styles = {
@@ -192,6 +182,11 @@ class StarRating extends React.Component {
     );
   }
 
+  /**
+   * Update the active rating selection
+   * @param  {number} width width based on mouse position
+   * @param  {number} val   current rating amount
+   */
   updateRating(width, val) {
     this.setState({
       pos: width,
@@ -207,14 +202,14 @@ class StarRating extends React.Component {
       );
       return true;
     } else {
-      return nextState.ratingCache.rating !== this.state.ratingCache.rating || nextState.rating !== this.state.rating;
+      return nextState.currentRatingVal !== this.state.currentRatingVal || nextState.rating !== this.state.rating;
     }
   }
 
   handleMouseLeave() {
     this.setState({
-      pos: this.state.ratingCache.pos,
-      rating: this.state.ratingCache.rating
+      pos: this.state.currentRatingPos,
+      rating: this.state.currentRatingVal
     });
   }
 
@@ -234,18 +229,21 @@ class StarRating extends React.Component {
       return false;
     }
 
-    var ratingCache = {
-      pos: this.state.pos,
-      rating: this.state.rating,
+    var payload = {
+      currentRatingPos: this.state.pos,
+      currentRatingVal: this.state.rating,
       caption: this.props.caption,
       name: this.props.name
     };
 
-    this.setState({
-      ratingCache: ratingCache
-    });
+    this.setState(payload);
 
-    this.props.onRatingClick(e, ratingCache);
+    this.props.onRatingClick(e, {
+      rating: this.state.rating,
+      position: this.state.pos,
+      caption: this.props.caption,
+      name: this.props.name
+    });
   }
 
   treatName(title) {
@@ -282,18 +280,14 @@ class StarRating extends React.Component {
           <div ref="ratingContainer"
             className="rsr rating-gly-star"
             data-content={this.state.glyph} {...attrs}>
-            {/*<div className="rsr__stars"
-                data-content={this.state.glyph} 
-                style={{width: this.state.pos}}>
-            </div>*/}
             {this.getSvg(this.state.rating)}
-            {/*<input type="number" 
-              name={this.props.name} 
-              value={this.state.ratingCache.rating} 
+            <input type="number"
+              name={this.props.name}
+              value={this.state.currentRatingVal}
               style={{display: 'none !important'}} 
               min={this.min} 
-              max={this.max} 
-              readOnly />*/}
+              max={this.max}
+              readOnly />
           </div>
         </div>
       </span>
