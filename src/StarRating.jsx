@@ -158,7 +158,7 @@ class StarRating extends React.Component {
       var attrs = {};
       attrs['transform'] = `translate(${i*50}, 0)`;
       attrs['fill'] = i+0.5 <= rating ? '#FFA91B' : '#C6C6C6';
-      stars.push(<path key={`star-${i}`} {...attrs} d="m0,18.1l19.1,0l5.9,-18.1l5.9,18.1l19.1,0l-15.4,11.2l5.9,18.1l-15.4,-11.2l-15.4,11.2l5.9,-18.1l-15.4,-11.2l0,0z" />);
+      stars.push(<path key={`star-${i}`} {...attrs} mask="url(#half-star-mask)" d="m0,18.1l19.1,0l5.9,-18.1l5.9,18.1l19.1,0l-15.4,11.2l5.9,18.1l-15.4,-11.2l-15.4,11.2l5.9,-18.1l-15.4,-11.2l0,0z" />);
     }
 
     var styles = {
@@ -173,6 +173,11 @@ class StarRating extends React.Component {
         preserveAspectRatio="xMinYMin meet" 
         version="1.1" 
         xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <mask id="half-star-mask">
+            <rect x="0" y="0" width="26" height="50" fill="blue"></rect>
+          </mask>
+        </defs>
         <g>
           {stars.map((item) => {
             return item;

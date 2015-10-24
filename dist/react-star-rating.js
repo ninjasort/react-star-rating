@@ -176,7 +176,7 @@ var StarRating = (function (_React$Component) {
         var attrs = {};
         attrs['transform'] = 'translate(' + i * 50 + ', 0)';
         attrs['fill'] = i + 0.5 <= rating ? '#FFA91B' : '#C6C6C6';
-        stars.push(_react2['default'].createElement('path', _extends({ key: 'star-' + i }, attrs, { d: 'm0,18.1l19.1,0l5.9,-18.1l5.9,18.1l19.1,0l-15.4,11.2l5.9,18.1l-15.4,-11.2l-15.4,11.2l5.9,-18.1l-15.4,-11.2l0,0z' })));
+        stars.push(_react2['default'].createElement('path', _extends({ key: 'star-' + i }, attrs, { 'data-mask': 'url(#half-star-mask)', d: 'm0,18.1l19.1,0l5.9,-18.1l5.9,18.1l19.1,0l-15.4,11.2l5.9,18.1l-15.4,-11.2l-15.4,11.2l5.9,-18.1l-15.4,-11.2l0,0z' })));
       }
 
       var styles = {
@@ -192,6 +192,15 @@ var StarRating = (function (_React$Component) {
           preserveAspectRatio: 'xMinYMin meet',
           version: '1.1',
           xmlns: 'http://www.w3.org/2000/svg' },
+        _react2['default'].createElement(
+          'defs',
+          null,
+          _react2['default'].createElement(
+            'mask',
+            { id: 'half-star-mask' },
+            _react2['default'].createElement('rect', { x: '0', y: '0', width: '26', height: '50', fill: 'blue' })
+          )
+        ),
         _react2['default'].createElement(
           'g',
           null,
