@@ -20,9 +20,10 @@ function isFloat(n) {
  *   caption={string} - caption for rating (optional)
  *   totalStars={number} - the total amount of stars (required, default: 5)
  *   rating={number} - a set rating between the rating amount (optional)
+ *   symbol={React.}
  *   disabled={boolean} - whether to disable the rating from being selected (optional)
  *   editing={boolean} - whether the rating is explicitly in editing mode (optional)
- *   size={string} - size of stars (optional)
+ *   size={number} - size of stars (optional)
  *   onRatingClick={function} - a handler function that gets called onClick of the rating (optional)
  *   />
  */
@@ -36,14 +37,15 @@ class StarRating extends React.Component {
     onRatingClick: React.PropTypes.func,
     disabled: React.PropTypes.bool,
     editing: React.PropTypes.bool,
-    size: React.PropTypes.string
+    size: React.PropTypes.number
   }
 
   static defaultProps = {
     step: 0.5,
     totalStars: 5,
     onRatingClick() {},
-    disabled: false
+    disabled: false,
+    size: 50
   }
 
   constructor(props) {
@@ -55,7 +57,8 @@ class StarRating extends React.Component {
       editing: props.editing || true,
       rating: props.rating,
       pos: this.getStarRatingPosition(props.rating),
-      glyph: this.getStars()
+      glyph: this.getStars(),
+      size: props.size
     };
   }
 
@@ -162,8 +165,8 @@ class StarRating extends React.Component {
     }
 
     var styles = {
-      width: `${stars.length * 50}px`,
-      height: '50px'
+      width: `${stars.length * this.props.size}px`,
+      height: `${this.props.size}px`
     };
 
     return (
@@ -173,11 +176,13 @@ class StarRating extends React.Component {
         preserveAspectRatio="xMinYMin meet" 
         version="1.1" 
         xmlns="http://www.w3.org/2000/svg">
+        {/*
+          React Doesn't support `mask` attributes yet
         <defs>
           <mask id="half-star-mask">
             <rect x="0" y="0" width="26" height="50" fill="blue"></rect>
           </mask>
-        </defs>
+        </defs>*/}
         <g>
           {stars.map((item) => {
             return item;
@@ -199,6 +204,9 @@ class StarRating extends React.Component {
     });
   }
 
+  /**
+   * Update rating state if props have changed
+   */
   shouldComponentUpdate(nextProps, nextState) {
     if (nextProps !== this.props) {
       this.updateRating(
@@ -211,6 +219,9 @@ class StarRating extends React.Component {
     }
   }
 
+  /**
+   * Set position to original state
+   */
   handleMouseLeave() {
     this.setState({
       pos: this.state.currentRatingPos,
@@ -218,6 +229,10 @@ class StarRating extends React.Component {
     });
   }
 
+  /**
+   * Update position to current event state
+   * @param  {object} event
+   */
   handleMouseMove(e) {
     // get hover position
     var ratingEvent = this.getRatingEvent(e);
@@ -227,6 +242,10 @@ class StarRating extends React.Component {
     );
   }
 
+  /**
+   * Update rating state, Trigger function handler
+   * @param  {object} event
+   */
   handleClick(e) {
     if (this.props.disabled) {
       e.stopPropagation();
@@ -257,26 +276,38 @@ class StarRating extends React.Component {
     }
   }
 
-  render() {
-    var caption = null;
-    var classes = cx({
+  getClasses() {
+    return cx({
       'rsr-root': true,
       'rsr--disabled': this.props.disabled,
       ['rsr--' + this.props.size]: this.props.size,
       'rsr--editing': this.state.editing
     });
+  }
 
-    // is there a caption?
+  getCaption() {
     if (this.props.caption) {
-      caption = (<span className="rsr__caption">{this.props.caption}</span>);
+      return (<span className="rsr__caption">{this.props.caption}</span>);
+    } else {
+      return null;
     }
+  }
 
+  setAttrs() {
     var attrs = {};
     if (this.state.editing) {
       attrs['onMouseMove'] = this.handleMouseMove.bind(this);
       attrs['onMouseLeave'] = this.handleMouseLeave.bind(this);
       attrs['onClick'] = this.handleClick.bind(this);
     }
+    return attrs;
+  }
+
+  render() {
+
+    var classes = this.getClasses();
+    var caption = this.getCaption();
+    var attrs = this.setAttrs();
 
     return (
       <span className="rsr-container">

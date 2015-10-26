@@ -23,7 +23,7 @@ class App extends React.Component {
             {'react-star-rating'}
             <small> easy star ratings with React</small>
           </h1>
-          <StarRating name="hotels" size="md" rating={5} editing={false} totalStars={5} step={1} />
+          <StarRating name="hotels" size={50} rating={5} editing={false} totalStars={5} step={1} />
           <p style={{marginBottom: '10px'}}>v{currentVersion}</p>
           <a href="https://github.com/cameronjroe/react-star-rating" className="btn btn-primary">View on Github</a>
         </div>
@@ -109,21 +109,21 @@ class App extends React.Component {
           <code>
             {'<StarRating name="half-stars" caption="Use half-star steps!" totalStars={5} />'}
           </code>
-          <StarRating name="small-rating" caption="Small!" size="sm" totalStars={5} rating={3} />
+          <StarRating name="small-rating" caption="Small!" size={30} totalStars={5} rating={3} />
           <code>
-            {'<StarRating name="small-rating" caption="Small!" size="sm" totalStars={5} rating={3} />'}
+            {'<StarRating name="small-rating" caption="Small!" size={30} totalStars={5} rating={3} />'}
           </code>
-          <StarRating name="medium-rating" caption="Medium!" size="md" totalStars={5} rating={4} />
+          <StarRating name="medium-rating" caption="Medium!" size={50} totalStars={5} rating={4} />
           <code>
-            {'<StarRating name="medium-rating" caption="Medium!" size="md" totalStars={5} rating={4} />'}
+            {'<StarRating name="medium-rating" caption="Medium!" size={50} totalStars={5} rating={4} />'}
           </code>
-          <StarRating name="large-rating" caption="Large!" size="lg" totalStars={5} rating={5} />
+          <StarRating name="large-rating" caption="Large!" size={70} totalStars={5} rating={5} />
           <code>
-            {'<StarRating name="large-rating" caption="Large!" size="lg" totalStars={5} rating={5} />'}
+            {'<StarRating name="large-rating" caption="Large!" size={70} totalStars={5} rating={5} />'}
           </code>
-          <StarRating name="jumbo-rating" caption="Jumbo!" size="jumbo" totalStars={5} rating={5} />
+          <StarRating name="jumbo-rating" caption="Jumbo!" size={100} totalStars={5} rating={5} />
           <code>
-            {'<StarRating name="jumbo-rating" caption="Jumbo!" size="jumbo" totalStars={5} rating={5} />'}
+            {'<StarRating name="jumbo-rating" caption="Jumbo!" size={100} totalStars={5} rating={5} />'}
           </code>
           <StarRating name="disabled" caption="Disabled." totalStars={5} rating={3} disabled={true} />
           <code>

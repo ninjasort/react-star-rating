@@ -46,7 +46,7 @@ var StarRating = (function (_React$Component) {
       onRatingClick: _react2['default'].PropTypes.func,
       disabled: _react2['default'].PropTypes.bool,
       editing: _react2['default'].PropTypes.bool,
-      size: _react2['default'].PropTypes.string
+      size: _react2['default'].PropTypes.number
     },
     enumerable: true
   }, {
@@ -55,7 +55,8 @@ var StarRating = (function (_React$Component) {
       step: 0.5,
       totalStars: 5,
       onRatingClick: function onRatingClick() {},
-      disabled: false
+      disabled: false,
+      size: 50
     },
     enumerable: true
   }]);
@@ -71,7 +72,8 @@ var StarRating = (function (_React$Component) {
       editing: props.editing || true,
       rating: props.rating,
       pos: this.getStarRatingPosition(props.rating),
-      glyph: this.getStars()
+      glyph: this.getStars(),
+      size: props.size
     };
   }
 
@@ -176,12 +178,12 @@ var StarRating = (function (_React$Component) {
         var attrs = {};
         attrs['transform'] = 'translate(' + i * 50 + ', 0)';
         attrs['fill'] = i + 0.5 <= rating ? '#FFA91B' : '#C6C6C6';
-        stars.push(_react2['default'].createElement('path', _extends({ key: 'star-' + i }, attrs, { 'data-mask': 'url(#half-star-mask)', d: 'm0,18.1l19.1,0l5.9,-18.1l5.9,18.1l19.1,0l-15.4,11.2l5.9,18.1l-15.4,-11.2l-15.4,11.2l5.9,-18.1l-15.4,-11.2l0,0z' })));
+        stars.push(_react2['default'].createElement('path', _extends({ key: 'star-' + i }, attrs, { mask: 'url(#half-star-mask)', d: 'm0,18.1l19.1,0l5.9,-18.1l5.9,18.1l19.1,0l-15.4,11.2l5.9,18.1l-15.4,-11.2l-15.4,11.2l5.9,-18.1l-15.4,-11.2l0,0z' })));
       }
 
       var styles = {
-        width: stars.length * 50 + 'px',
-        height: '50px'
+        width: stars.length * this.props.size + 'px',
+        height: this.props.size + 'px'
       };
 
       return _react2['default'].createElement(
@@ -192,15 +194,6 @@ var StarRating = (function (_React$Component) {
           preserveAspectRatio: 'xMinYMin meet',
           version: '1.1',
           xmlns: 'http://www.w3.org/2000/svg' },
-        _react2['default'].createElement(
-          'defs',
-          null,
-          _react2['default'].createElement(
-            'mask',
-            { id: 'half-star-mask' },
-            _react2['default'].createElement('rect', { x: '0', y: '0', width: '26', height: '50', fill: 'blue' })
-          )
-        ),
         _react2['default'].createElement(
           'g',
           null,
@@ -275,30 +268,46 @@ var StarRating = (function (_React$Component) {
       }
     }
   }, {
-    key: 'render',
-    value: function render() {
+    key: 'getClasses',
+    value: function getClasses() {
       var _cx;
 
-      var caption = null;
-      var classes = (0, _classnames2['default'])((_cx = {
+      return (0, _classnames2['default'])((_cx = {
         'rsr-root': true,
         'rsr--disabled': this.props.disabled
       }, _defineProperty(_cx, 'rsr--' + this.props.size, this.props.size), _defineProperty(_cx, 'rsr--editing', this.state.editing), _cx));
-
+    }
+  }, {
+    key: 'getCaption',
+    value: function getCaption() {
       if (this.props.caption) {
-        caption = _react2['default'].createElement(
+        return _react2['default'].createElement(
           'span',
           { className: 'rsr__caption' },
           this.props.caption
         );
+      } else {
+        return null;
       }
-
+    }
+  }, {
+    key: 'setAttrs',
+    value: function setAttrs() {
       var attrs = {};
       if (this.state.editing) {
         attrs['onMouseMove'] = this.handleMouseMove.bind(this);
         attrs['onMouseLeave'] = this.handleMouseLeave.bind(this);
         attrs['onClick'] = this.handleClick.bind(this);
       }
+      return attrs;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+
+      var classes = this.getClasses();
+      var caption = this.getCaption();
+      var attrs = this.setAttrs();
 
       return _react2['default'].createElement(
         'span',
