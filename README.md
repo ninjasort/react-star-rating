@@ -7,6 +7,8 @@
 
 > A simple star rating component built with React.
 
+## v1.4.0 coming soon.
+
 ## Install
 
 ```sh
