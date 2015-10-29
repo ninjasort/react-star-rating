@@ -78,6 +78,11 @@ class StarRating extends React.Component {
   }
 
   getPosition(e) {
+
+    if (e.touches && e.touches.length) {
+      return e.touches[0].pageX - this.root.getBoundingClientRect().left;
+    }
+
     return e.pageX - this.root.getBoundingClientRect().left;
   }
 
@@ -199,6 +204,11 @@ class StarRating extends React.Component {
     this.props.onRatingClick(e, ratingCache);
   }
 
+  handleTouchEnd(e) {
+    this.handleMouseLeave(e);
+    this.handleClick(e);
+  }
+
   treatName(title) {
     if (typeof title === 'string') {
       return title.toLowerCase().split(' ').join('_');
@@ -229,7 +239,9 @@ class StarRating extends React.Component {
           data-content={this.state.glyph}
           onMouseMove={this.handleMouseMove.bind(this)}
           onMouseLeave={this.handleMouseLeave.bind(this)}
-          onClick={this.handleClick.bind(this)}>
+          onClick={this.handleClick.bind(this)}
+          onTouchStart={this.handleMouseMove.bind(this)}
+          onTouchEnd={this.handleTouchEnd.bind(this)}>
           <div className="rating-stars" data-content={this.state.glyph} style={{width: this.state.pos}}></div>
           <input type="number" name={this.props.name} value={this.state.ratingCache.rating} style={{display: 'none !important'}} min={this.min} max={this.max} readOnly />
         </div>

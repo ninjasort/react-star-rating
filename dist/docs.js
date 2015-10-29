@@ -31,7 +31,9 @@ function drainQueue() {
         currentQueue = queue;
         queue = [];
         while (++queueIndex < len) {
-            currentQueue[queueIndex].run();
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
         }
         queueIndex = -1;
         len = queue.length;
@@ -83,7 +85,6 @@ process.binding = function (name) {
     throw new Error('process.binding is not supported');
 };
 
-// TODO(shtylman)
 process.cwd = function () { return '/' };
 process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
@@ -19922,10 +19923,12 @@ var _react2 = _interopRequireDefault(_react);
 
 var _classnames = require('classnames');
 
+var _classnames2 = _interopRequireDefault(_classnames);
+
 /**
  * @fileoverview react-star-rating
  * @author @cameronjroe
- * <StarRating 
+ * <StarRating
  *   name={string} - name for form input (required)
  *   caption={string} - caption for rating (optional)
  *   ratingAmount={number} - the rating amount (required, default: 5)
@@ -19936,8 +19939,6 @@ var _classnames = require('classnames');
  *   onRatingClick={function} - a handler function that gets called onClick of the rating (optional)
  *   />
  */
-
-var _classnames2 = _interopRequireDefault(_classnames);
 
 var StarRating = (function (_React$Component) {
   _inherits(StarRating, _React$Component);
@@ -19985,10 +19986,12 @@ var StarRating = (function (_React$Component) {
       this.max = this.props.ratingAmount || 5;
       if (this.props.rating) {
 
-        this.state.editing = false;
-
+        this.state.editing = this.props.editing || false;
         var ratingVal = this.props.rating;
+        this.state.ratingCache.pos = this.getStarRatingPosition(ratingVal);
+
         this.setState({
+          ratingCache: this.state.ratingCache,
           rating: ratingVal,
           pos: this.getStarRatingPosition(ratingVal)
         });
@@ -20009,6 +20012,11 @@ var StarRating = (function (_React$Component) {
   }, {
     key: 'getPosition',
     value: function getPosition(e) {
+
+      if (e.touches && e.touches.length) {
+        return e.touches[0].pageX - this.root.getBoundingClientRect().left;
+      }
+
       return e.pageX - this.root.getBoundingClientRect().left;
     }
   }, {
@@ -20073,11 +20081,11 @@ var StarRating = (function (_React$Component) {
     value: function getSvg() {
       return _react2['default'].createElement(
         'svg',
-        { className: "react-star-rating__star", viewBox: "0 0 286 272", version: "1.1", xmlns: "http://www.w3.org/2000/svg" },
+        { className: 'react-star-rating__star', viewBox: '0 0 286 272', version: '1.1', xmlns: 'http://www.w3.org/2000/svg' },
         _react2['default'].createElement(
           'g',
-          { stroke: "none", 'stroke-width': "1", fill: "none", 'fill-rule': "evenodd" },
-          _react2['default'].createElement('polygon', { id: "star-flat", points: "143 225 54.8322122 271.352549 71.6707613 173.176275 0.341522556 103.647451 98.9161061 89.3237254 143 0 187.083894 89.3237254 285.658477 103.647451 214.329239 173.176275 231.167788 271.352549 " })
+          { stroke: 'none', 'stroke-width': '1', fill: 'none', 'fill-rule': 'evenodd' },
+          _react2['default'].createElement('polygon', { id: 'star-flat', points: '143 225 54.8322122 271.352549 71.6707613 173.176275 0.341522556 103.647451 98.9161061 89.3237254 143 0 187.083894 89.3237254 285.658477 103.647451 214.329239 173.176275 231.167788 271.352549 ' })
         )
       );
     }
@@ -20139,6 +20147,12 @@ var StarRating = (function (_React$Component) {
       this.props.onRatingClick(e, ratingCache);
     }
   }, {
+    key: 'handleTouchEnd',
+    value: function handleTouchEnd(e) {
+      this.handleMouseLeave(e);
+      this.handleClick(e);
+    }
+  }, {
     key: 'treatName',
     value: function treatName(title) {
       if (typeof title === 'string') {
@@ -20160,7 +20174,7 @@ var StarRating = (function (_React$Component) {
       if (this.props.caption) {
         caption = _react2['default'].createElement(
           'span',
-          { className: "react-rating-caption" },
+          { className: 'react-rating-caption' },
           this.props.caption
         );
       }
@@ -20170,31 +20184,33 @@ var StarRating = (function (_React$Component) {
       if (this.state.editing) {
         starRating = _react2['default'].createElement(
           'div',
-          { ref: "ratingContainer",
-            className: "rating-container rating-gly-star",
+          { ref: 'ratingContainer',
+            className: 'rating-container rating-gly-star',
             'data-content': this.state.glyph,
             onMouseMove: this.handleMouseMove.bind(this),
             onMouseLeave: this.handleMouseLeave.bind(this),
-            onClick: this.handleClick.bind(this) },
-          _react2['default'].createElement('div', { className: "rating-stars", 'data-content': this.state.glyph, style: { width: this.state.pos } }),
-          _react2['default'].createElement('input', { type: "number", name: this.props.name, value: this.state.ratingCache.rating, style: { display: 'none !important' }, min: this.min, max: this.max, readOnly: true })
+            onClick: this.handleClick.bind(this),
+            onTouchStart: this.handleMouseMove.bind(this),
+            onTouchEnd: this.handleTouchEnd.bind(this) },
+          _react2['default'].createElement('div', { className: 'rating-stars', 'data-content': this.state.glyph, style: { width: this.state.pos } }),
+          _react2['default'].createElement('input', { type: 'number', name: this.props.name, value: this.state.ratingCache.rating, style: { display: 'none !important' }, min: this.min, max: this.max, readOnly: true })
         );
       } else {
         starRating = _react2['default'].createElement(
           'div',
-          { ref: "ratingContainer", className: "rating-container rating-gly-star", 'data-content': this.state.glyph },
-          _react2['default'].createElement('div', { className: "rating-stars", 'data-content': this.state.glyph, style: { width: this.state.pos } }),
-          _react2['default'].createElement('input', { type: "number", name: this.props.name, value: this.state.ratingCache.rating, style: { display: 'none !important' }, min: this.min, max: this.max, readOnly: true })
+          { ref: 'ratingContainer', className: 'rating-container rating-gly-star', 'data-content': this.state.glyph },
+          _react2['default'].createElement('div', { className: 'rating-stars', 'data-content': this.state.glyph, style: { width: this.state.pos } }),
+          _react2['default'].createElement('input', { type: 'number', name: this.props.name, value: this.state.ratingCache.rating, style: { display: 'none !important' }, min: this.min, max: this.max, readOnly: true })
         );
       }
 
       return _react2['default'].createElement(
         'span',
-        { className: "react-star-rating" },
+        { className: 'react-star-rating' },
         caption,
         _react2['default'].createElement(
           'span',
-          { ref: "root", style: { cursor: 'pointer' }, className: classes },
+          { ref: 'root', style: { cursor: 'pointer' }, className: classes },
           starRating
         )
       );
@@ -20276,10 +20292,10 @@ var App = (function (_React$Component) {
         null,
         _react2['default'].createElement(
           'div',
-          { className: "intro" },
+          { className: 'intro' },
           _react2['default'].createElement(
             'h1',
-            { className: "main-title" },
+            { className: 'main-title' },
             'react-star-rating',
             _react2['default'].createElement(
               'small',
@@ -20287,7 +20303,7 @@ var App = (function (_React$Component) {
               ' easy star ratings with React'
             )
           ),
-          _react2['default'].createElement(_StarRating2['default'], { name: "hotels", size: "md", rating: 5, editing: true, ratingAmount: 5, step: 1 }),
+          _react2['default'].createElement(_StarRating2['default'], { name: 'hotels', size: 'md', rating: 5, editing: true, ratingAmount: 5, step: 1 }),
           _react2['default'].createElement(
             'p',
             { style: { marginBottom: '10px' } },
@@ -20296,13 +20312,13 @@ var App = (function (_React$Component) {
           ),
           _react2['default'].createElement(
             'a',
-            { href: "https://github.com/cameronjroe/react-star-rating", className: "btn btn-primary" },
+            { href: 'https://github.com/cameronjroe/react-star-rating', className: 'btn btn-primary' },
             'View on Github'
           )
         ),
         _react2['default'].createElement(
           'div',
-          { className: "ratings-wrap" },
+          { className: 'ratings-wrap' },
           _react2['default'].createElement(
             'h2',
             null,
@@ -20322,11 +20338,11 @@ var App = (function (_React$Component) {
           _react2['default'].createElement('hr', null),
           _react2['default'].createElement(
             'form',
-            { target: "_self", method: "GET", className: "demo-form" },
-            _react2['default'].createElement(_StarRating2['default'], { name: "react-star-rating", caption: "Rate this component!", ratingAmount: 5 }),
+            { target: '_self', method: 'GET', className: 'demo-form' },
+            _react2['default'].createElement(_StarRating2['default'], { name: 'react-star-rating', caption: 'Rate this component!', ratingAmount: 5 }),
             _react2['default'].createElement(
               'button',
-              { type: "submit", className: "btn btn-primary" },
+              { type: 'submit', className: 'btn btn-primary' },
               'Submit Rating'
             )
           ),
@@ -20594,7 +20610,7 @@ var App = (function (_React$Component) {
             'Examples'
           ),
           _react2['default'].createElement('hr', null),
-          _react2['default'].createElement(_StarRating2['default'], { name: "handler", caption: "Use onClick Handlers!", ratingAmount: 5, step: 0.5, onRatingClick: this.handleRatingClick.bind(this) }),
+          _react2['default'].createElement(_StarRating2['default'], { name: 'handler', caption: 'Use onClick Handlers!', ratingAmount: 5, step: 0.5, onRatingClick: this.handleRatingClick.bind(this) }),
           _react2['default'].createElement('p', null),
           _react2['default'].createElement(
             'code',
@@ -20645,43 +20661,43 @@ var App = (function (_React$Component) {
               'this.handleRatingClick.bind(this, pass, args, here)'
             )
           ),
-          _react2['default'].createElement(_StarRating2['default'], { name: "ten-stars", caption: "Configure number of stars!", ratingAmount: 10, step: 1, onRatingClick: this.handleRatingClick.bind(this) }),
+          _react2['default'].createElement(_StarRating2['default'], { name: 'ten-stars', caption: 'Configure number of stars!', ratingAmount: 10, step: 1, onRatingClick: this.handleRatingClick.bind(this) }),
           _react2['default'].createElement(
             'code',
             null,
             '<StarRating name="ten-stars" caption="Configure number of stars!" ratingAmount={10} step={1} onRatingClick={this.handleRatingClick} />'
           ),
-          _react2['default'].createElement(_StarRating2['default'], { name: "half-stars", caption: "Use half-star steps!", ratingAmount: 5 }),
+          _react2['default'].createElement(_StarRating2['default'], { name: 'half-stars', caption: 'Use half-star steps!', ratingAmount: 5 }),
           _react2['default'].createElement(
             'code',
             null,
             '<StarRating name="half-stars" caption="Use half-star steps!" ratingAmount={5} />'
           ),
-          _react2['default'].createElement(_StarRating2['default'], { name: "small-rating", caption: "Small!", size: "sm", ratingAmount: 5, rating: 3 }),
+          _react2['default'].createElement(_StarRating2['default'], { name: 'small-rating', caption: 'Small!', size: 'sm', ratingAmount: 5, rating: 3 }),
           _react2['default'].createElement(
             'code',
             null,
             '<StarRating name="small-rating" caption="Small!" size="sm" ratingAmount={5} rating={3} />'
           ),
-          _react2['default'].createElement(_StarRating2['default'], { name: "medium-rating", caption: "Medium!", size: "md", ratingAmount: 5, rating: 4 }),
+          _react2['default'].createElement(_StarRating2['default'], { name: 'medium-rating', caption: 'Medium!', size: 'md', ratingAmount: 5, rating: 4 }),
           _react2['default'].createElement(
             'code',
             null,
             '<StarRating name="medium-rating" caption="Medium!" size="md" ratingAmount={5} rating={4} />'
           ),
-          _react2['default'].createElement(_StarRating2['default'], { name: "large-rating", caption: "Large!", size: "lg", ratingAmount: 5, rating: 5 }),
+          _react2['default'].createElement(_StarRating2['default'], { name: 'large-rating', caption: 'Large!', size: 'lg', ratingAmount: 5, rating: 5 }),
           _react2['default'].createElement(
             'code',
             null,
             '<StarRating name="large-rating" caption="Large!" size="lg" ratingAmount={5} rating={5} />'
           ),
-          _react2['default'].createElement(_StarRating2['default'], { name: "jumbo-rating", caption: "Jumbo!", size: "jumbo", ratingAmount: 5, rating: 5 }),
+          _react2['default'].createElement(_StarRating2['default'], { name: 'jumbo-rating', caption: 'Jumbo!', size: 'jumbo', ratingAmount: 5, rating: 5 }),
           _react2['default'].createElement(
             'code',
             null,
             '<StarRating name="jumbo-rating" caption="Jumbo!" size="jumbo" ratingAmount={5} rating={5} />'
           ),
-          _react2['default'].createElement(_StarRating2['default'], { name: "disabled", caption: "Disabled.", ratingAmount: 5, rating: 3, disabled: true }),
+          _react2['default'].createElement(_StarRating2['default'], { name: 'disabled', caption: 'Disabled.', ratingAmount: 5, rating: 3, disabled: true }),
           _react2['default'].createElement(
             'code',
             null,
@@ -20693,14 +20709,14 @@ var App = (function (_React$Component) {
           null,
           _react2['default'].createElement(
             'p',
-            { className: "footer-creds" },
+            { className: 'footer-creds' },
             _react2['default'].createElement(
               'p',
               null,
               'Code licensed under ',
               _react2['default'].createElement(
                 'a',
-                { href: "https://github.com/cameronjroe/react-star-rating/blob/master/LICENSE" },
+                { href: 'https://github.com/cameronjroe/react-star-rating/blob/master/LICENSE' },
                 'MIT'
               ),
               ' - Currently v',
@@ -20708,7 +20724,7 @@ var App = (function (_React$Component) {
               ' - ',
               _react2['default'].createElement(
                 'a',
-                { href: "https://github.com/cameronjroe/react-star-rating" },
+                { href: 'https://github.com/cameronjroe/react-star-rating' },
                 'Github Repo'
               )
             ),
@@ -20718,11 +20734,11 @@ var App = (function (_React$Component) {
               'Created by ',
               _react2['default'].createElement(
                 'a',
-                { href: "http://twitter.com/cameronjroe" },
+                { href: 'http://twitter.com/cameronjroe' },
                 '@cameronjroe'
               ),
               ' - ',
-              _react2['default'].createElement('iframe', { src: "https://ghbtns.com/github-btn.html?user=cameronjroe&type=follow&count=true", frameBorder: "0", scrolling: "0", width: "170px", height: "20px" })
+              _react2['default'].createElement('iframe', { src: 'https://ghbtns.com/github-btn.html?user=cameronjroe&type=follow&count=true', frameBorder: '0', scrolling: '0', width: '170px', height: '20px' })
             )
           )
         )
