@@ -20,16 +20,21 @@ class StarRating extends React.Component {
 
   constructor(props) {
     super(props);
-
     // initialize touch events
     React.initializeTouchEvents(true);
-
+    // Sets the default state for the editing property
+    if (props.editing === undefined) {
+        props.editing = true;
+    }
+    if (props.disabled) {
+        props.editing = false;
+    }
     this.state = {
       ratingCache: {
         pos: 0,
         rating: 0
       },
-      editing: props.editing || true,
+      editing: props.editing,
       stars: 5,
       rating: 0,
       pos: 0,
@@ -53,9 +58,9 @@ class StarRating extends React.Component {
   componentWillMount() {
     this.min = 0;
     this.max = this.props.ratingAmount || 5;
-    if (this.props.rating) {
 
-      this.state.editing = this.props.editing || false;
+    if (this.props.rating !== undefined) {
+
       var ratingVal = this.props.rating;
       this.state.ratingCache.pos = this.getStarRatingPosition(ratingVal);
 
@@ -206,7 +211,6 @@ class StarRating extends React.Component {
   }
 
   render() {
-
     var caption = null;
     var classes = cx({
       'react-star-rating__root': true,
@@ -242,11 +246,12 @@ class StarRating extends React.Component {
         </div>
       );
     }
-
+    // If editing is enabled, change the cursor to reflect this
+    var cursorStyle = (this.state.editing) ? {cursor: 'pointer'} : {};
     return (
       <span className="react-star-rating">
         {caption}
-        <span ref="root" style={{cursor: 'pointer'}} className={classes}>
+        <span ref="root" style={cursorStyle} className={classes}>
           {starRating}
         </span>
       </span>
