@@ -33,6 +33,10 @@ class App extends React.Component {
           <code>
             {'$ npm install react-star-rating --save'}
           </code>
+          <p>Include the css:</p>
+          <code>
+            {'<link rel="stylesheet" href="node_modules/react-star-rating/dist/css/react-star-rating.min.css">'}
+          </code>
           <h2>Usage</h2>
           <hr/>
           <form target="_self" method="GET" className="demo-form">
