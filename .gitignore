@@ -3,3 +3,5 @@ bootstrap-star-rating
 ./src/components/Review.jsx
 other
 .travis.yml
+coverage
+dist
