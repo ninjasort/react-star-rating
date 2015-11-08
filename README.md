@@ -7,13 +7,18 @@
 
 > A simple star rating component built with React.
 
-## v1.4.0 coming soon.
-
 ## Install
 
 ```sh
 $ npm install react-star-rating --save
 ```
+
+Include the css:
+
+```html
+<link rel="stylesheet" href="node_modules/react-star-rating/dist/css/react-star-rating.min.css">
+```
+
 ## Usage
 
 ### ES6
@@ -25,7 +30,7 @@ class FormComponent extends React.Component {
   render() {
     return (
       <form action="/api" method="POST">
-        <StarRating name="airbnb-rating" caption="Rate your stay!" ratingAmount={5} />
+        <StarRating name="airbnb-rating" caption="Rate your stay!" totalStars={5} />
         <button type="submit" className="btn btn-submit">Submit Rating</button>
       </form>
     );
@@ -44,7 +49,7 @@ var FormComponent = React.createClass({
     render: function () {
       return (
         <form action="/api" method="POST">
-          <StarRating name="airbnb-rating" caption="Rate your stay!" ratingAmount={5} />
+          <StarRating name="airbnb-rating" caption="Rate your stay!" totalStars={5} />
           <button type="submit" className="btn btn-submit">Submit Rating</button>
         </form>
       );
