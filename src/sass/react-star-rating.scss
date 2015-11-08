@@ -1,68 +1,42 @@
 @import "bourbon";
 
-.react-star-rating__star {
-  width: 25px;
-  #star-flat {
-    fill: #C6C6C6;
-    &:hover {
-      fill: #FFA91B;
-    }
+.rsr-root {
+  vertical-align: middle;
+  display: inline-block; 
+}
+
+.rsr--editing {
+  &:hover {
+    cursor: pointer;
   }
 }
 
-.react-star-rating__root {
-  font-size: 2em;
-  vertical-align: middle;
-  display: inline-block;
-  &.rating-editing {
-    &:hover {
-      cursor: pointer;
-    }
-  }  
-}
-.rating-container {
+.rsr {
   position: relative;
   vertical-align: middle;
   display: inline-block;
   color: #e3e3e3;
   overflow: hidden;
-  &:before {
-    content: attr(data-content);
-  }
-  .rating-stars {
-    position: absolute;
-    left: 0;
-    top: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    color: #F5A71B;
-    @include transition(all 0.01s);
-    -webkit-mask-image: -webkit-gradient(linear,left top,left bottom,from(#FDBD47),to(#F5A71B));
-    &:before {
-      content: attr(data-content);
-    }
-  }
 }
 
-.react-rating-caption {
+.rsr__stars {
+  position: absolute;
+  left: 0;
+  top: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  color: #F5A71B;
+  @include transition(all 0.01s);
+}
+
+.rsr__caption {
   font-size: 1.25em;
   vertical-align: middle;
   margin-right: 0.5em;
 }
 
-.rating-disabled {
-  .rating-container:hover {
+.rsr--disabled {
+  .rsr-container:hover {
     cursor: not-allowed;
   }
-}
-
-// sizes
-.react-star-rating__size--sm {
-  font-size: 1em;
-}
-.react-star-rating__size--md {
-  font-size: 2em;
-}
-.react-star-rating__size--lg {
-  font-size: 2.5em;
 }

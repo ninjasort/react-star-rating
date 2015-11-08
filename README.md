@@ -1,4 +1,6 @@
-# react-star-rating [![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)
+# react-star-rating ![](https://david-dm.org/cameronjroe/react-star-rating.svg)
+
+[![NPM](https://nodei.co/npm/react-star-rating.png?compact=true)](https://nodei.co/npm/react-star-rating/)
 
 <!-- [![Build Status](https://travis-ci.org/)](https://travis-ci.org/) -->
 ![](src/assets/star-rating.png)
@@ -10,6 +12,13 @@
 ```sh
 $ npm install react-star-rating --save
 ```
+
+Include the css:
+
+```html
+<link rel="stylesheet" href="node_modules/react-star-rating/dist/css/react-star-rating.min.css">
+```
+
 ## Usage
 
 ### ES6
@@ -21,7 +30,7 @@ class FormComponent extends React.Component {
   render() {
     return (
       <form action="/api" method="POST">
-        <StarRating name="airbnb-rating" caption="Rate your stay!" ratingAmount={5} />
+        <StarRating name="airbnb-rating" caption="Rate your stay!" totalStars={5} />
         <button type="submit" className="btn btn-submit">Submit Rating</button>
       </form>
     );
@@ -40,7 +49,7 @@ var FormComponent = React.createClass({
     render: function () {
       return (
         <form action="/api" method="POST">
-          <StarRating name="airbnb-rating" caption="Rate your stay!" ratingAmount={5} />
+          <StarRating name="airbnb-rating" caption="Rate your stay!" totalStars={5} />
           <button type="submit" className="btn btn-submit">Submit Rating</button>
         </form>
       );
@@ -53,19 +62,19 @@ React.render(<FormComponent />, document.getElementById('star-rating'));
 ## Options
   - **name**={string} - name for form input (required)
   - **caption**={string} - caption for rating (optional)
-  - **ratingAmount**={number} - rating amount (required, default: 5)
+  - **totalStars**={number} - rating amount (required, default: 5)
   - **rating**={number} - a set rating between the rating amount (optional)
   - **disabled**={boolean} - whether to disable the rating from being selected (optional)
   - **editing**={boolean} - whether the rating is explicitly in editing mode (optional)
-  - **size**={string} - size of stars (optional)
+  - **size**={number} - size of stars (optional)
   - **onRatingClick**={function} - a handler function that gets called onClick of the rating (optional) - gets passed (event, {position, rating, caption, name})
 
 ## Todo
 
 - [x] Fix ES6 bug with bundling
-- [ ] Add svg stars
+- [x] Add svg stars
+- [x] Double-check touch support works
 - [ ] Re-implement star hovering (kinda janky right now)
-- [ ] Double-check touch support works
 
 
 ## License

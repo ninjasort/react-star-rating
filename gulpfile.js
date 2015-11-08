@@ -1,6 +1,5 @@
-/**
- * Gulp
- */
+'use strict';
+
 var gulp       = require('gulp');
 var source     = require('vinyl-source-stream');
 var browserify = require('browserify');
@@ -14,6 +13,7 @@ var uglify     = require('gulp-uglify');
 var eslint     = require('gulp-eslint');
 var replace    = require('gulp-replace');
 var minifyCSS  = require('gulp-minify-css');
+var karma      = require('gulp-karma');
 
 var config = {
   componentFileName: 'react-star-rating',
@@ -48,14 +48,6 @@ gulp.task('styles', ['demo-styles'], function () {
     .pipe(gulp.dest(config.stylesDest));
 });
 
-gulp.task('demo-styles', function () {
-  return gulp.src(config.componentStylesDir + '/demo.scss')
-    .pipe(sass({
-      includePaths: require('node-bourbon').includePaths
-    }))
-    .pipe(gulp.dest(config.stylesDest));
-});
-
 /**
  * Build
  */
@@ -70,9 +62,20 @@ gulp.task('build', ['lint'], function () {
 });
 
 /**
+ * Demo Styles
+ */
+gulp.task('demo-styles', function () {
+  return gulp.src(config.componentStylesDir + '/demo.scss')
+    .pipe(sass({
+      includePaths: require('node-bourbon').includePaths
+    }))
+    .pipe(gulp.dest(config.stylesDest));
+});
+
+/**
  * Demo Bundle
  */
-gulp.task('default', ['lint','styles'], function () {
+gulp.task('default', ['lint', 'styles'], function () {
   return browserify('./src/docs.jsx', {extensions: '.jsx'})
     .transform(babelify)
     .bundle()
@@ -88,7 +91,9 @@ gulp.task('default', ['lint','styles'], function () {
  */
 gulp.task('watch', ['default'], function () {
   gulp.watch(['./src/*.js', './src/**/*.jsx', './src/sass/{*/,}*.scss'], ['dist']);
-  return gulp.src('.').pipe(server());
+  return gulp.src('.').pipe(server({
+    port: 3000
+  }));
 });
 
 /**
