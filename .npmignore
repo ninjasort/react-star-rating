@@ -1,10 +1,6 @@
 node_modules
 bootstrap-star-rating
-./src/components/Review.jsx
 other
-.travis.yml
-coverage
-dist
 test
 karma.conf.js
 webpack.config.js

@@ -13,6 +13,7 @@ var uglify     = require('gulp-uglify');
 var eslint     = require('gulp-eslint');
 var replace    = require('gulp-replace');
 var minifyCSS  = require('gulp-minify-css');
+var karma      = require('gulp-karma');
 
 var config = {
   componentFileName: 'react-star-rating',
@@ -90,7 +91,9 @@ gulp.task('default', ['lint', 'styles'], function () {
  */
 gulp.task('watch', ['default'], function () {
   gulp.watch(['./src/*.js', './src/**/*.jsx', './src/sass/{*/,}*.scss'], ['dist']);
-  return gulp.src('.').pipe(server());
+  return gulp.src('.').pipe(server({
+    port: 3000
+  }));
 });
 
 /**
