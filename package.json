@@ -8,6 +8,7 @@
     "watch": "gulp watch",
     "build": "gulp dist",
     "test": "karma start",
+    "prepublish": "npm run build",
     "dev": "webpack-dev-server --progress --colors --hot --inline --no-info"
   },
   "author": "Cameron J Roe <cameronjroe@gmail.com> (http://cameronjroe.com/)",
