@@ -84,7 +84,7 @@ class App extends React.Component {
             <li><strong>rating</strong>{'={number} - a set rating between the rating amount (optional)'}</li>
             <li><strong>disabled</strong>{'={boolean} - whether to disable the rating from being selected (optional)'}</li>
             <li><strong>editing</strong>{'={boolean} - whether the rating is explicitly in editing mode (optional)'}</li>
-            <li><strong>size</strong>{'={string} - size of stars (optional)'}</li>
+            <li><strong>size</strong>{'={number} - size of stars (optional)'}</li>
             <li><strong>onRatingClick</strong>{'={function} - a handler function that gets called onClick of the rating (optional) - gets passed (event, {position, rating, caption, name})'}</li>
           </ul>
           <h2>Examples</h2>
