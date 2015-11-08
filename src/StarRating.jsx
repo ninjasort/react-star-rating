@@ -1,4 +1,3 @@
-'use strict';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import cx from 'classnames';
@@ -7,11 +6,6 @@ function isFloat(n) {
   return n === Number(n) && n % 1 !== 0;
 }
 
-// TODO:
-// - abstract mixin for mouse tracking
-// - finish updating svgs on hover, state changes
-// - implement tests
-// 
 /**
  * @fileoverview react-star-rating
  * @author @cameronjroe
@@ -41,11 +35,12 @@ class StarRating extends React.Component {
   }
 
   static defaultProps = {
-    step: 0.5,
+    step: 1,
     totalStars: 5,
     onRatingClick() {},
     disabled: false,
-    size: 50
+    size: 50,
+    rating: 0
   }
 
   constructor(props) {
@@ -157,11 +152,16 @@ class StarRating extends React.Component {
    */
   getSvg(rating) {
     var stars = [];
-    for(var i = 0; i < this.props.totalStars; i++) {
+    for (var i = 0; i < this.props.totalStars; i++) {
       var attrs = {};
       attrs['transform'] = `translate(${i*50}, 0)`;
-      attrs['fill'] = i+0.5 <= rating ? '#FFA91B' : '#C6C6C6';
-      stars.push(<path key={`star-${i}`} {...attrs} mask="url(#half-star-mask)" d="m0,18.1l19.1,0l5.9,-18.1l5.9,18.1l19.1,0l-15.4,11.2l5.9,18.1l-15.4,-11.2l-15.4,11.2l5.9,-18.1l-15.4,-11.2l0,0z" />);
+      attrs['fill'] = (i+this.props.step <= rating) ? '#FFA91B' : '#C6C6C6';
+      stars.push(
+        <path {...attrs}
+          key={`star-${i}`}
+          mask="url(#half-star-mask)"
+          d="m0,18.1l19.1,0l5.9,-18.1l5.9,18.1l19.1,0l-15.4,11.2l5.9,18.1l-15.4,-11.2l-15.4,11.2l5.9,-18.1l-15.4,-11.2l0,0z" />
+      );
     }
 
     var styles = {
@@ -280,7 +280,6 @@ class StarRating extends React.Component {
     return cx({
       'rsr-root': true,
       'rsr--disabled': this.props.disabled,
-      ['rsr--' + this.props.size]: this.props.size,
       'rsr--editing': this.state.editing
     });
   }

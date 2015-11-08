@@ -7,8 +7,7 @@ module.exports = {
   ],
   output: {
     path: 'dist',
-    filename: 'react-star-rating.js',
-    publicPath: '/assets/'
+    filename: 'react-star-rating.js'
   },
   cache: true,
   debug: true,
@@ -31,20 +30,15 @@ module.exports = {
     //   exclude: /node_modules/,
     //   loader: 'jsxhint'
     // }],
-    loaders: [{
-      test: /\.(js|jsx)$/,
-      exclude: /node_modules/,
-      loader: 'babel',
-    }, {
-      test: /\.less/,
-      loader: 'style-loader!css-loader!less-loader'
-    }, {
-      test: /\.css$/,
-      loader: 'style-loader!css-loader'
-    }, {
-      test: /\.(png|jpg|woff|woff2)$/,
-      loader: 'url-loader?limit=8192'
-    }]
+    loaders: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader'
+      },
+      { test: /\.css$/, loader: 'style-loader!css-loader' },
+      { test: /\.(png|jpg|woff|woff2)$/, loader: 'url-loader?limit=8192'}
+    ]
   },
 
   plugins: [

@@ -1,21 +1,12 @@
 'use strict';
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
 var _react = require('react');
 
@@ -29,52 +20,52 @@ var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 function isFloat(n) {
   return n === Number(n) && n % 1 !== 0;
 }
 
+/**
+ * @fileoverview react-star-rating
+ * @author @cameronjroe
+ * <StarRating
+ *   name={string} - name for form input (required)
+ *   caption={string} - caption for rating (optional)
+ *   totalStars={number} - the total amount of stars (required, default: 5)
+ *   rating={number} - a set rating between the rating amount (optional)
+ *   symbol={React.}
+ *   disabled={boolean} - whether to disable the rating from being selected (optional)
+ *   editing={boolean} - whether the rating is explicitly in editing mode (optional)
+ *   size={number} - size of stars (optional)
+ *   onRatingClick={function} - a handler function that gets called onClick of the rating (optional)
+ *   />
+ */
+
 var StarRating = (function (_React$Component) {
   _inherits(StarRating, _React$Component);
-
-  _createClass(StarRating, null, [{
-    key: 'propTypes',
-    value: {
-      name: _react2['default'].PropTypes.string.isRequired,
-      caption: _react2['default'].PropTypes.string,
-      totalStars: _react2['default'].PropTypes.number.isRequired,
-      rating: _react2['default'].PropTypes.number,
-      onRatingClick: _react2['default'].PropTypes.func,
-      disabled: _react2['default'].PropTypes.bool,
-      editing: _react2['default'].PropTypes.bool,
-      size: _react2['default'].PropTypes.number
-    },
-    enumerable: true
-  }, {
-    key: 'defaultProps',
-    value: {
-      step: 0.5,
-      totalStars: 5,
-      onRatingClick: function onRatingClick() {},
-      disabled: false,
-      size: 50
-    },
-    enumerable: true
-  }]);
 
   function StarRating(props) {
     _classCallCheck(this, StarRating);
 
-    _get(Object.getPrototypeOf(StarRating.prototype), 'constructor', this).call(this, props);
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(StarRating).call(this, props));
 
-    this.state = {
+    _this.state = {
       currentRatingVal: props.rating,
-      currentRatingPos: this.getStarRatingPosition(props.rating),
+      currentRatingPos: _this.getStarRatingPosition(props.rating),
       editing: props.editing || true,
       rating: props.rating,
-      pos: this.getStarRatingPosition(props.rating),
-      glyph: this.getStars(),
+      pos: _this.getStarRatingPosition(props.rating),
+      glyph: _this.getStars(),
       size: props.size
     };
+    return _this;
   }
 
   _createClass(StarRating, [{
@@ -90,8 +81,8 @@ var StarRating = (function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.root = _reactDom2['default'].findDOMNode(this.refs.root);
-      this.ratingContainer = _reactDom2['default'].findDOMNode(this.refs.ratingContainer);
+      this.root = _reactDom2.default.findDOMNode(this.refs.root);
+      this.ratingContainer = _reactDom2.default.findDOMNode(this.refs.ratingContainer);
     }
   }, {
     key: 'componentWillUnmount',
@@ -99,6 +90,12 @@ var StarRating = (function (_React$Component) {
       delete this.root;
       delete this.ratingContainer;
     }
+
+    /**
+     * Gets the stars based on totalStars
+     * @return {string} stars
+     */
+
   }, {
     key: 'getStars',
     value: function getStars() {
@@ -109,6 +106,13 @@ var StarRating = (function (_React$Component) {
       }
       return stars;
     }
+
+    /**
+     * Gets the mouse position
+     * @param  {event} e
+     * @return {number} delta
+     */
+
   }, {
     key: 'getPosition',
     value: function getPosition(e) {
@@ -170,6 +174,11 @@ var StarRating = (function (_React$Component) {
       var pos = this.getPosition(e);
       return this.calculate(pos);
     }
+
+    /**
+     * Get Star SVG
+     */
+
   }, {
     key: 'getSvg',
     value: function getSvg(rating) {
@@ -177,8 +186,11 @@ var StarRating = (function (_React$Component) {
       for (var i = 0; i < this.props.totalStars; i++) {
         var attrs = {};
         attrs['transform'] = 'translate(' + i * 50 + ', 0)';
-        attrs['fill'] = i + 0.5 <= rating ? '#FFA91B' : '#C6C6C6';
-        stars.push(_react2['default'].createElement('path', _extends({ key: 'star-' + i }, attrs, { mask: 'url(#half-star-mask)', d: 'm0,18.1l19.1,0l5.9,-18.1l5.9,18.1l19.1,0l-15.4,11.2l5.9,18.1l-15.4,-11.2l-15.4,11.2l5.9,-18.1l-15.4,-11.2l0,0z' })));
+        attrs['fill'] = i + this.props.step <= rating ? '#FFA91B' : '#C6C6C6';
+        stars.push(_react2.default.createElement('path', _extends({}, attrs, {
+          key: 'star-' + i,
+          mask: 'url(#half-star-mask)',
+          d: 'm0,18.1l19.1,0l5.9,-18.1l5.9,18.1l19.1,0l-15.4,11.2l5.9,18.1l-15.4,-11.2l-15.4,11.2l5.9,-18.1l-15.4,-11.2l0,0z' })));
       }
 
       var styles = {
@@ -186,7 +198,7 @@ var StarRating = (function (_React$Component) {
         height: this.props.size + 'px'
       };
 
-      return _react2['default'].createElement(
+      return _react2.default.createElement(
         'svg',
         { className: 'rsr__star',
           style: styles,
@@ -194,7 +206,7 @@ var StarRating = (function (_React$Component) {
           preserveAspectRatio: 'xMinYMin meet',
           version: '1.1',
           xmlns: 'http://www.w3.org/2000/svg' },
-        _react2['default'].createElement(
+        _react2.default.createElement(
           'g',
           null,
           stars.map(function (item) {
@@ -203,6 +215,13 @@ var StarRating = (function (_React$Component) {
         )
       );
     }
+
+    /**
+     * Update the active rating selection
+     * @param  {number} width width based on mouse position
+     * @param  {number} val   current rating amount
+     */
+
   }, {
     key: 'updateRating',
     value: function updateRating(width, val) {
@@ -211,6 +230,11 @@ var StarRating = (function (_React$Component) {
         rating: val
       });
     }
+
+    /**
+     * Update rating state if props have changed
+     */
+
   }, {
     key: 'shouldComponentUpdate',
     value: function shouldComponentUpdate(nextProps, nextState) {
@@ -221,6 +245,11 @@ var StarRating = (function (_React$Component) {
         return nextState.currentRatingVal !== this.state.currentRatingVal || nextState.rating !== this.state.rating;
       }
     }
+
+    /**
+     * Set position to original state
+     */
+
   }, {
     key: 'handleMouseLeave',
     value: function handleMouseLeave() {
@@ -229,12 +258,25 @@ var StarRating = (function (_React$Component) {
         rating: this.state.currentRatingVal
       });
     }
+
+    /**
+     * Update position to current event state
+     * @param  {object} event
+     */
+
   }, {
     key: 'handleMouseMove',
     value: function handleMouseMove(e) {
+      // get hover position
       var ratingEvent = this.getRatingEvent(e);
       this.updateRating(ratingEvent.width, ratingEvent.val);
     }
+
+    /**
+     * Update rating state, Trigger function handler
+     * @param  {object} event
+     */
+
   }, {
     key: 'handleClick',
     value: function handleClick(e) {
@@ -270,18 +312,17 @@ var StarRating = (function (_React$Component) {
   }, {
     key: 'getClasses',
     value: function getClasses() {
-      var _cx;
-
-      return (0, _classnames2['default'])((_cx = {
+      return (0, _classnames2.default)({
         'rsr-root': true,
-        'rsr--disabled': this.props.disabled
-      }, _defineProperty(_cx, 'rsr--' + this.props.size, this.props.size), _defineProperty(_cx, 'rsr--editing', this.state.editing), _cx));
+        'rsr--disabled': this.props.disabled,
+        'rsr--editing': this.state.editing
+      });
     }
   }, {
     key: 'getCaption',
     value: function getCaption() {
       if (this.props.caption) {
-        return _react2['default'].createElement(
+        return _react2.default.createElement(
           'span',
           { className: 'rsr__caption' },
           this.props.caption
@@ -309,20 +350,20 @@ var StarRating = (function (_React$Component) {
       var caption = this.getCaption();
       var attrs = this.setAttrs();
 
-      return _react2['default'].createElement(
+      return _react2.default.createElement(
         'span',
         { className: 'rsr-container' },
         caption,
-        _react2['default'].createElement(
+        _react2.default.createElement(
           'div',
           { ref: 'root', className: classes },
-          _react2['default'].createElement(
+          _react2.default.createElement(
             'div',
             _extends({ ref: 'ratingContainer',
               className: 'rsr rating-gly-star',
               'data-content': this.state.glyph }, attrs),
             this.getSvg(this.state.rating),
-            _react2['default'].createElement('input', { type: 'number',
+            _react2.default.createElement('input', { type: 'number',
               name: this.props.name,
               value: this.state.currentRatingVal,
               style: { display: 'none !important' },
@@ -336,7 +377,25 @@ var StarRating = (function (_React$Component) {
   }]);
 
   return StarRating;
-})(_react2['default'].Component);
+})(_react2.default.Component);
 
-exports['default'] = StarRating;
-module.exports = exports['default'];
+StarRating.propTypes = {
+  name: _react2.default.PropTypes.string.isRequired,
+  caption: _react2.default.PropTypes.string,
+  totalStars: _react2.default.PropTypes.number.isRequired,
+  rating: _react2.default.PropTypes.number,
+  onRatingClick: _react2.default.PropTypes.func,
+  disabled: _react2.default.PropTypes.bool,
+  editing: _react2.default.PropTypes.bool,
+  size: _react2.default.PropTypes.number
+};
+StarRating.defaultProps = {
+  step: 1,
+  totalStars: 5,
+  onRatingClick: function onRatingClick() {},
+
+  disabled: false,
+  size: 50,
+  rating: 0
+};
+exports.default = StarRating;

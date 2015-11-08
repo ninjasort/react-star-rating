@@ -8,13 +8,13 @@ describe("<StarRating />", () => {
   
   beforeEach(function () {
     this.component = TestUtils.renderIntoDocument(
-        <StarRating 
-          name="test-rating" 
-          size="md" 
-          rating={5} 
-          editing={true} 
-          totalStars={5} 
-          step={1} />
+      <StarRating 
+        name="test-rating" 
+        size={30}
+        rating={5} 
+        editing={true} 
+        totalStars={5} 
+        step={1} />
       );
     this.renderedDOM = () => ReactDOM.findDOMNode(this.component);
   });
@@ -39,8 +39,20 @@ describe("<StarRating />", () => {
     expect(root.className).to.contain('rsr-container');
     expect(root.children[0].className).to.contain('rsr-root');
     expect(root.children[0].className).to.contain('rsr--editing');
-    console.log(root);
     expect(root.querySelectorAll('.rsr__star path').length).to.equal(5);
+  });
+
+  xit("should findRenderedDOMComponentWithClass", function () {
+
+    // TestUtils.findRenderedDOMComponentWithClass(root, 'rsr-container');
+  });
+
+  it("should render a root in a container with proper classes", function () {
+    var container = TestUtils.findRenderedDOMComponentWithTag(this.component, 'span');
+    expect(container.props.className).to.equal('rsr-container');
+
+    var root = TestUtils.findRenderedDOMComponentWithTag(this.component, 'div');
+    expect(root.props.className).to.contain('rsr-root');
   });
   
   // it("has the default props properly set", () => {

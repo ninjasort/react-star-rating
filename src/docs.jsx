@@ -21,7 +21,7 @@ class App extends React.Component {
         <div className="intro">
           <h1 className="main-title">
             {'react-star-rating'}
-            <small> easy star ratings with React</small>
+            <small> easy star ratings with Test</small>
           </h1>
           <StarRating name="hotels" size={50} rating={5} editing={false} totalStars={5} step={1} />
           <p style={{marginBottom: '10px'}}>v{currentVersion}</p>
@@ -89,7 +89,7 @@ class App extends React.Component {
           </ul>
           <h2>Examples</h2>
           <hr/>
-          <StarRating name="handler" caption="Use onClick Handlers!" totalStars={5} step={0.5} onRatingClick={this.handleRatingClick.bind(this)} />
+          <StarRating name="handler" caption="Use onClick Handlers!" totalStars={5} onRatingClick={this.handleRatingClick.bind(this)} />
           <p></p>
           <code>
             <p>{'// handler in react class'}</p>
@@ -97,7 +97,7 @@ class App extends React.Component {
             <p>{'    alert(\'You left a \' + data.rating + \' star rating for \' + data.caption);'}</p>
             <p>{'}'}</p>
             <p>{' '}</p>
-            <p>{'<StarRating name="handler" caption="Use onClick Handlers!" totalStars={5} step={0.5} onRatingClick={handleRatingClick} />'}</p>
+            <p>{'<StarRating name="handler" caption="Use onClick Handlers!" totalStars={5} onRatingClick={handleRatingClick} />'}</p>
           </code>
           <p></p>
           <blockquote><strong>{'If you\'re using ES6, make sure to bind the handler: '}</strong><code>{'this.handleRatingClick.bind(this, pass, args, here)'}</code></blockquote>
@@ -105,10 +105,10 @@ class App extends React.Component {
           <code>
             {'<StarRating name="ten-stars" caption="Configure number of stars!" totalStars={10} step={1} onRatingClick={this.handleRatingClick} />'}
           </code>
-          <StarRating name="half-stars" caption="Use half-star steps!" totalStars={5} />
+          {/*<StarRating name="half-stars" caption="Use half-star steps!" totalStars={5} />
           <code>
             {'<StarRating name="half-stars" caption="Use half-star steps!" totalStars={5} />'}
-          </code>
+          </code>*/}
           <StarRating name="small-rating" caption="Small!" size={30} totalStars={5} rating={3} />
           <code>
             {'<StarRating name="small-rating" caption="Small!" size={30} totalStars={5} rating={3} />'}

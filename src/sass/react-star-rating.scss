@@ -17,9 +17,6 @@
   display: inline-block;
   color: #e3e3e3;
   overflow: hidden;
-  // &:before {
-  //   content: attr(data-content);
-  // }
 }
 
 .rsr__stars {
@@ -30,10 +27,6 @@
   overflow: hidden;
   color: #F5A71B;
   @include transition(all 0.01s);
-  // -webkit-mask-image: -webkit-gradient(linear,left top,left bottom,from(#FDBD47),to(#F5A71B));
-  // &:before {
-  //   content: attr(data-content);
-  // }
 }
 
 .rsr__caption {
@@ -42,34 +35,8 @@
   margin-right: 0.5em;
 }
 
-.rsr__star {
-  // path {
-  //   fill: #C6C6C6;
-  //   &:hover {
-  //     fill: #FFA91B;
-  //   }
-  // }
-}
-
 .rsr--disabled {
   .rating-container:hover {
     cursor: not-allowed;
-  }
-}
-
-// sizes
-.rsr--sm {
-  font-size: 1em;
-}
-.rsr--md {
-  font-size: 2em;
-}
-.rsr--lg {
-  font-size: 2.5em;
-}
-.rsr--jumbo {
-  font-size: 6em;
-  @media screen and (max-width: 768px) {
-    font-size: 3em;
   }
 }

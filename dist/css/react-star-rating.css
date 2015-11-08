@@ -30,18 +30,3 @@
 
 .rsr--disabled .rating-container:hover {
   cursor: not-allowed; }
-
-.rsr--sm {
-  font-size: 1em; }
-
-.rsr--md {
-  font-size: 2em; }
-
-.rsr--lg {
-  font-size: 2.5em; }
-
-.rsr--jumbo {
-  font-size: 6em; }
-  @media screen and (max-width: 768px) {
-    .rsr--jumbo {
-      font-size: 3em; } }
