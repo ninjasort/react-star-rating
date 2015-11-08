@@ -55,19 +55,19 @@ React.render(<FormComponent />, document.getElementById('star-rating'));
 ## Options
   - **name**={string} - name for form input (required)
   - **caption**={string} - caption for rating (optional)
-  - **ratingAmount**={number} - rating amount (required, default: 5)
+  - **totalStars**={number} - rating amount (required, default: 5)
   - **rating**={number} - a set rating between the rating amount (optional)
   - **disabled**={boolean} - whether to disable the rating from being selected (optional)
   - **editing**={boolean} - whether the rating is explicitly in editing mode (optional)
-  - **size**={string} - size of stars (optional)
+  - **size**={number} - size of stars (optional)
   - **onRatingClick**={function} - a handler function that gets called onClick of the rating (optional) - gets passed (event, {position, rating, caption, name})
 
 ## Todo
 
 - [x] Fix ES6 bug with bundling
-- [ ] Add svg stars
-- [ ] Re-implement star hovering (kinda janky right now)
+- [x] Add svg stars
 - [x] Double-check touch support works
+- [ ] Re-implement star hovering (kinda janky right now)
 
 
 ## License
