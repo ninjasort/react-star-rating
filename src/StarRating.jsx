@@ -6,6 +6,12 @@ function isFloat(n) {
   return n === Number(n) && n % 1 !== 0;
 }
 
+// TODO
+// - Add support for svg symbol
+// - Add svg masking when react supports it
+// - Update onClick to onSelect which supports mobile, desktop
+// - Add onChange to trigger function when rating changes
+
 /**
  * @fileoverview react-star-rating
  * @author @cameronjroe
@@ -14,7 +20,6 @@ function isFloat(n) {
  *   caption={string} - caption for rating (optional)
  *   totalStars={number} - the total amount of stars (required, default: 5)
  *   rating={number} - a set rating between the rating amount (optional)
- *   symbol={React.}
  *   disabled={boolean} - whether to disable the rating from being selected (optional)
  *   editing={boolean} - whether the rating is explicitly in editing mode (optional)
  *   size={number} - size of stars (optional)
