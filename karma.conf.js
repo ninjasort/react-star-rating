@@ -9,41 +9,14 @@ module.exports = function(config) {
     frameworks: ['mocha', 'chai', 'sinon'],
 
     files: [
+        'src/**/*.jsx',
         'test/*.spec.js'
     ],
 
     preprocessors: {
-        'test/*.spec.js': ['webpack']
+        'src/**/*.jsx': ['babel'],
+        'test/*.spec.js': ['babel']
     },
-
-    webpack: {
-        cache: true,
-        module: {
-            loaders: [
-                { test: /\.(js|jsx)$/, loader: 'babel' }
-            ]
-        },
-        resolve: {
-            extensions: ['', '.js', '.jsx'],
-            alias: {
-                'styles': path.join(process.cwd(), './src/styles/'),
-                'components': path.join(process.cwd(), './src/components/')
-            }
-        }
-
-    },
-
-    webpackServer: {
-        noInfo: true,
-        stats: {
-            colors: true
-        }
-    },
-
-    // coverageReporter: {
-    //   type : 'html',
-    //   dir : 'coverage/'
-    // },
 
     reporters: ['progress'], // 'coverage'
 
