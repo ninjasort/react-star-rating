@@ -4,7 +4,6 @@ bootstrap-star-rating
 other
 .travis.yml
 coverage
-dist
 test
 karma.conf.js
 webpack.config.js
