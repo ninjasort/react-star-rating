@@ -100,6 +100,11 @@ class StarRating extends React.Component {
    * @return {number} delta
    */
   getPosition(e) {
+
+    if (e.touches && e.touches.length) {
+      return e.touches[0].pageX - this.root.getBoundingClientRect().left;
+    }
+  
     return e.clientX - this.root.getBoundingClientRect().left;
   }
 
@@ -303,8 +308,15 @@ class StarRating extends React.Component {
       attrs['onMouseMove'] = this.handleMouseMove.bind(this);
       attrs['onMouseLeave'] = this.handleMouseLeave.bind(this);
       attrs['onClick'] = this.handleClick.bind(this);
+      attrs['onTouchStart'] = this.handleMouseMove.bind(this);
+      attrs['onTouchEnd'] = this.handleTouchEnd.bind(this);
     }
     return attrs;
+  }
+  
+  handleTouchEnd(e) {
+    this.handleMouseLeave(e);
+    this.handleClick(e);
   }
 
   render() {
