@@ -1,5 +1,6 @@
 'use strict';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import cx from 'classnames';
 
 /**
@@ -21,7 +22,7 @@ class StarRating extends React.Component {
   constructor(props) {
     super(props);
     // initialize touch events
-    React.initializeTouchEvents(true);
+    // React.initializeTouchEvents(true);
     // Sets the default state for the editing property
     var editing;
     if (props.editing === undefined) {
@@ -74,8 +75,8 @@ class StarRating extends React.Component {
   }
 
   componentDidMount() {
-    this.root = React.findDOMNode(this.refs.root);
-    this.ratingContainer = React.findDOMNode(this.refs.ratingContainer);
+    this.root = ReactDOM.findDOMNode(this.refs.root);
+    this.ratingContainer = ReactDOM.findDOMNode(this.refs.ratingContainer);
   }
 
   componentWillUnmount() {
