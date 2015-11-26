@@ -23,18 +23,19 @@ class StarRating extends React.Component {
     // initialize touch events
     React.initializeTouchEvents(true);
     // Sets the default state for the editing property
+    var editing;
     if (props.editing === undefined) {
-        props.editing = true;
+        editing = true;
     }
     if (props.disabled) {
-        props.editing = false;
+        editing = false;
     }
     this.state = {
       ratingCache: {
         pos: 0,
         rating: 0
       },
-      editing: props.editing,
+      editing: editing,
       stars: 5,
       rating: 0,
       pos: 0,
