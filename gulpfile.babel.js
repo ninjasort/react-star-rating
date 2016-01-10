@@ -41,9 +41,7 @@ gulp.task('lint', () => {
  */
 gulp.task('styles', ['demo-styles'], () => {
   return gulp.src(config.componentStylesDir + '/' + config.componentFileName + '.scss')
-    .pipe(sass({
-      includePaths: require('node-bourbon').includePaths
-    }))
+    .pipe(sass())
     .pipe(gulp.dest(config.stylesDest))
     .pipe(minifyCSS())
     .pipe(rename(config.componentFileName + '.min.css'))
@@ -69,6 +67,7 @@ gulp.task('build', ['lint'], () => {
 gulp.task('demo-styles', () => {
   return gulp.src(config.componentStylesDir + '/demo.scss')
     .pipe(sass())
+    .pipe(gulp.dest('./example/css'))
     .pipe(gulp.dest(config.stylesDest));
 });
 

@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import cx from 'classnames';
+import useSheet from 'react-jss';
+import styles from './styles';
 
 function isFloat(n) {
   return n === Number(n) && n % 1 !== 0;
@@ -37,24 +39,24 @@ class StarRating extends React.Component {
     disabled: React.PropTypes.bool,
     editing: React.PropTypes.bool,
     size: React.PropTypes.number
-  }
+  };
 
   static defaultProps = {
     step: 1,
     totalStars: 5,
     onRatingClick() {},
+    editing: true,
     disabled: false,
     size: 50,
     rating: 0
-  }
+  };
 
   constructor(props) {
     super(props);
-
     this.state = {
       currentRatingVal: props.rating,
       currentRatingPos: this.getStarRatingPosition(props.rating),
-      editing: props.editing || true,
+      editing: props.editing,
       rating: props.rating,
       pos: this.getStarRatingPosition(props.rating),
       glyph: this.getStars(),
@@ -281,20 +283,12 @@ class StarRating extends React.Component {
     }
   }
 
-  getClasses() {
+  getClasses(classes) {
     return cx({
-      'rsr-root': true,
-      'rsr--disabled': this.props.disabled,
-      'rsr--editing': this.state.editing
+      [classes['rsr-root']]: true,
+      [classes['rsr--disabled']]: this.props.disabled,
+      [classes['rsr--editing']]: this.state.editing
     });
-  }
-
-  getCaption() {
-    if (this.props.caption) {
-      return (<span className="rsr__caption">{this.props.caption}</span>);
-    } else {
-      return null;
-    }
   }
 
   setAttrs() {
@@ -308,17 +302,16 @@ class StarRating extends React.Component {
   }
 
   render() {
-
-    var classes = this.getClasses();
-    var caption = this.getCaption();
+    let { classes } = this.props.sheet;
+    classes = this.getClasses(classes);
     var attrs = this.setAttrs();
 
     return (
       <span className="rsr-container">
-        {caption}
+        <span className={classes['rsr__caption']}>{this.props.caption}</span>
         <div ref="root" className={classes}>
           <div ref="ratingContainer"
-            className="rsr rating-gly-star"
+            className={classes.rsr}
             data-content={this.state.glyph} {...attrs}>
             {this.getSvg(this.state.rating)}
             <input type="number"
@@ -335,4 +328,4 @@ class StarRating extends React.Component {
   }
 }
 
-export default StarRating;
+export default useSheet(StarRating, styles);
