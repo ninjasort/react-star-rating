@@ -1,10 +1,7 @@
-'use strict';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import StarRating from './StarRating';
 import pkg from '../package';
-
-var inject = document.querySelector('.inject');
 
 class App extends React.Component {
 
@@ -23,7 +20,14 @@ class App extends React.Component {
             {'react-star-rating'}
             <small> easy star ratings with Test</small>
           </h1>
-          <StarRating name="hotels" size={50} rating={5} editing={false} totalStars={5} step={1} />
+          <StarRating 
+            className="my-star-rating"
+            name="hotels" 
+            size={50} 
+            rating={5} 
+            editing={false} 
+            totalStars={5} 
+            step={1} />
           <p style={{marginBottom: '10px'}}>v{currentVersion}</p>
           <a href="https://github.com/cameronjroe/react-star-rating" className="btn btn-primary">View on Github</a>
         </div>
@@ -33,14 +37,13 @@ class App extends React.Component {
           <code>
             {'$ npm install react-star-rating --save'}
           </code>
-          <p>Include the css:</p>
-          <code>
-            {'<link rel="stylesheet" href="node_modules/react-star-rating/dist/css/react-star-rating.min.css">'}
-          </code>
           <h2>Usage</h2>
           <hr/>
           <form target="_self" method="GET" className="demo-form">
-            <StarRating name="react-star-rating" caption="Rate this component!" totalStars={5} />
+            <StarRating 
+              name="react-star-rating" 
+              caption="Rate this component!" 
+              totalStars={5} />
             <button type="submit" className="btn btn-primary">Submit Rating</button>
           </form>
           <h3>ES6</h3>
@@ -93,7 +96,11 @@ class App extends React.Component {
           </ul>
           <h2>Examples</h2>
           <hr/>
-          <StarRating name="handler" caption="Use onClick Handlers!" totalStars={5} onRatingClick={this.handleRatingClick.bind(this)} />
+          <StarRating 
+            name="handler" 
+            caption="Use onClick Handlers!" 
+            totalStars={5} 
+            onRatingClick={this.handleRatingClick.bind(this)} />
           <p></p>
           <code>
             <p>{'// handler in react class'}</p>
@@ -105,31 +112,66 @@ class App extends React.Component {
           </code>
           <p></p>
           <blockquote><strong>{'If you\'re using ES6, make sure to bind the handler: '}</strong><code>{'this.handleRatingClick.bind(this, pass, args, here)'}</code></blockquote>
-          <StarRating name="ten-stars" caption="Configure number of stars!" totalStars={10} step={1} onRatingClick={this.handleRatingClick.bind(this)} />
+          <StarRating 
+            name="ten-stars" 
+            caption="Configure number of stars!" 
+            totalStars={10} 
+            step={1} 
+            onRatingClick={this.handleRatingClick.bind(this)} />
           <code>
-            {'<StarRating name="ten-stars" caption="Configure number of stars!" totalStars={10} step={1} onRatingClick={this.handleRatingClick} />'}
+            {`<StarRating 
+                name="ten-stars" 
+                caption="Configure number of stars!" 
+                totalStars={10} 
+                step={1} 
+                onRatingClick={this.handleRatingClick} />`}
           </code>
           {/*<StarRating name="half-stars" caption="Use half-star steps!" totalStars={5} />
           <code>
             {'<StarRating name="half-stars" caption="Use half-star steps!" totalStars={5} />'}
           </code>*/}
-          <StarRating name="small-rating" caption="Small!" size={30} totalStars={5} rating={3} />
+          <StarRating 
+            name="small-rating" 
+            caption="Small!" 
+            size={30} 
+            totalStars={5} 
+            rating={3} />
           <code>
             {'<StarRating name="small-rating" caption="Small!" size={30} totalStars={5} rating={3} />'}
           </code>
-          <StarRating name="medium-rating" caption="Medium!" size={50} totalStars={5} rating={4} />
+          <StarRating 
+            name="medium-rating" 
+            caption="Medium!" 
+            size={50} 
+            totalStars={5} 
+            rating={4} />
           <code>
             {'<StarRating name="medium-rating" caption="Medium!" size={50} totalStars={5} rating={4} />'}
           </code>
-          <StarRating name="large-rating" caption="Large!" size={70} totalStars={5} rating={5} />
+          <StarRating 
+            name="large-rating" 
+            caption="Large!" 
+            size={70} 
+            totalStars={5} 
+            rating={5} />
           <code>
             {'<StarRating name="large-rating" caption="Large!" size={70} totalStars={5} rating={5} />'}
           </code>
-          <StarRating name="jumbo-rating" caption="Jumbo!" size={100} totalStars={5} rating={5} />
+          <StarRating 
+            name="jumbo-rating" 
+            caption="Jumbo!" 
+            size={100} 
+            totalStars={5} 
+            rating={5} />
           <code>
             {'<StarRating name="jumbo-rating" caption="Jumbo!" size={100} totalStars={5} rating={5} />'}
           </code>
-          <StarRating name="disabled" caption="Disabled." totalStars={5} rating={3} disabled={true} />
+          <StarRating 
+            name="disabled" 
+            caption="Disabled." 
+            totalStars={5} 
+            rating={3} 
+            disabled={true} />
           <code>
             {'<StarRating name="disabled" caption="Disabled." totalStars={5} rating={3} disabled={true} />'}
           </code>
@@ -146,4 +188,7 @@ class App extends React.Component {
 
 }
 
-ReactDOM.render(<App />, inject);
+ReactDOM.render(
+  <App />, 
+  document.querySelector('.docs')
+  );

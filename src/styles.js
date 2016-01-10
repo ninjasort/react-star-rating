@@ -1,6 +1,9 @@
 // updates
 // - uses rems
 export default {
+  'rsr-container': {
+    'position': 'relative'
+  },
   'rsr': {
     'position': 'relative',
     'vertical-align': 'middle',

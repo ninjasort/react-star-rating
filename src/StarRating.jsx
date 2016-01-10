@@ -177,7 +177,7 @@ class StarRating extends React.Component {
     };
 
     return (
-      <svg className="rsr__star" 
+      <svg className={this.props.sheet.classes['rsr__star']}
         style={styles} 
         viewBox={`0 0 ${stars.length} 50`} 
         preserveAspectRatio="xMinYMin meet" 
@@ -303,13 +303,13 @@ class StarRating extends React.Component {
 
   render() {
     let { classes } = this.props.sheet;
-    classes = this.getClasses(classes);
-    var attrs = this.setAttrs();
+    let stateClasses = this.getClasses(classes);
+    let attrs = this.setAttrs();
 
     return (
-      <span className="rsr-container">
+      <span className={classes['rsr-container']} {...this.props}>
         <span className={classes['rsr__caption']}>{this.props.caption}</span>
-        <div ref="root" className={classes}>
+        <div ref="root" className={stateClasses}>
           <div ref="ratingContainer"
             className={classes.rsr}
             data-content={this.state.glyph} {...attrs}>

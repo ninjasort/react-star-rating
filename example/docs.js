@@ -20572,7 +20572,7 @@ var StarRating = (function (_React$Component) {
 
       return _react2.default.createElement(
         'svg',
-        { className: 'rsr__star',
+        { className: this.props.sheet.classes['rsr__star'],
           style: styles,
           viewBox: '0 0 ' + stars.length + ' 50',
           preserveAspectRatio: 'xMinYMin meet',
@@ -20704,12 +20704,12 @@ var StarRating = (function (_React$Component) {
     value: function render() {
       var classes = this.props.sheet.classes;
 
-      classes = this.getClasses(classes);
+      var stateClasses = this.getClasses(classes);
       var attrs = this.setAttrs();
 
       return _react2.default.createElement(
         'span',
-        { className: 'rsr-container' },
+        _extends({ className: classes['rsr-container'] }, this.props),
         _react2.default.createElement(
           'span',
           { className: classes['rsr__caption'] },
@@ -20717,7 +20717,7 @@ var StarRating = (function (_React$Component) {
         ),
         _react2.default.createElement(
           'div',
-          { ref: 'root', className: classes },
+          { ref: 'root', className: stateClasses },
           _react2.default.createElement(
             'div',
             _extends({ ref: 'ratingContainer',
@@ -20791,8 +20791,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var inject = document.querySelector('.inject');
-
 var App = (function (_React$Component) {
   _inherits(App, _React$Component);
 
@@ -20829,7 +20827,14 @@ var App = (function (_React$Component) {
               ' easy star ratings with Test'
             )
           ),
-          _react2.default.createElement(_StarRating2.default, { name: 'hotels', size: 50, rating: 5, editing: false, totalStars: 5, step: 1 }),
+          _react2.default.createElement(_StarRating2.default, {
+            className: 'my-star-rating',
+            name: 'hotels',
+            size: 50,
+            rating: 5,
+            editing: false,
+            totalStars: 5,
+            step: 1 }),
           _react2.default.createElement(
             'p',
             { style: { marginBottom: '10px' } },
@@ -20857,16 +20862,6 @@ var App = (function (_React$Component) {
             '$ npm install react-star-rating --save'
           ),
           _react2.default.createElement(
-            'p',
-            null,
-            'Include the css:'
-          ),
-          _react2.default.createElement(
-            'code',
-            null,
-            '<link rel="stylesheet" href="node_modules/react-star-rating/dist/css/react-star-rating.min.css">'
-          ),
-          _react2.default.createElement(
             'h2',
             null,
             'Usage'
@@ -20875,7 +20870,10 @@ var App = (function (_React$Component) {
           _react2.default.createElement(
             'form',
             { target: '_self', method: 'GET', className: 'demo-form' },
-            _react2.default.createElement(_StarRating2.default, { name: 'react-star-rating', caption: 'Rate this component!', totalStars: 5 }),
+            _react2.default.createElement(_StarRating2.default, {
+              name: 'react-star-rating',
+              caption: 'Rate this component!',
+              totalStars: 5 }),
             _react2.default.createElement(
               'button',
               { type: 'submit', className: 'btn btn-primary' },
@@ -21146,7 +21144,11 @@ var App = (function (_React$Component) {
             'Examples'
           ),
           _react2.default.createElement('hr', null),
-          _react2.default.createElement(_StarRating2.default, { name: 'handler', caption: 'Use onClick Handlers!', totalStars: 5, onRatingClick: this.handleRatingClick.bind(this) }),
+          _react2.default.createElement(_StarRating2.default, {
+            name: 'handler',
+            caption: 'Use onClick Handlers!',
+            totalStars: 5,
+            onRatingClick: this.handleRatingClick.bind(this) }),
           _react2.default.createElement('p', null),
           _react2.default.createElement(
             'code',
@@ -21197,37 +21199,67 @@ var App = (function (_React$Component) {
               'this.handleRatingClick.bind(this, pass, args, here)'
             )
           ),
-          _react2.default.createElement(_StarRating2.default, { name: 'ten-stars', caption: 'Configure number of stars!', totalStars: 10, step: 1, onRatingClick: this.handleRatingClick.bind(this) }),
+          _react2.default.createElement(_StarRating2.default, {
+            name: 'ten-stars',
+            caption: 'Configure number of stars!',
+            totalStars: 10,
+            step: 1,
+            onRatingClick: this.handleRatingClick.bind(this) }),
           _react2.default.createElement(
             'code',
             null,
-            '<StarRating name="ten-stars" caption="Configure number of stars!" totalStars={10} step={1} onRatingClick={this.handleRatingClick} />'
+            '<StarRating \n                name="ten-stars" \n                caption="Configure number of stars!" \n                totalStars={10} \n                step={1} \n                onRatingClick={this.handleRatingClick} />'
           ),
-          _react2.default.createElement(_StarRating2.default, { name: 'small-rating', caption: 'Small!', size: 30, totalStars: 5, rating: 3 }),
+          _react2.default.createElement(_StarRating2.default, {
+            name: 'small-rating',
+            caption: 'Small!',
+            size: 30,
+            totalStars: 5,
+            rating: 3 }),
           _react2.default.createElement(
             'code',
             null,
             '<StarRating name="small-rating" caption="Small!" size={30} totalStars={5} rating={3} />'
           ),
-          _react2.default.createElement(_StarRating2.default, { name: 'medium-rating', caption: 'Medium!', size: 50, totalStars: 5, rating: 4 }),
+          _react2.default.createElement(_StarRating2.default, {
+            name: 'medium-rating',
+            caption: 'Medium!',
+            size: 50,
+            totalStars: 5,
+            rating: 4 }),
           _react2.default.createElement(
             'code',
             null,
             '<StarRating name="medium-rating" caption="Medium!" size={50} totalStars={5} rating={4} />'
           ),
-          _react2.default.createElement(_StarRating2.default, { name: 'large-rating', caption: 'Large!', size: 70, totalStars: 5, rating: 5 }),
+          _react2.default.createElement(_StarRating2.default, {
+            name: 'large-rating',
+            caption: 'Large!',
+            size: 70,
+            totalStars: 5,
+            rating: 5 }),
           _react2.default.createElement(
             'code',
             null,
             '<StarRating name="large-rating" caption="Large!" size={70} totalStars={5} rating={5} />'
           ),
-          _react2.default.createElement(_StarRating2.default, { name: 'jumbo-rating', caption: 'Jumbo!', size: 100, totalStars: 5, rating: 5 }),
+          _react2.default.createElement(_StarRating2.default, {
+            name: 'jumbo-rating',
+            caption: 'Jumbo!',
+            size: 100,
+            totalStars: 5,
+            rating: 5 }),
           _react2.default.createElement(
             'code',
             null,
             '<StarRating name="jumbo-rating" caption="Jumbo!" size={100} totalStars={5} rating={5} />'
           ),
-          _react2.default.createElement(_StarRating2.default, { name: 'disabled', caption: 'Disabled.', totalStars: 5, rating: 3, disabled: true }),
+          _react2.default.createElement(_StarRating2.default, {
+            name: 'disabled',
+            caption: 'Disabled.',
+            totalStars: 5,
+            rating: 3,
+            disabled: true }),
           _react2.default.createElement(
             'code',
             null,
@@ -21279,7 +21311,7 @@ var App = (function (_React$Component) {
   return App;
 })(_react2.default.Component);
 
-_reactDom2.default.render(_react2.default.createElement(App, null), inject);
+_reactDom2.default.render(_react2.default.createElement(App, null), document.querySelector('.docs'));
 
 },{"../package":175,"./StarRating":176,"react":174,"react-dom":44}],178:[function(require,module,exports){
 'use strict';
@@ -21290,6 +21322,9 @@ Object.defineProperty(exports, "__esModule", {
 // updates
 // - uses rems
 exports.default = {
+  'rsr-container': {
+    'position': 'relative'
+  },
   'rsr': {
     'position': 'relative',
     'vertical-align': 'middle',
