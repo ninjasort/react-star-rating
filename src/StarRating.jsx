@@ -38,7 +38,8 @@ class StarRating extends React.Component {
     onRatingClick: React.PropTypes.func,
     disabled: React.PropTypes.bool,
     editing: React.PropTypes.bool,
-    size: React.PropTypes.number
+    size: React.PropTypes.number,
+    step: React.PropTypes.number
   };
 
   static defaultProps = {
@@ -329,3 +330,5 @@ class StarRating extends React.Component {
 }
 
 export default useSheet(StarRating, styles);
+
+

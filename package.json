@@ -14,7 +14,7 @@
     "start": "npm run watch",
     "watch": "gulp watch",
     "build": "gulp dist",
-    "test": "karma start",
+    "test": "mocha ./src/__tests__/*.js --compilers js:babel-core/register",
     "prepublish": "npm run build"
   },
   "author": "Cameron J Roe <cameronjroe@gmail.com> (http://cameronjroe.com/)",
@@ -23,7 +23,6 @@
     "classnames": "^2.2.0",
     "jss": "^3.2.0",
     "react": "^0.14.2",
-    "react-addons-test-utils": "^0.14.2",
     "react-dom": "^0.14.2",
     "react-jss": "^2.0.1"
   },
@@ -35,6 +34,9 @@
     "babelify": "^7.2.0",
     "browserify": "^13.0.0",
     "chai": "^3.4.0",
+    "chai-enzyme": "^0.3.0",
+    "chai-equal-jsx": "^1.0.9",
+    "enzyme": "^1.4.1",
     "gulp": "^3.9.0",
     "gulp-babel": "^6.0.0",
     "gulp-concat": "^2.6.0",
@@ -60,6 +62,7 @@
     "karma-sourcemap-loader": "^0.3.6",
     "mocha": "^2.3.3",
     "node-sass": "^3.4.1",
+    "react-addons-test-utils": "^0.14.7",
     "sinon": "^1.17.2",
     "through2": "^2.0.0",
     "vinyl-source-stream": "^1.1.0"
