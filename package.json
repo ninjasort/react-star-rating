@@ -14,7 +14,7 @@
     "start": "npm run watch",
     "watch": "gulp watch",
     "build": "gulp dist",
-    "test": "mocha ./src/__tests__/*.js --compilers js:babel-core/register",
+    "test": "mocha ./src/__tests__/*.js --compilers js:babel-core/register -w",
     "prepublish": "npm run build"
   },
   "author": "Cameron J Roe <cameronjroe@gmail.com> (http://cameronjroe.com/)",
