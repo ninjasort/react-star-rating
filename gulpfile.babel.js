@@ -88,7 +88,7 @@ gulp.task('docs', ['lint', 'styles'], () => {
 /**
  * Watch
  */
-gulp.task('watch', ['default'], () => {
+gulp.task('watch', ['docs'], () => {
   gulp.watch(config.watchPaths, ['dist']);
   return gulp.src('./example').pipe(server({
     port: 3000

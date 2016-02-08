@@ -1,4 +1,4 @@
-# react-star-rating ![](https://david-dm.org/cameronjroe/react-star-rating.svg) [![Travis](https://img.shields.io/travis/cameronjroe/react-star-rating.svg?style=flat-square)](https://travis-ci.org/cameronjroe/react-star-rating)
+# react-star-rating [![npm](https://img.shields.io/npm/v/npm.svg?style=flat-square)](https://www.npmjs.com/package/react-star-rating) [![Dependencies](https://david-dm.org/cameronjroe/react-star-rating.svg?style=flat-square)]() [![Travis](https://img.shields.io/travis/cameronjroe/react-star-rating.svg?style=flat-square)](https://travis-ci.org/cameronjroe/react-star-rating)
 [![NPM](https://nodei.co/npm/react-star-rating.png?compact=true)](https://nodei.co/npm/react-star-rating/)
 
 <!-- [![Build Status](https://travis-ci.org/)](https://travis-ci.org/) -->
@@ -12,12 +12,6 @@
 $ npm install react-star-rating --save
 ```
 
-Include the css:
-
-```html
-<link rel="stylesheet" href="node_modules/react-star-rating/dist/css/react-star-rating.min.css">
-```
-
 ## Usage
 
 ### ES6
@@ -29,7 +23,10 @@ class FormComponent extends React.Component {
   render() {
     return (
       <form action="/api" method="POST">
-        <StarRating name="airbnb-rating" caption="Rate your stay!" totalStars={5} />
+        <StarRating 
+          name="airbnb-rating" 
+          caption="Rate your stay!" 
+          totalStars={5} />
         <button type="submit" className="btn btn-submit">Submit Rating</button>
       </form>
     );
@@ -48,7 +45,10 @@ var FormComponent = React.createClass({
     render: function () {
       return (
         <form action="/api" method="POST">
-          <StarRating name="airbnb-rating" caption="Rate your stay!" totalStars={5} />
+          <StarRating 
+            name="airbnb-rating" 
+            caption="Rate your stay!" 
+            totalStars={5} />
           <button type="submit" className="btn btn-submit">Submit Rating</button>
         </form>
       );
