@@ -74,7 +74,7 @@ gulp.task('demo-styles', () => {
 /**
  * Demo Bundle
  */
-gulp.task('default', ['lint', 'styles'], () => {
+gulp.task('docs', ['lint', 'styles'], () => {
   return browserify('./src/docs.jsx', {extensions: '.jsx'})
     .transform(babelify)
     .bundle()
@@ -98,4 +98,4 @@ gulp.task('watch', ['default'], () => {
 /**
  * Dist
  */
-gulp.task('dist', ['default', 'build']);
+gulp.task('dist', ['build', 'docs']);

@@ -1,6 +1,5 @@
 {
   "name": "react-star-rating",
-  "version": "1.4.2",
   "description": "A simple star rating component built with React.",
   "main": "./dist/react-star-rating.min.js",
   "babel": {
@@ -26,7 +25,8 @@
     "check-coverage": "./node_modules/.bin/babel-node ./node_modules/.bin/babel-istanbul check-coverage --statements 100 --branches 100 --functions 100 --lines 100",
     "test": "./node_modules/.bin/babel-node ./node_modules/.bin/babel-istanbul cover _mocha -- -R spec --compilers js:babel-core/register",
     "test:watch": "mocha -w --compilers js:babel-core/register",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "author": "Cameron J Roe <cameronjroe@gmail.com> (http://cameronjroe.com/)",
   "license": "MIT",
@@ -71,9 +71,13 @@
     "mocha": "^2.3.3",
     "node-sass": "^3.4.1",
     "react-addons-test-utils": "^0.14.7",
-    "semantic-release": "4.3.5",
+    "semantic-release": "^4.3.5",
     "sinon": "^1.17.2",
     "through2": "^2.0.0",
     "vinyl-source-stream": "^1.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cameronjroe/react-star-rating.git"
   }
 }
