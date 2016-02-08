@@ -1,5 +1,4 @@
-# react-star-rating ![](https://david-dm.org/cameronjroe/react-star-rating.svg)
-[![Travis](https://img.shields.io/travis/rust-lang/rust.svg?style=flat-square)]()
+# react-star-rating ![](https://david-dm.org/cameronjroe/react-star-rating.svg) [![Travis](https://img.shields.io/travis/cameronjroe/react-star-rating.svg?style=flat-square)](https://travis-ci.org/cameronjroe/react-star-rating)
 [![NPM](https://nodei.co/npm/react-star-rating.png?compact=true)](https://nodei.co/npm/react-star-rating/)
 
 <!-- [![Build Status](https://travis-ci.org/)](https://travis-ci.org/) -->
