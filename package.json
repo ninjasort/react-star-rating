@@ -10,11 +10,22 @@
       "stage-0"
     ]
   },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    },
+    "ghooks": {
+      "pre-commit": "npm run test"
+    }
+  },
   "scripts": {
     "start": "npm run watch",
     "watch": "gulp watch",
     "build": "gulp dist",
-    "test": "mocha ./src/__tests__/*.js --compilers js:babel-core/register -w",
+    "commit": "git-cz",
+    "check-coverage": "./node_modules/.bin/babel-node ./node_modules/.bin/babel-istanbul check-coverage --statements 100 --branches 100 --functions 100 --lines 100",
+    "test": "./node_modules/.bin/babel-node ./node_modules/.bin/babel-istanbul cover _mocha -- -R spec --compilers js:babel-core/register",
+    "test:watch": "mocha -w --compilers js:babel-core/register",
     "prepublish": "npm run build"
   },
   "author": "Cameron J Roe <cameronjroe@gmail.com> (http://cameronjroe.com/)",
@@ -27,16 +38,21 @@
     "react-jss": "^2.0.1"
   },
   "devDependencies": {
+    "babel-cli": "6.5.0",
     "babel-eslint": "^5.0.0-beta6",
+    "babel-istanbul": "0.6.0",
     "babel-preset-es2015": "^6.0.15",
     "babel-preset-react": "^6.0.15",
     "babel-preset-stage-0": "^6.1.2",
     "babelify": "^7.2.0",
     "browserify": "^13.0.0",
     "chai": "^3.4.0",
-    "chai-enzyme": "^0.3.0",
+    "chai-enzyme": "0.3.0",
     "chai-equal-jsx": "^1.0.9",
-    "enzyme": "^1.4.1",
+    "codecov.io": "0.1.6",
+    "cz-conventional-changelog": "1.1.5",
+    "enzyme": "1.5.0",
+    "ghooks": "1.0.3",
     "gulp": "^3.9.0",
     "gulp-babel": "^6.0.0",
     "gulp-concat": "^2.6.0",
@@ -52,17 +68,10 @@
     "isparta": "^4.0.0",
     "istanbul-instrumenter-loader": "^0.1.3",
     "jshint-stylish": "^2.0.1",
-    "karma": "^0.13.15",
-    "karma-babel-preprocessor": "^6.0.1",
-    "karma-chai": "^0.1.0",
-    "karma-chrome-launcher": "^0.2.1",
-    "karma-coverage": "^0.5.3",
-    "karma-mocha": "^0.2.0",
-    "karma-sinon": "^1.0.4",
-    "karma-sourcemap-loader": "^0.3.6",
     "mocha": "^2.3.3",
     "node-sass": "^3.4.1",
     "react-addons-test-utils": "^0.14.7",
+    "semantic-release": "4.3.5",
     "sinon": "^1.17.2",
     "through2": "^2.0.0",
     "vinyl-source-stream": "^1.1.0"

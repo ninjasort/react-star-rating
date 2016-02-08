@@ -15,7 +15,7 @@ import karma      from 'gulp-karma';
 
 var config = {
   componentFileName: 'react-star-rating',
-  componentSrc: './src/StarRating.jsx',
+  componentSrc: './src/StarRating.js',
   componentStylesDir: './src/sass',
   stylesDest: './dist/css',
   watchPaths: [
@@ -98,4 +98,4 @@ gulp.task('watch', ['default'], () => {
 /**
  * Dist
  */
-gulp.task('dist', ['default', 'styles', 'build']);
+gulp.task('dist', ['default', 'build']);

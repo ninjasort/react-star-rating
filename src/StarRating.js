@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import cx from 'classnames';
 import useSheet from 'react-jss';
 import styles from './styles';
+import _ from 'lodash';
 
 function isFloat(n) {
   return n === Number(n) && n % 1 !== 0;
@@ -39,7 +40,8 @@ class StarRating extends React.Component {
     disabled: React.PropTypes.bool,
     editing: React.PropTypes.bool,
     size: React.PropTypes.number,
-    step: React.PropTypes.number
+    step: React.PropTypes.number,
+    className: React.PropTypes.string
   };
 
   static defaultProps = {
@@ -306,9 +308,10 @@ class StarRating extends React.Component {
     let { classes } = this.props.sheet;
     let stateClasses = this.getClasses(classes);
     let attrs = this.setAttrs();
+    let props = _.omit(this.props, ['className']);
 
     return (
-      <span className={classes['rsr-container']} {...this.props}>
+      <span className={`${classes['rsr-container']} ${this.props.className}`} {...props}>
         <span className={classes['rsr__caption']}>{this.props.caption}</span>
         <div ref="root" className={stateClasses}>
           <div ref="ratingContainer"

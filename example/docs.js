@@ -1310,6 +1310,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
+var _utils = require('./utils');
+
 var _uid = require('./uid');
 
 var uid = _interopRequireWildcard(_uid);
@@ -1317,7 +1319,7 @@ var uid = _interopRequireWildcard(_uid);
 /**
  * Conditional rule for @media, @supports
  *
- * @api private
+ * @api public
  */
 
 var ConditionalRule = (function () {
@@ -1328,7 +1330,10 @@ var ConditionalRule = (function () {
     this.type = 'conditional';
     this.selector = selector;
     this.options = _extends({}, options, { parent: this });
-    this.rules = this.createChildRules(styles);
+    this.rules = Object.create(null);
+    for (var _name in styles) {
+      this.createRule(_name, styles[_name]);
+    }
   }
 
   /**
@@ -1336,38 +1341,43 @@ var ConditionalRule = (function () {
    *
    * @param {Object} styles
    * @return {Array} rules
-   * @api private
+   * @api public
    */
 
-  ConditionalRule.prototype.createChildRules = function createChildRules(styles) {
-    var rules = Object.create(null);
-    var _options = this.options;
-    var sheet = _options.sheet;
-    var jss = _options.jss;
+  ConditionalRule.prototype.createRule = function createRule(name, style, options) {
+    var newOptions = this.options;
+    var _newOptions = newOptions;
+    var sheet = _newOptions.sheet;
+    var jss = _newOptions.jss;
 
-    for (var _name in styles) {
-      var localOptions = this.options;
-      // We have already a rule in the current style sheet with this name,
-      // This new rule is supposed to overwrite the first one, for this we need
-      // to ensure it will have the same className/selector.
-      var ruleToOverwrite = this.options.sheet && this.options.sheet.getRule(_name);
-      if (ruleToOverwrite) localOptions = _extends({}, this.options, { className: ruleToOverwrite.className });
-      rules[_name] = (sheet || jss).createRule(_name, styles[_name], localOptions);
+    // We have already a rule in the current style sheet with this name,
+    // This new rule is supposed to overwrite the first one, for this we need
+    // to ensure it will have the same className/selector.
+    var existingRule = sheet && sheet.getRule(name);
+    var className = existingRule ? existingRule.className : null;
+    if (className || options) {
+      newOptions = _extends({}, newOptions, { className: className }, options);
     }
-    return rules;
+    var rule = (sheet || jss).createRule(name, style, newOptions);
+    this.rules[name] = rule;
+    return rule;
   };
 
   /**
    * Generates a CSS string.
    *
    * @return {String}
-   * @api private
+   * @api public
    */
 
   ConditionalRule.prototype.toString = function toString() {
     var str = this.selector + ' {\n';
     for (var _name2 in this.rules) {
-      var ruleStr = this.rules[_name2].toString({ indentationLevel: 1 });
+      var rule = this.rules[_name2];
+      if (rule.style && _utils.isEmptyObject(rule.style)) {
+        continue;
+      }
+      var ruleStr = rule.toString({ indentationLevel: 1 });
       str += ruleStr + '\n';
     }
     str += '}';
@@ -1379,7 +1389,7 @@ var ConditionalRule = (function () {
 
 exports['default'] = ConditionalRule;
 module.exports = exports['default'];
-},{"./uid":42}],30:[function(require,module,exports){
+},{"./uid":41,"./utils":42}],30:[function(require,module,exports){
 /**
  * DOM rendering backend for StyleSheet.
  *
@@ -1582,12 +1592,20 @@ var Jss = (function () {
   /**
    * Register plugin. Passed function will be invoked with a rule instance.
    *
-   * @param {Function} fn
+   * @param {Function} plugins
    * @api public
    */
 
-  Jss.prototype.use = function use(fn) {
-    this.plugins.use(fn);
+  Jss.prototype.use = function use() {
+    var _this = this;
+
+    for (var _len = arguments.length, plugins = Array(_len), _key = 0; _key < _len; _key++) {
+      plugins[_key] = arguments[_key];
+    }
+
+    plugins.forEach(function (plugin) {
+      return _this.plugins.use(plugin);
+    });
     return this;
   };
 
@@ -1596,7 +1614,7 @@ var Jss = (function () {
 
 exports['default'] = Jss;
 module.exports = exports['default'];
-},{"./PluginsRegistry":33,"./StyleSheet":36,"./createRule":39,"./findRenderer":40,"./uid":42}],32:[function(require,module,exports){
+},{"./PluginsRegistry":33,"./StyleSheet":36,"./createRule":38,"./findRenderer":39,"./uid":41}],32:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -1665,7 +1683,7 @@ var KeyframeRule = (function () {
 
 exports['default'] = KeyframeRule;
 module.exports = exports['default'];
-},{"./uid":42}],33:[function(require,module,exports){
+},{"./uid":41}],33:[function(require,module,exports){
 /**
  * Register a plugin, run a plugin.
  */
@@ -1716,8 +1734,6 @@ module.exports = exports["default"];
 
 exports.__esModule = true;
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
@@ -1726,14 +1742,12 @@ var _uid = require('./uid');
 
 var uid = _interopRequireWildcard(_uid);
 
-var _clone = require('./clone');
-
-var _clone2 = _interopRequireDefault(_clone);
+var _utils = require('./utils');
 
 /**
  * Regular rules and font-face.
  *
- * @api private
+ * @api public
  */
 
 var Rule = (function () {
@@ -1751,7 +1765,7 @@ var Rule = (function () {
     }
     this.originalStyle = style;
     // We expect style to be plain object.
-    this.style = _clone2['default'](style);
+    this.style = _utils.clone(style);
   }
 
   /**
@@ -1835,9 +1849,13 @@ var Rule = (function () {
   /**
    * Generates a CSS string.
    *
+   * Options:
+   * - `selector` to get a rule without selector
+   * - `indentationLevel` level of indentation
+   *
    * @param {Object} options
    * @return {String}
-   * @api private
+   * @api public
    */
 
   Rule.prototype.toString = function toString() {
@@ -1874,7 +1892,7 @@ function indent(level, str) {
   }return indentStr + str;
 }
 module.exports = exports['default'];
-},{"./clone":38,"./uid":42}],35:[function(require,module,exports){
+},{"./uid":41,"./utils":42}],35:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -1890,7 +1908,7 @@ var uid = _interopRequireWildcard(_uid);
 /**
  * Rule like @charset, @import, @namespace.
  *
- * @api private
+ * @api public
  */
 
 var SimpleRule = (function () {
@@ -1908,7 +1926,7 @@ var SimpleRule = (function () {
    * Generates a CSS string.
    *
    * @return {String}
-   * @api private
+   * @api public
    */
 
   SimpleRule.prototype.toString = function toString() {
@@ -1920,7 +1938,7 @@ var SimpleRule = (function () {
 
 exports['default'] = SimpleRule;
 module.exports = exports['default'];
-},{"./uid":42}],36:[function(require,module,exports){
+},{"./uid":41}],36:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -1930,6 +1948,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _utils = require('./utils');
 
 var _createRule2 = require('./createRule');
 
@@ -2077,8 +2097,18 @@ var StyleSheet = (function () {
       if (stringified[rule.id]) {
         continue;
       }
+
+      if (rule.style && _utils.isEmptyObject(rule.style)) {
+        continue;
+      }
+
+      if (rule.rules && _utils.isEmptyObject(rule.rules)) {
+        continue;
+      }
+
       if (str) str += '\n';
-      str += rules[_name3].toString(options);
+
+      str += rule.toString(options);
       stringified[rule.id] = true;
     }
     return str;
@@ -2158,7 +2188,7 @@ var StyleSheet = (function () {
 
 exports['default'] = StyleSheet;
 module.exports = exports['default'];
-},{"./createRule":39,"./findRenderer":40}],37:[function(require,module,exports){
+},{"./createRule":38,"./findRenderer":39,"./utils":42}],37:[function(require,module,exports){
 /**
  * Rendering backend to do nothing in nodejs.
  */
@@ -2193,29 +2223,6 @@ var VirtualRenderer = (function () {
 exports["default"] = VirtualRenderer;
 module.exports = exports["default"];
 },{}],38:[function(require,module,exports){
-"use strict";
-
-exports.__esModule = true;
-exports["default"] = clone;
-var stringify = JSON.stringify;
-var parse = JSON.parse;
-
-/**
- * Deeply clone object using serialization.
- * Expects object to be plain and without cyclic dependencies.
- *
- * http://jsperf.com/lodash-deepclone-vs-jquery-extend-deep/6
- *
- * @type {Object} obj
- * @return {Object}
- */
-
-function clone(obj) {
-  return parse(stringify(obj));
-}
-
-module.exports = exports["default"];
-},{}],39:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -2289,7 +2296,7 @@ function createRule(selector) {
 }
 
 module.exports = exports['default'];
-},{"./ConditionalRule":29,"./KeyframeRule":32,"./Rule":34,"./SimpleRule":35}],40:[function(require,module,exports){
+},{"./ConditionalRule":29,"./KeyframeRule":32,"./Rule":34,"./SimpleRule":35}],39:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -2323,7 +2330,7 @@ function findRenderer() {
 }
 
 module.exports = exports['default'];
-},{"./DomRenderer":30,"./VirtualRenderer":37}],41:[function(require,module,exports){
+},{"./DomRenderer":30,"./VirtualRenderer":37}],40:[function(require,module,exports){
 /**
  * StyleSheets written in javascript.
  *
@@ -2344,7 +2351,7 @@ var _Jss2 = _interopRequireDefault(_Jss);
 
 exports['default'] = new _Jss2['default']();
 module.exports = exports['default'];
-},{"./Jss":31}],42:[function(require,module,exports){
+},{"./Jss":31}],41:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -2381,6 +2388,41 @@ function reset() {
   ruleCounter = 0;
 }
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{}],42:[function(require,module,exports){
+"use strict";
+
+exports.__esModule = true;
+exports.clone = clone;
+exports.isEmptyObject = isEmptyObject;
+var stringify = JSON.stringify;
+var parse = JSON.parse;
+
+/**
+ * Deeply clone object using serialization.
+ * Expects object to be plain and without cyclic dependencies.
+ *
+ * http://jsperf.com/lodash-deepclone-vs-jquery-extend-deep/6
+ *
+ * @type {Object} obj
+ * @return {Object}
+ */
+
+function clone(obj) {
+  return parse(stringify(obj));
+}
+
+/*
+ * Determine whether an object is empty or not.
+ * More performant than a `Object.keys(obj).length > 0`
+ */
+
+function isEmptyObject(obj) {
+  for (var key in obj) {
+    return false;
+  } // eslint-disable-line no-unused-vars
+
+  return true;
+}
 },{}],43:[function(require,module,exports){
 // shim for using process in browser
 
@@ -2608,7 +2650,7 @@ function useSheet(rulesOrComponentOrJss) {
 
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"_process":43,"jss":41,"react":174}],46:[function(require,module,exports){
+},{"_process":43,"jss":40,"react":174}],46:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -10317,7 +10359,10 @@ var ReactDOMOption = {
       }
     });
 
-    nativeProps.children = content;
+    if (content) {
+      nativeProps.children = content;
+    }
+
     return nativeProps;
   }
 
@@ -16447,7 +16492,7 @@ module.exports = ReactUpdates;
 
 'use strict';
 
-module.exports = '0.14.6';
+module.exports = '0.14.7';
 },{}],130:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -17539,6 +17584,7 @@ var warning = require('fbjs/lib/warning');
  */
 var EventInterface = {
   type: null,
+  target: null,
   // currentTarget is set when dispatching; no use in copying it here
   currentTarget: emptyFunction.thatReturnsNull,
   eventPhase: null,
@@ -17572,8 +17618,6 @@ function SyntheticEvent(dispatchConfig, dispatchMarker, nativeEvent, nativeEvent
   this.dispatchConfig = dispatchConfig;
   this.dispatchMarker = dispatchMarker;
   this.nativeEvent = nativeEvent;
-  this.target = nativeEventTarget;
-  this.currentTarget = nativeEventTarget;
 
   var Interface = this.constructor.Interface;
   for (var propName in Interface) {
@@ -17584,7 +17628,11 @@ function SyntheticEvent(dispatchConfig, dispatchMarker, nativeEvent, nativeEvent
     if (normalize) {
       this[propName] = normalize(nativeEvent);
     } else {
-      this[propName] = nativeEvent[propName];
+      if (propName === 'target') {
+        this.target = nativeEventTarget;
+      } else {
+        this[propName] = nativeEvent[propName];
+      }
     }
   }
 
@@ -20172,11 +20220,22 @@ module.exports={
       "stage-0"
     ]
   },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    },
+    "ghooks": {
+      "pre-commit": "npm run test"
+    }
+  },
   "scripts": {
     "start": "npm run watch",
     "watch": "gulp watch",
     "build": "gulp dist",
-    "test": "karma start",
+    "commit": "git-cz",
+    "check-coverage": "./node_modules/.bin/babel-node ./node_modules/.bin/babel-istanbul check-coverage --statements 100 --branches 100 --functions 100 --lines 100",
+    "test": "./node_modules/.bin/babel-node ./node_modules/.bin/babel-istanbul cover _mocha ./src/__tests__/*.js -- -R spec --compilers js:babel-core/register",
+    "test:watch": "mocha ./src/__tests__/*.js -w --compilers js:babel-core/register",
     "prepublish": "npm run build"
   },
   "author": "Cameron J Roe <cameronjroe@gmail.com> (http://cameronjroe.com/)",
@@ -20185,18 +20244,25 @@ module.exports={
     "classnames": "^2.2.0",
     "jss": "^3.2.0",
     "react": "^0.14.2",
-    "react-addons-test-utils": "^0.14.2",
     "react-dom": "^0.14.2",
     "react-jss": "^2.0.1"
   },
   "devDependencies": {
+    "babel-cli": "6.4.5",
     "babel-eslint": "^5.0.0-beta6",
+    "babel-istanbul": "0.6.0",
     "babel-preset-es2015": "^6.0.15",
     "babel-preset-react": "^6.0.15",
     "babel-preset-stage-0": "^6.1.2",
     "babelify": "^7.2.0",
     "browserify": "^13.0.0",
     "chai": "^3.4.0",
+    "chai-enzyme": "^0.3.0",
+    "chai-equal-jsx": "^1.0.9",
+    "codecov.io": "0.1.6",
+    "cz-conventional-changelog": "1.1.5",
+    "enzyme": "^1.4.1",
+    "ghooks": "1.0.3",
     "gulp": "^3.9.0",
     "gulp-babel": "^6.0.0",
     "gulp-concat": "^2.6.0",
@@ -20212,16 +20278,10 @@ module.exports={
     "isparta": "^4.0.0",
     "istanbul-instrumenter-loader": "^0.1.3",
     "jshint-stylish": "^2.0.1",
-    "karma": "^0.13.15",
-    "karma-babel-preprocessor": "^6.0.1",
-    "karma-chai": "^0.1.0",
-    "karma-chrome-launcher": "^0.2.1",
-    "karma-coverage": "^0.5.3",
-    "karma-mocha": "^0.2.0",
-    "karma-sinon": "^1.0.4",
-    "karma-sourcemap-loader": "^0.3.6",
     "mocha": "^2.3.3",
     "node-sass": "^3.4.1",
+    "react-addons-test-utils": "^0.14.7",
+    "semantic-release": "4.3.5",
     "sinon": "^1.17.2",
     "through2": "^2.0.0",
     "vinyl-source-stream": "^1.1.0"
@@ -20583,7 +20643,7 @@ var StarRating = (function (_React$Component) {
 
       return _react2.default.createElement(
         'span',
-        _extends({ className: classes['rsr-container'] }, this.props),
+        { className: classes['rsr-container'] + ' ' + this.props.className },
         _react2.default.createElement(
           'span',
           { className: classes['rsr__caption'] },
@@ -20622,7 +20682,9 @@ StarRating.propTypes = {
   onRatingClick: _react2.default.PropTypes.func,
   disabled: _react2.default.PropTypes.bool,
   editing: _react2.default.PropTypes.bool,
-  size: _react2.default.PropTypes.number
+  size: _react2.default.PropTypes.number,
+  step: _react2.default.PropTypes.number,
+  className: _react2.default.PropTypes.string
 };
 StarRating.defaultProps = {
   step: 1,
