@@ -1,5 +1,5 @@
 # react-star-rating [![npm](https://img.shields.io/npm/v/npm.svg?style=flat-square)](https://www.npmjs.com/package/react-star-rating) [![Dependencies](https://david-dm.org/cameronjroe/react-star-rating.svg?style=flat-square)]() [![Travis](https://img.shields.io/travis/cameronjroe/react-star-rating.svg?style=flat-square)](https://travis-ci.org/cameronjroe/react-star-rating)
-[![NPM](https://nodei.co/npm/react-star-rating.png?compact=true)](https://nodei.co/npm/react-star-rating/)
+[![NPM](https://nodei.co/npm/react-star-rating.png?compact=true)](https://nodei.co/npm/react-star-rating/) [![npm](https://img.shields.io/npm/dt/express.svg?style=flat-square)](https://www.npmjs.com/package/react-star-rating)
 
 <!-- [![Build Status](https://travis-ci.org/)](https://travis-ci.org/) -->
 ![](src/assets/star-rating.png)

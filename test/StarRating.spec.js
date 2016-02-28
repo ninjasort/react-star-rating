@@ -5,12 +5,7 @@ import StarRating from '../src/StarRating';
 import chai from 'chai';
 import chaiEnzyme from 'chai-enzyme'
 import sinon from 'sinon';
-import {
-  shallow,
-  describeWithDOM,
-  mount,
-  spyLifecycle
-} from 'enzyme';
+import { mount, shallow } from 'enzyme';
 chai.use(chaiEnzyme);
 let expect = chai.expect;
 
@@ -18,7 +13,7 @@ let expect = chai.expect;
 // - [ ] http://reactkungfu.com/2015/07/approaches-to-testing-react-components-an-overview/
 // - [ ] http://www.toptal.com/react/how-react-components-make-ui-testing-easy
 
-describeWithDOM("<StarRating />", () => {
+describe("<StarRating />", () => {
   
   var wrapper;
 
@@ -71,6 +66,7 @@ describeWithDOM("<StarRating />", () => {
   it("should support additional props passed in", () => {
     const rating = mount(<StarRating name='rating' className='something' />);
     expect(rating.find('span').first().prop('className')).to.contain('rsr-container');
+    expect(rating.find('span').first().prop('className')).to.contain('something');
   });
 
 

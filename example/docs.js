@@ -34825,6 +34825,7 @@ module.exports={
   },
   "devDependencies": {
     "babel-cli": "6.5.0",
+    "babel-core": "6.5.1",
     "babel-eslint": "^5.0.0-beta6",
     "babel-istanbul": "0.6.0",
     "babel-preset-es2015": "^6.0.15",
@@ -34860,7 +34861,9 @@ module.exports={
     "semantic-release": "^4.3.5",
     "sinon": "^1.17.2",
     "through2": "^2.0.0",
-    "vinyl-source-stream": "^1.1.0"
+    "vinyl-source-stream": "^1.1.0",
+    "webpack": "1.12.14",
+    "webpack-dev-server": "1.14.1"
   },
   "repository": {
     "type": "git",
