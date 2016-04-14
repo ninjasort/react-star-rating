@@ -321,7 +321,7 @@ class StarRating extends React.Component {
             className="rsr rating-gly-star"
             data-content={this.state.glyph} {...attrs}>
             {this.getSvg(this.state.rating)}
-            <input type="number"
+            <input type="hidden"
               name={this.props.name}
               value={this.state.currentRatingVal}
               style={{display: 'none !important'}} 
