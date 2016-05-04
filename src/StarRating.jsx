@@ -24,6 +24,7 @@ function isFloat(n) {
  *   editing={boolean} - whether the rating is explicitly in editing mode (optional)
  *   size={number} - size of stars (optional)
  *   onRatingClick={function} - a handler function that gets called onClick of the rating (optional)
+ *   decimalRating={bool} - round up decimal and create half star
  *   />
  */
 class StarRating extends React.Component {
@@ -36,7 +37,8 @@ class StarRating extends React.Component {
     onRatingClick: React.PropTypes.func,
     disabled: React.PropTypes.bool,
     editing: React.PropTypes.bool,
-    size: React.PropTypes.number
+    size: React.PropTypes.number,
+    decimalRating: React.PropTypes.bool
   }
 
   static defaultProps = {
@@ -45,7 +47,8 @@ class StarRating extends React.Component {
     onRatingClick() {},
     disabled: false,
     size: 50,
-    rating: 0
+    rating: 0,
+    decimalRating: false
   }
 
   constructor(props) {
@@ -198,6 +201,73 @@ class StarRating extends React.Component {
   }
 
   /**
+   * Get Star SVG With Half
+   */
+  getHalfSvg(rating) {
+    var stars = [];
+    console.log('decimal', this.getDecimalPlaces(rating));
+    console.log('rating', rating);
+    for (var i = 0; i < this.props.totalStars; i++) {
+      var attrs = {};
+      attrs['transform'] = `translate(${i*22}, 0)`;
+      attrs['fill'] = (i+this.props.step <= rating) ? '#FFA91B' : '#C6C6C6';
+      if(this.getDecimalPlaces(rating) === 1 && i === Math.floor(rating)) {
+        attrs['fill'] = '#FFA91B';
+        stars.push(
+          <path {...attrs}
+            key={`star-${i}`}
+            mask="url(#half-star-mask)"
+            d="M22,9.744l-7.191-0.617L12,2.5L9.191,9.127L2,9.744v0l0,0l5.455,4.727L5.82,21.5L12,17.772l0,0l6.18,3.727l-1.635-7.029L22,9.744z M12,15.896V6.595l1.71,4.036l4.38,0.376l-3.322,2.878l0.996,4.281L12,15.896z" />
+        );
+      } else {
+        if(i > Math.floor(rating) ) {
+          stars.push(
+            <path {...attrs}
+            key={`star-${i}`}
+            mask="url(#half-star-mask)"
+            d="M22,9.244l-7.191-0.617L12,2L9.191,8.627L2,9.244l5.455,4.727L5.82,21L12,17.272L18.18,21l-1.635-7.029L22,9.244z M12,15.396l-3.763,2.27l0.996-4.281L5.91,10.507l4.38-0.376L12,6.095l1.71,4.036l4.38,0.376l-3.322,2.878l0.996,4.281L12,15.396z" />
+          );
+        } else {
+          stars.push(
+            <polygon {...attrs}
+              key={`star-${i}`}
+              mask="url(#half-star-mask)"
+              points="12,17.273 18.18,21 16.545,13.971 22,9.244 14.809,8.627 12,2 9.191,8.627 2,9.244 7.455,13.971 5.82,21 ">
+            </polygon>
+          );
+        }
+      }
+    }
+
+    var styles = {
+      width: `${stars.length * this.props.size * 1.6}px`,
+      height: `${this.props.size + 10}px`
+    };
+
+    return (
+      <svg className="rsr__star" 
+        style={styles} 
+        viewBox={`0 0 ${stars.length} 20`} 
+        preserveAspectRatio="xMinYMin meet" 
+        version="1.1" 
+        xmlns="http://www.w3.org/2000/svg">
+        {/*
+          React Doesn't support `mask` attributes yet
+        <defs>
+          <mask id="half-star-mask">
+            <rect x="0" y="0" width="26" height="50" fill="blue"></rect>
+          </mask>
+        </defs>*/}
+        <g>
+          {stars.map((item) => {
+            return item;
+          })}
+        </g>
+      </svg>
+    );
+  }
+
+  /**
    * Update the active rating selection
    * @param  {number} width width based on mouse position
    * @param  {number} val   current rating amount
@@ -320,7 +390,8 @@ class StarRating extends React.Component {
           <div ref="ratingContainer"
             className="rsr rating-gly-star"
             data-content={this.state.glyph} {...attrs}>
-            {this.getSvg(this.state.rating)}
+            { !this.props.decimalRating && this.getSvg(this.state.rating)}
+            { this.props.decimalRating && this.getHalfSvg(this.state.rating)}
             <input type="number"
               name={this.props.name}
               value={this.state.currentRatingVal}
