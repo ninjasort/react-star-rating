@@ -54,6 +54,7 @@
     "react-dom": "^15.0.0",
     "sinon": "^1.17.2",
     "through2": "^2.0.0",
-    "vinyl-source-stream": "^1.1.0"
+    "vinyl-source-stream": "^1.1.0",
+    "webpack": "^1.13.0"
   }
 }
