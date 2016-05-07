@@ -11,6 +11,7 @@
     "prepublish": "npm run build"
   },
   "author": "Cameron J Roe <cameronjroe@gmail.com> (http://cameronjroe.com/)",
+  "repository": "cameronroe/react-star-rating",
   "license": "MIT",
   "dependencies": {
     "classnames": "^2.2.0"
