@@ -29,7 +29,7 @@ function isFloat(n) {
 class StarRating extends React.Component {
 
   static propTypes = {
-    name: React.PropTypes.string.isRequired,
+    name: React.PropTypes.string,
     caption: React.PropTypes.string,
     totalStars: React.PropTypes.number.isRequired,
     rating: React.PropTypes.number,
@@ -65,7 +65,7 @@ class StarRating extends React.Component {
   componentWillMount() {
     this.min = 0;
     this.max = this.props.totalStars || 5;
-    
+
     if (this.props.rating) {
       this.state.editing = this.props.editing || false;
     }
@@ -175,11 +175,11 @@ class StarRating extends React.Component {
     };
 
     return (
-      <svg className="rsr__star" 
-        style={styles} 
-        viewBox={`0 0 ${stars.length} 50`} 
-        preserveAspectRatio="xMinYMin meet" 
-        version="1.1" 
+      <svg className="rsr__star"
+        style={styles}
+        viewBox={`0 0 ${stars.length} 50`}
+        preserveAspectRatio="xMinYMin meet"
+        version="1.1"
         xmlns="http://www.w3.org/2000/svg">
         {/*
           React Doesn't support `mask` attributes yet
@@ -324,8 +324,8 @@ class StarRating extends React.Component {
             <input type="hidden"
               name={this.props.name}
               value={this.state.currentRatingVal}
-              style={{display: 'none !important'}} 
-              min={this.min} 
+              style={{display: 'none !important'}}
+              min={this.min}
               max={this.max}
               readOnly />
           </div>

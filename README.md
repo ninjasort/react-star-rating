@@ -60,7 +60,7 @@ React.render(<FormComponent />, document.getElementById('star-rating'));
 ```
 
 ## Options
-  - **name**={string} - name for form input (required)
+  - **name**={string} - name for form input
   - **caption**={string} - caption for rating (optional)
   - **totalStars**={number} - rating amount (required, default: 5)
   - **rating**={number} - a set rating between the rating amount (optional)
