@@ -13,10 +13,7 @@
   "author": "Cameron J Roe <cameronjroe@gmail.com> (http://cameronjroe.com/)",
   "license": "MIT",
   "dependencies": {
-    "classnames": "^2.2.0",
-    "react": "^0.14.2",
-    "react-addons-test-utils": "^0.14.2",
-    "react-dom": "^0.14.2"
+    "classnames": "^2.2.0"
   },
   "devDependencies": {
     "babel-eslint": "^4.1.4",
@@ -52,6 +49,9 @@
     "mocha": "^2.3.3",
     "node-bourbon": "^4.2.3",
     "node-sass": "^3.4.1",
+    "react": "^15.0.0",
+    "react-addons-test-utils": "^15.0.0",
+    "react-dom": "^15.0.0",
     "sinon": "^1.17.2",
     "through2": "^2.0.0",
     "vinyl-source-stream": "^1.1.0"
