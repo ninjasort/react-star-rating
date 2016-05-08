@@ -9,10 +9,6 @@ import { mount, shallow } from 'enzyme';
 chai.use(chaiEnzyme);
 let expect = chai.expect;
 
-// Tutorials to read. Fuck I have so much to do...
-// - [ ] http://reactkungfu.com/2015/07/approaches-to-testing-react-components-an-overview/
-// - [ ] http://www.toptal.com/react/how-react-components-make-ui-testing-easy
-
 describe("<StarRating />", () => {
   
   var wrapper;
@@ -68,9 +64,5 @@ describe("<StarRating />", () => {
     expect(rating.find('span').first().prop('className')).to.contain('rsr-container');
     expect(rating.find('span').first().prop('className')).to.contain('something');
   });
-
-  // xit('should set editing to true if there is a rating prop', function () {
-  //   // expect(wrapper)
-  // });
 
 });

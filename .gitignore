@@ -5,3 +5,5 @@ other
 coverage
 dist
 karma.conf.js
+.nyc_output
+gh-pages

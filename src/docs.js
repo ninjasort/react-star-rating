@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import StarRating from './StarRating';
 import pkg from 'package';
+import './sass/demo.scss';
 
 class App extends React.Component {
 
