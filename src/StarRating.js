@@ -17,7 +17,7 @@ function isFloat(n) {
 
 /**
  * @fileoverview react-star-rating
- * @author @cameronjroe
+ * @author @cameronroe
  * <StarRating
  *   name={string} - name for form input (required)
  *   caption={string} - caption for rating (optional)
@@ -157,24 +157,25 @@ class StarRating extends React.Component {
     return this.calculate(pos);
   }
 
-  /**
-   * Get Star SVG
-   */
-  getSvg(rating) {
-    var stars = [];
+  _createStars(rating) {
+    let stars = [];
     for (var i = 0; i < this.props.totalStars; i++) {
       var attrs = {};
       attrs['transform'] = `translate(${i*50}, 0)`;
       attrs['fill'] = (i+this.props.step <= rating) ? '#FFA91B' : '#C6C6C6';
       stars.push(
         <path {...attrs}
-          key={`star-${i}`}
+          key={i}
           mask="url(#half-star-mask)"
           d="m0,18.1l19.1,0l5.9,-18.1l5.9,18.1l19.1,0l-15.4,11.2l5.9,18.1l-15.4,-11.2l-15.4,11.2l5.9,-18.1l-15.4,-11.2l0,0z" />
       );
     }
+    return stars;
+  }
 
-    var styles = {
+  getSvg(rating) {
+    let stars = this._createStars(rating);
+    let styles = {
       width: `${stars.length * this.props.size}px`,
       height: `${this.props.size}px`
     };
@@ -186,17 +187,13 @@ class StarRating extends React.Component {
         preserveAspectRatio="xMinYMin meet" 
         version="1.1" 
         xmlns="http://www.w3.org/2000/svg">
-        {/*
-          React Doesn't support `mask` attributes yet
         <defs>
           <mask id="half-star-mask">
             <rect x="0" y="0" width="26" height="50" fill="blue"></rect>
           </mask>
-        </defs>*/}
+        </defs>
         <g>
-          {stars.map((item) => {
-            return item;
-          })}
+          {stars.map((item) => item)}
         </g>
       </svg>
     );
@@ -314,11 +311,12 @@ class StarRating extends React.Component {
       <span className={`${classes['rsr-container']} ${this.props.className}`} {...props}>
         <span className={classes['rsr__caption']}>{this.props.caption}</span>
         <div ref="root" className={stateClasses}>
+          Foo
           <div ref="ratingContainer"
             className={classes.rsr}
             data-content={this.state.glyph} {...attrs}>
             {this.getSvg(this.state.rating)}
-            <input type="number"
+            <input type="hidden"
               name={this.props.name}
               value={this.state.currentRatingVal}
               style={{display: 'none !important'}} 

@@ -9,80 +9,50 @@
       "stage-0"
     ]
   },
-  "config": {
-    "commitizen": {
-      "path": "node_modules/cz-conventional-changelog"
-    },
-    "ghooks": {
-      "pre-commit": "npm run test"
-    }
-  },
   "scripts": {
     "start": "npm run watch",
-    "watch": "gulp watch",
+    "watch": "webpack-dev-server --content-base example --inline --hot",
     "build": "gulp dist",
-    "commit": "git-cz",
+    "lint": "./node_modules/.bin/eslint ./src",
     "check-coverage": "./node_modules/.bin/babel-node ./node_modules/.bin/babel-istanbul check-coverage --statements 100 --branches 100 --functions 100 --lines 100",
     "report-coverage": "cat ./coverage/lcov.info | codecov",
-    "test": "./node_modules/.bin/babel-node ./node_modules/.bin/babel-istanbul cover _mocha -- -R spec -r setup.js --recursive test --compilers js:babel-core/register",
-    "test:watch": "mocha -w --compilers js:babel-core/register",
+    "test": "./node_modules/.bin/babel-node ./node_modules/.bin/istanbul cover _mocha -- -R spec -r test/setup.js --recursive test --compilers js:babel-core/register",
+    "test:watch": "mocha -r setup.js -w --compilers js:babel-core/register",
     "prepublish": "npm run build",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
-  "author": "Cameron J Roe <cameronjroe@gmail.com> (http://cameronjroe.com/)",
+  "author": "Cameron Roe <cameronjroe@gmail.com> (http://cameronjroe.com/)",
   "license": "MIT",
   "dependencies": {
     "classnames": "^2.2.0",
     "jss": "^3.2.0",
-    "react": "^0.14.2",
-    "react-dom": "^0.14.2",
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1",
     "react-jss": "^2.0.1"
   },
   "devDependencies": {
-    "babel-cli": "6.5.1",
-    "babel-core": "6.5.2",
-    "babel-eslint": "^5.0.0-beta6",
-    "babel-istanbul": "0.6.0",
+    "babel-cli": "6.8.0",
+    "babel-core": "6.8.0",
+    "babel-eslint": "^6.0.2",
+    "babel-loader": "6.2.4",
     "babel-preset-es2015": "^6.0.15",
     "babel-preset-react": "^6.0.15",
     "babel-preset-stage-0": "^6.1.2",
-    "babelify": "^7.2.0",
-    "browserify": "^13.0.0",
     "chai": "^3.4.0",
-    "chai-enzyme": "0.4.1",
+    "chai-enzyme": "0.4.2",
     "chai-equal-jsx": "^1.0.9",
     "codecov.io": "0.1.6",
-    "cz-conventional-changelog": "1.1.5",
-    "enzyme": "2.0.0",
-    "ghooks": "1.0.3",
-    "gulp": "^3.9.0",
-    "gulp-babel": "^6.0.0",
-    "gulp-concat": "^2.6.0",
-    "gulp-eslint": "^2.0.0",
-    "gulp-jshint": "^2.0.0",
-    "gulp-karma": "0.0.5",
-    "gulp-minify-css": "^1.2.1",
-    "gulp-rename": "^1.2.2",
-    "gulp-replace": "^0.5.4",
-    "gulp-sass": "^2.1.0",
-    "gulp-uglify": "^1.4.2",
-    "gulp-webserver": "^0.9.1",
-    "isparta": "^4.0.0",
-    "istanbul-instrumenter-loader": "^0.2.0",
-    "jsdom": "8.0.4",
+    "enzyme": "2.2.0",
+    "eslint": "2.9.0",
+    "jsdom": "8.5.0",
     "jshint-stylish": "^2.0.1",
+    "json-loader": "0.5.4",
     "mocha": "^2.3.3",
     "node-sass": "^3.4.1",
-    "react-addons-test-utils": "^0.14.7",
+    "react-addons-test-utils": "^15.0.1",
     "semantic-release": "^4.3.5",
     "sinon": "^1.17.2",
-    "through2": "^2.0.0",
-    "vinyl-source-stream": "^1.1.0",
-    "webpack": "1.12.14",
+    "webpack": "1.13.0",
     "webpack-dev-server": "1.14.1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/cameronjroe/react-star-rating.git"
   }
 }

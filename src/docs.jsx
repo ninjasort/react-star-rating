@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import StarRating from './StarRating';
-import pkg from '../package';
+import pkg from 'package';
 
 class App extends React.Component {
 

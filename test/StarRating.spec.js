@@ -69,5 +69,8 @@ describe("<StarRating />", () => {
     expect(rating.find('span').first().prop('className')).to.contain('something');
   });
 
+  // xit('should set editing to true if there is a rating prop', function () {
+  //   // expect(wrapper)
+  // });
 
 });
