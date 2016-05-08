@@ -307,11 +307,12 @@ class StarRating extends React.Component {
     let attrs = this.setAttrs();
     let props = _.omit(this.props, ['className']);
 
+    console.log(classes['rsr__caption']);
+    
     return (
       <span className={`${classes['rsr-container']} ${this.props.className}`} {...props}>
         <span className={classes['rsr__caption']}>{this.props.caption}</span>
         <div ref="root" className={stateClasses}>
-          Foo
           <div ref="ratingContainer"
             className={classes.rsr}
             data-content={this.state.glyph} {...attrs}>

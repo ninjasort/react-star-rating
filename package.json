@@ -11,7 +11,7 @@
     ]
   },
   "gh-pages-deploy": {
-    "staticpath": "example-dist",
+    "staticpath": "example",
     "prep": [
       "pre-gh-pages"
     ],
@@ -27,7 +27,7 @@
     "lint": "./node_modules/.bin/eslint ./src",
     "test": "mocha --require ./test/setup.js --recursive test --compilers js:babel-register",
     "test:watch": "npm t -- -w",
-    "cover": "nyc npm t -r text-lcov",
+    "cover": "nyc npm t -r lcov",
     "gh-pages": "gh-pages-deploy",
     "pre-gh-pages": "",
     "post-gh-pages": "",
