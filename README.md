@@ -2,6 +2,8 @@
 
 [![NPM](https://nodei.co/npm/react-star-rating.png?compact=true)](https://nodei.co/npm/react-star-rating/)
 
+# NOTE: This repo is not being currently maintained. Please prefer other star rating plugins such as [this one](https://github.com/voronianski/react-star-rating-component)
+
 <!-- [![Build Status](https://travis-ci.org/)](https://travis-ci.org/) -->
 ![](src/assets/star-rating.png)
 
