@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import cx from 'classnames';
+import PropTypes from 'prop-types';
 
 function isFloat(n) {
   return n === Number(n) && n % 1 !== 0;
@@ -29,14 +30,14 @@ function isFloat(n) {
 class StarRating extends React.Component {
 
   static propTypes = {
-    name: React.PropTypes.string.isRequired,
-    caption: React.PropTypes.string,
-    totalStars: React.PropTypes.number.isRequired,
-    rating: React.PropTypes.number,
-    onRatingClick: React.PropTypes.func,
-    disabled: React.PropTypes.bool,
-    editing: React.PropTypes.bool,
-    size: React.PropTypes.number
+    name: PropTypes.string.isRequired,
+    caption: PropTypes.string,
+    totalStars: PropTypes.number.isRequired,
+    rating: PropTypes.number,
+    onRatingClick: PropTypes.func,
+    disabled: PropTypes.bool,
+    editing: PropTypes.bool,
+    size: PropTypes.number
   }
 
   static defaultProps = {
@@ -65,7 +66,7 @@ class StarRating extends React.Component {
   componentWillMount() {
     this.min = 0;
     this.max = this.props.totalStars || 5;
-    
+
     if (this.props.rating) {
       this.state.editing = this.props.editing || false;
     }
@@ -175,11 +176,11 @@ class StarRating extends React.Component {
     };
 
     return (
-      <svg className="rsr__star" 
-        style={styles} 
-        viewBox={`0 0 ${stars.length} 50`} 
-        preserveAspectRatio="xMinYMin meet" 
-        version="1.1" 
+      <svg className="rsr__star"
+        style={styles}
+        viewBox={`0 0 ${stars.length} 50`}
+        preserveAspectRatio="xMinYMin meet"
+        version="1.1"
         xmlns="http://www.w3.org/2000/svg">
         {/*
           React Doesn't support `mask` attributes yet
@@ -324,8 +325,8 @@ class StarRating extends React.Component {
             <input type="hidden"
               name={this.props.name}
               value={this.state.currentRatingVal}
-              style={{display: 'none !important'}} 
-              min={this.min} 
+              style={{display: 'none !important'}}
+              min={this.min}
               max={this.max}
               readOnly />
           </div>
