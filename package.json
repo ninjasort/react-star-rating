@@ -17,7 +17,7 @@
     "classnames": "^2.2.0"
   },
   "peerDependencies": {
-    "react": ">14"
+    "react": ">=0.14 || >=15.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^4.1.4",
