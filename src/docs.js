@@ -1,10 +1,11 @@
-'use strict';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import StarRating from './StarRating';
 import pkg from '../package';
+import './sass/demo.scss';
 
-var inject = document.querySelector('.inject');
+const inject = document.querySelector('.inject');
+const root = createRoot(inject);
 
 class App extends React.Component {
 
@@ -146,4 +147,4 @@ class App extends React.Component {
 
 }
 
-ReactDOM.render(<App />, inject);
+root.render(<App />);

@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import cx from 'classnames';
+import { utils } from './utils';
+import './sass/react-star-rating.scss';
 
 function isFloat(n) {
   return n === Number(n) && n % 1 !== 0;
@@ -14,7 +16,6 @@ function isFloat(n) {
 
 /**
  * @fileoverview react-star-rating
- * @author @cameronjroe
  * <StarRating
  *   name={string} - name for form input (required)
  *   caption={string} - caption for rating (optional)
@@ -28,16 +29,16 @@ function isFloat(n) {
  */
 class StarRating extends React.Component {
 
-  static propTypes = {
-    name: React.PropTypes.string.isRequired,
-    caption: React.PropTypes.string,
-    totalStars: React.PropTypes.number.isRequired,
-    rating: React.PropTypes.number,
-    onRatingClick: React.PropTypes.func,
-    disabled: React.PropTypes.bool,
-    editing: React.PropTypes.bool,
-    size: React.PropTypes.number
-  }
+  // static propTypes = {
+  //   name: React.PropTypes.string.isRequired,
+  //   caption: React.PropTypes.string,
+  //   totalStars: React.PropTypes.number.isRequired,
+  //   rating: React.PropTypes.number,
+  //   onRatingClick: React.PropTypes.func,
+  //   disabled: React.PropTypes.bool,
+  //   editing: React.PropTypes.bool,
+  //   size: React.PropTypes.number
+  // }
 
   static defaultProps = {
     step: 1,
@@ -65,7 +66,7 @@ class StarRating extends React.Component {
   componentWillMount() {
     this.min = 0;
     this.max = this.props.totalStars || 5;
-    
+
     if (this.props.rating) {
       this.state.editing = this.props.editing || false;
     }
@@ -94,15 +95,6 @@ class StarRating extends React.Component {
     return stars;
   }
 
-  /**
-   * Gets the mouse position
-   * @param  {event} e
-   * @return {number} delta
-   */
-  getPosition(e) {
-    return e.clientX - this.root.getBoundingClientRect().left;
-  }
-
   getWidthFromValue(val) {
     var min = this.min,
         max = this.max;
@@ -115,28 +107,8 @@ class StarRating extends React.Component {
     return (val - min) * 100 / (max - min);
   }
 
-  applyPrecision(val, precision) {
-    return parseFloat(val.toFixed(precision));
-  }
-
-  getDecimalPlaces(num) {
-    var match = ('' + num).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
-    return !match ? 0 : Math.max(0, (match[1] ? match[1].length : 0) - (match[2] ? +match[2] : 0));
-  }
-
-  getValueFromPosition(pos) {
-    var precision = this.getDecimalPlaces(this.props.step);
-    var maxWidth = this.ratingContainer.offsetWidth;
-    var diff = this.max - this.min;
-    var factor = (diff * pos) / (maxWidth * this.props.step);
-    factor = Math.ceil(factor);
-    var val = this.applyPrecision(parseFloat(this.min + factor * this.props.step), precision);
-    val = Math.max(Math.min(val, this.max), this.min);
-    return val;
-  }
-
   calculate(pos) {
-    var val = this.getValueFromPosition(pos),
+    var val = utils.getValueFromPosition(pos, this.props.step, this.ratingContainer, this.min, this.max),
         width = this.getWidthFromValue(val);
 
     width += '%';
@@ -148,7 +120,8 @@ class StarRating extends React.Component {
   }
 
   getRatingEvent(e) {
-    var pos = this.getPosition(e);
+    var root = this.root;
+    var pos = utils.getPosition(e, root);
     return this.calculate(pos);
   }
 
@@ -175,11 +148,11 @@ class StarRating extends React.Component {
     };
 
     return (
-      <svg className="rsr__star" 
-        style={styles} 
-        viewBox={`0 0 ${stars.length} 50`} 
-        preserveAspectRatio="xMinYMin meet" 
-        version="1.1" 
+      <svg className="rsr__star"
+        style={styles}
+        viewBox={`0 0 ${stars.length} 50`}
+        preserveAspectRatio="xMinYMin meet"
+        version="1.1"
         xmlns="http://www.w3.org/2000/svg">
         {/*
           React Doesn't support `mask` attributes yet
@@ -275,12 +248,6 @@ class StarRating extends React.Component {
     });
   }
 
-  treatName(title) {
-    if (typeof title === 'string') {
-      return title.toLowerCase().split(' ').join('_');
-    }
-  }
-
   getClasses() {
     return cx({
       'rsr-root': true,
@@ -297,21 +264,11 @@ class StarRating extends React.Component {
     }
   }
 
-  setAttrs() {
-    var attrs = {};
-    if (this.state.editing) {
-      attrs['onMouseMove'] = this.handleMouseMove.bind(this);
-      attrs['onMouseLeave'] = this.handleMouseLeave.bind(this);
-      attrs['onClick'] = this.handleClick.bind(this);
-    }
-    return attrs;
-  }
-
   render() {
 
     var classes = this.getClasses();
     var caption = this.getCaption();
-    var attrs = this.setAttrs();
+    var attrs = utils.setAttrs(this.state.editing, this);
 
     return (
       <span className="rsr-container">
@@ -324,8 +281,8 @@ class StarRating extends React.Component {
             <input type="hidden"
               name={this.props.name}
               value={this.state.currentRatingVal}
-              style={{display: 'none !important'}} 
-              min={this.min} 
+              style={{display: 'none !important'}}
+              min={this.min}
               max={this.max}
               readOnly />
           </div>
