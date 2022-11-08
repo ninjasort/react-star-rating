@@ -18,16 +18,6 @@ export const utils = {
     return e.clientX - root.getBoundingClientRect().left;
   },
 
-  setAttrs(isState, obj) {
-    var attrs = {};
-    if (isState) {
-      attrs['onMouseMove'] = obj.handleMouseMove;
-      attrs['onMouseLeave'] = obj.handleMouseLeave;
-      attrs['onClick'] = obj.handleClick;
-    }
-    return attrs;
-  },
-
   treatName(title) {
     if (typeof title === 'string') {
       return title.toLowerCase().split(' ').join('_');

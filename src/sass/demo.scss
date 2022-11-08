@@ -73,7 +73,7 @@ footer {
 
 .intro {
   color: #fff;
-  /*@include background(linear-gradient(#444, #333) left repeat);*/
+  background: linear-gradient(#444, #333) left repeat;
   padding: 8em 0;
   box-shadow: inset 0px 0px 7px #000;
   text-align: center;
@@ -85,7 +85,6 @@ footer {
 .main-title {
   font-size: 4em;
   letter-spacing: 1px;
-  text-shadow: 1px 1px 0px #333;
   text-align: center;
   > small {
     display: block;

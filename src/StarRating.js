@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import cx from 'classnames';
 import { utils } from './utils';
@@ -27,7 +27,7 @@ function isFloat(n) {
  *   onRatingClick={function} - a handler function that gets called onClick of the rating (optional)
  *   />
  */
-class StarRating extends React.Component {
+class StarRating extends Component {
 
   // static propTypes = {
   //   name: React.PropTypes.string.isRequired,
@@ -120,8 +120,8 @@ class StarRating extends React.Component {
   }
 
   getRatingEvent(e) {
-    var root = this.root;
-    var pos = utils.getPosition(e, root);
+    let root = this.root;
+    let pos = utils.getPosition(e, root);
     return this.calculate(pos);
   }
 
@@ -129,9 +129,9 @@ class StarRating extends React.Component {
    * Get Star SVG
    */
   getSvg(rating) {
-    var stars = [];
-    for (var i = 0; i < this.props.totalStars; i++) {
-      var attrs = {};
+    let stars = [];
+    for (let i = 0; i < this.props.totalStars; i++) {
+      let attrs = {};
       attrs['transform'] = `translate(${i*50}, 0)`;
       attrs['fill'] = (i+this.props.step <= rating) ? '#FFA91B' : '#C6C6C6';
       stars.push(
@@ -142,7 +142,7 @@ class StarRating extends React.Component {
       );
     }
 
-    var styles = {
+    let styles = {
       width: `${stars.length * this.props.size}px`,
       height: `${this.props.size}px`
     };
@@ -213,7 +213,7 @@ class StarRating extends React.Component {
    */
   handleMouseMove(e) {
     // get hover position
-    var ratingEvent = this.getRatingEvent(e);
+    let ratingEvent = this.getRatingEvent(e);
     this.updateRating(
       ratingEvent.width,
       ratingEvent.val
@@ -264,11 +264,21 @@ class StarRating extends React.Component {
     }
   }
 
+  setAttrs(isState) {
+    let attrs = {};
+    if (isState) {
+      attrs['onMouseMove'] = this.handleMouseMove.bind(this);
+      attrs['onMouseLeave'] = this.handleMouseLeave.bind(this);
+      attrs['onClick'] = this.handleClick.bind(this);
+    }
+    return attrs;
+  }
+
   render() {
 
-    var classes = this.getClasses();
-    var caption = this.getCaption();
-    var attrs = utils.setAttrs(this.state.editing, this);
+    let classes = this.getClasses();
+    let caption = this.getCaption();
+    let attrs = this.setAttrs(this.state.editing);
 
     return (
       <span className="rsr-container">

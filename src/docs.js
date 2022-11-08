@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { createRoot } from 'react-dom/client';
 import StarRating from './StarRating';
 import pkg from '../package';
@@ -7,7 +7,7 @@ import './sass/demo.scss';
 const inject = document.querySelector('.inject');
 const root = createRoot(inject);
 
-class App extends React.Component {
+class Docs extends Component {
 
   handleRatingClick(e, data) {
     console.log(data);
@@ -147,4 +147,4 @@ class App extends React.Component {
 
 }
 
-root.render(<App />);
+root.render(<Docs />);
